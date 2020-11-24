@@ -26,8 +26,6 @@ class CategoriesAdapter (private val categoriesList: ArrayList<Category>):
 
     override fun onBindViewHolder(holder: CategoriesViewHolder, position: Int) {
 
-        //        holder.imageCategory?.setImageResource(categoriesList.get(position).imageResource)
-
         Picasso.get().load(categoriesList.get(position).imageResource)
                 .resize(120, 120)
                 .centerCrop()

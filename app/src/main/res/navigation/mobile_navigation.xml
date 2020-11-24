@@ -9,7 +9,11 @@
         android:id="@+id/navigation_home"
         android:name="com.desiredsoftware.socialquiz.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_questionShowingFragment"
+            app:destination="@id/questionShowingFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
@@ -28,5 +32,29 @@
         android:name="com.desiredsoftware.socialquiz.ui.profile.ProfileFragment"
         android:label="@string/profile"
         tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/questionShowingFragment"
+        android:name="com.desiredsoftware.socialquiz.ui.question.QuestionShowingFragment"
+        android:label="question_showing_fragment"
+        tools:layout="@layout/question_showing_fragment" >
+        <action
+            android:id="@+id/action_questionShowingFragment_to_questionResultFragment"
+            app:destination="@id/questionResultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/questionResultFragment"
+        android:name="com.desiredsoftware.socialquiz.ui.question.QuestionResultFragment"
+        android:label="question_result_fragment"
+        tools:layout="@layout/question_result_fragment" >
+        <action
+            android:id="@+id/action_questionResultFragment_to_questionShowingFragment"
+            app:destination="@id/questionShowingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addOwnQuestionFragment"
+        android:name="com.desiredsoftware.socialquiz.ui.question.AddOwnQuestionFragment"
+        android:label="add_own_question_fragment"
+        tools:layout="@layout/add_own_question_fragment" />
 
 </navigation>
