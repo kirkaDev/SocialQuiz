@@ -7,10 +7,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.desiredsoftware.socialquiz.R
-import com.desiredsoftware.socialquiz.data.model.api.`in`.category.Category
+import com.desiredsoftware.socialquiz.data.model.QuestionCategory
 import com.squareup.picasso.Picasso
 
-class CategoriesAdapter (private val categoriesList: ArrayList<Category>):
+class CategoriesAdapter (private val categoriesList: ArrayList<QuestionCategory>):
         RecyclerView.Adapter<CategoriesAdapter.CategoriesViewHolder>(){
 
 
@@ -20,7 +20,7 @@ class CategoriesAdapter (private val categoriesList: ArrayList<Category>):
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoriesViewHolder {
-        val itemView = LayoutInflater.from(parent?.context).inflate(R.layout.category_item, parent, false)
+        val itemView = LayoutInflater.from(parent?.context).inflate(R.layout.item_category, parent, false)
         return CategoriesViewHolder(itemView)
     }
 
