@@ -7,12 +7,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.desiredsoftware.socialquiz.R
-import com.desiredsoftware.socialquiz.data.model.QuestionCategory
+import com.desiredsoftware.socialquiz.data.model.question.QuestionCategory
 import com.squareup.picasso.Picasso
 
 class CategoriesAdapter (private val categoriesList: ArrayList<QuestionCategory>):
         RecyclerView.Adapter<CategoriesAdapter.CategoriesViewHolder>(){
-
 
 
     override fun getItemCount(): Int {
@@ -27,7 +26,7 @@ class CategoriesAdapter (private val categoriesList: ArrayList<QuestionCategory>
     override fun onBindViewHolder(holder: CategoriesViewHolder, position: Int) {
 
         Picasso.get().load(categoriesList.get(position).imageResource)
-                .resize(120, 120)
+                .resize(100, 100)
                 .centerCrop()
                 .into(holder.imageCategory)
 
@@ -45,6 +44,4 @@ class CategoriesAdapter (private val categoriesList: ArrayList<QuestionCategory>
             textViewCategoryName = itemView?.findViewById(R.id.textViewCategoryName)
         }
     }
-
-
 }

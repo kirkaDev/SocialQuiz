@@ -1,24 +1,35 @@
 package com.desiredsoftware.socialquiz.utils
 
 import com.desiredsoftware.socialquiz.data.model.Profile
-import com.desiredsoftware.socialquiz.data.model.QuestionCategory
+import com.desiredsoftware.socialquiz.data.model.question.Question
+import com.desiredsoftware.socialquiz.data.model.question.QuestionCategory
 
     fun generateCategories () : ArrayList<QuestionCategory>
     {
         val categoriesList = ArrayList<QuestionCategory>()
 
-        categoriesList.add(QuestionCategory("21","https://avatars.mds.yandex.net/get-zen_doc/15270/pub_5a9e407b830905db0f61b7bf_5a9e40d0610493f240e19a18/scale_1200", "Sunflower"))
-        categoriesList.add(QuestionCategory("23", "https://vsthemes.ru/uploads/posts/2018-12/1582030596_las-vegas_vsthemes_ru-34.jpg", "Las-Vegas"))
-        categoriesList.add(QuestionCategory("43","https://avatars.mds.yandex.net/get-zen_doc/15270/pub_5a9e407b830905db0f61b7bf_5a9e40d0610493f240e19a18/scale_1200", "Sunflower"))
-        categoriesList.add(QuestionCategory("56", "https://vsthemes.ru/uploads/posts/2018-12/1582030596_las-vegas_vsthemes_ru-34.jpg", "Las-Vegas"))
-        categoriesList.add(QuestionCategory("21","https://avatars.mds.yandex.net/get-zen_doc/15270/pub_5a9e407b830905db0f61b7bf_5a9e40d0610493f240e19a18/scale_1200", "Sunflower"))
-        categoriesList.add(QuestionCategory("23", "https://vsthemes.ru/uploads/posts/2018-12/1582030596_las-vegas_vsthemes_ru-34.jpg", "Las-Vegas"))
-        categoriesList.add(QuestionCategory("43","https://avatars.mds.yandex.net/get-zen_doc/15270/pub_5a9e407b830905db0f61b7bf_5a9e40d0610493f240e19a18/scale_1200", "Sunflower"))
-        categoriesList.add(QuestionCategory("56", "https://vsthemes.ru/uploads/posts/2018-12/1582030596_las-vegas_vsthemes_ru-34.jpg", "Las-Vegas"))
-        categoriesList.add(QuestionCategory("21","https://avatars.mds.yandex.net/get-zen_doc/15270/pub_5a9e407b830905db0f61b7bf_5a9e40d0610493f240e19a18/scale_1200", "Sunflower"))
-        categoriesList.add(QuestionCategory("23", "https://vsthemes.ru/uploads/posts/2018-12/1582030596_las-vegas_vsthemes_ru-34.jpg", "Las-Vegas"))
-        categoriesList.add(QuestionCategory("43","https://avatars.mds.yandex.net/get-zen_doc/15270/pub_5a9e407b830905db0f61b7bf_5a9e40d0610493f240e19a18/scale_1200", "Sunflower"))
-        categoriesList.add(QuestionCategory("56", "https://vsthemes.ru/uploads/posts/2018-12/1582030596_las-vegas_vsthemes_ru-34.jpg", "Las-Vegas"))
+        categoriesList.add(QuestionCategory("21","https://img.icons8.com/color/2x/owl.png", "Animals"))
+        categoriesList.add(QuestionCategory("23", "https://img.icons8.com/color/2x/heart-with-pulse.png", "Health"))
+        categoriesList.add(QuestionCategory("43","https://img.icons8.com/doodle/2x/controller--v1.png", "Video Games"))
+        categoriesList.add(QuestionCategory("56", "https://img.icons8.com/color/2x/boy-stroller.png", "Children"))
+        categoriesList.add(QuestionCategory("21","https://img.icons8.com/color/2x/cheburashka.png", "Cartoons"))
+        categoriesList.add(QuestionCategory("23", "https://img.icons8.com/color/2x/project.png", "Business"))
+        categoriesList.add(QuestionCategory("21","https://img.icons8.com/cute-clipart/2x/outdoor-swimming-pool.png", "Rest"))
+        categoriesList.add(QuestionCategory("21","https://img.icons8.com/color/2x/owl.png", "Animals"))
+        categoriesList.add(QuestionCategory("23", "https://img.icons8.com/color/2x/heart-with-pulse.png", "Health"))
+        categoriesList.add(QuestionCategory("43","https://img.icons8.com/doodle/2x/controller--v1.png", "Video Games"))
+        categoriesList.add(QuestionCategory("56", "https://img.icons8.com/color/2x/boy-stroller.png", "Children"))
+        categoriesList.add(QuestionCategory("21","https://img.icons8.com/color/2x/cheburashka.png", "Cartoons"))
+        categoriesList.add(QuestionCategory("23", "https://img.icons8.com/color/2x/project.png", "Business"))
+        categoriesList.add(QuestionCategory("21","https://img.icons8.com/cute-clipart/2x/outdoor-swimming-pool.png", "Rest"))
+        categoriesList.add(QuestionCategory("21","https://img.icons8.com/color/2x/owl.png", "Animals"))
+        categoriesList.add(QuestionCategory("23", "https://img.icons8.com/color/2x/heart-with-pulse.png", "Health"))
+        categoriesList.add(QuestionCategory("43","https://img.icons8.com/doodle/2x/controller--v1.png", "Video Games"))
+        categoriesList.add(QuestionCategory("56", "https://img.icons8.com/color/2x/boy-stroller.png", "Children"))
+        categoriesList.add(QuestionCategory("21","https://img.icons8.com/color/2x/cheburashka.png", "Cartoons"))
+        categoriesList.add(QuestionCategory("23", "https://img.icons8.com/color/2x/project.png", "Business"))
+        categoriesList.add(QuestionCategory("21","https://img.icons8.com/cute-clipart/2x/outdoor-swimming-pool.png", "Rest"))
+
 
 
         return categoriesList
@@ -41,5 +52,20 @@ import com.desiredsoftware.socialquiz.data.model.QuestionCategory
         properties)
 
         return profile
+    }
+
+    fun generateQuestion() : Question
+    {
+        val answerVariants : ArrayList<Question.Answer> = ArrayList<Question.Answer>()
+
+        answerVariants.add(Question.Answer(true, "Cat"))
+        answerVariants.add(Question.Answer(false, "Shake"))
+        answerVariants.add(Question.Answer(true, "Dog"))
+
+        return Question("1",
+                "text",
+                "Who has 4 paws?",
+                answerVariants
+        )
     }
 

@@ -2,12 +2,12 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="10dp"
-    android:layout_margin="10dp"
+    app:cardCornerRadius="4dp"
+    android:layout_margin="4dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
-        android:padding="20dp"
+        android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingStart="3dp"
@@ -17,7 +17,8 @@
         <TextView
             android:id="@+id/propertyName"
             android:layout_gravity="left"
-            android:paddingBottom="12sp"
+            android:paddingStart="2dp"
+            android:paddingBottom="4dp"
             android:text="Instagram"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -26,6 +27,7 @@
         <TextView
             android:id="@+id/propertyValue"
             android:layout_gravity="left"
+            android:paddingStart="2dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"

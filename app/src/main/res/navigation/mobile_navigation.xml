@@ -37,16 +37,19 @@
         android:id="@+id/questionShowingFragment"
         android:name="com.desiredsoftware.socialquiz.ui.question.QuestionShowingFragment"
         android:label="question_showing_fragment"
-        tools:layout="@layout/question_showing_fragment" >
+        tools:layout="@layout/fragment_question_showing" >
         <action
             android:id="@+id/action_questionShowingFragment_to_questionResultFragment"
             app:destination="@id/questionResultFragment" />
+        <action
+            android:id="@+id/action_questionShowingFragment_to_navigation_home"
+            app:destination="@id/navigation_home" />
     </fragment>
     <fragment
         android:id="@+id/questionResultFragment"
         android:name="com.desiredsoftware.socialquiz.ui.question.QuestionResultFragment"
         android:label="question_result_fragment"
-        tools:layout="@layout/question_result_fragment" >
+        tools:layout="@layout/fragment_question_result" >
         <action
             android:id="@+id/action_questionResultFragment_to_questionShowingFragment"
             app:destination="@id/questionShowingFragment" />

@@ -11,14 +11,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.desiredsoftware.socialquiz.R
+import com.desiredsoftware.socialquiz.data.model.question.QuestionCategory
 import com.desiredsoftware.socialquiz.ui.components.CategoriesAdapter
 import com.desiredsoftware.socialquiz.utils.*
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment () {
 
     private lateinit var homeViewModel: HomeViewModel
-
-
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -34,10 +33,10 @@ class HomeFragment : Fragment() {
         homeViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
 
-            recyclerView.layoutManager = GridLayoutManager(requireContext(),2)
+            recyclerView.layoutManager = GridLayoutManager(requireContext(),3)
             recyclerView.adapter = CategoriesAdapter(generateCategories())
-
         })
         return root
     }
+
 }

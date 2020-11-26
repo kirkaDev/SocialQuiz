@@ -20,7 +20,7 @@ class QuestionShowingFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.question_showing_fragment, container, false)
+        return inflater.inflate(R.layout.fragment_question_showing, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
