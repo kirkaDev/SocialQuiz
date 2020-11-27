@@ -2,6 +2,7 @@
 <androidx.appcompat.widget.LinearLayoutCompat
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:background="@color/mainBackground"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -16,13 +17,8 @@
 
     <TextView
         android:id="@+id/textViewCategoryName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:text="Category name"
-        android:textAlignment="center"
-        android:layout_gravity="center_horizontal"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp">
+        style="@style/TextViewStyle">
     </TextView>
 
 

@@ -7,6 +7,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="whiteTranspar">#4DFFFFFF</color>
+    <color name="testColor">#6FFFFFFF</color>
     <color name="bottomToolbar">#3D4D64</color>>
     <color name="mainBackground">#35445C</color>>
     <color name="yellowMain">#F2C94C</color>>
