@@ -1,16 +1,19 @@
 package com.desiredsoftware.socialquiz.ui.components
 
+import android.content.ContentResolver
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.core.content.ContentProviderCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.desiredsoftware.socialquiz.R
 import com.desiredsoftware.socialquiz.data.model.question.QuestionCategory
 import com.squareup.picasso.Picasso
 
-class CategoriesAdapter (private val categoriesList: ArrayList<QuestionCategory>):
+class CategoriesAdapter (private val categoriesList: ArrayList<QuestionCategory>, private val onClickCategoryListener: OnClickCategoryListener):
         RecyclerView.Adapter<CategoriesAdapter.CategoriesViewHolder>(){
 
 
@@ -26,11 +29,16 @@ class CategoriesAdapter (private val categoriesList: ArrayList<QuestionCategory>
     override fun onBindViewHolder(holder: CategoriesViewHolder, position: Int) {
 
         Picasso.get().load(categoriesList.get(position).imageResource)
-                .resize(100, 100)
+                .resize(120, 120)
                 .centerCrop()
                 .into(holder.imageCategory)
 
-        holder.textViewCategoryName?.setText(categoriesList.get(position).categoryName)
+        holder.textViewCategoryName?.setText(categoriesList[position].categoryName)
+
+        holder.imageCategory?.setOnClickListener {
+            onClickCategoryListener.onClicked(categoriesList[position].categoryId)
+        }
+
     }
 
 
@@ -44,4 +52,5 @@ class CategoriesAdapter (private val categoriesList: ArrayList<QuestionCategory>
             textViewCategoryName = itemView?.findViewById(R.id.textViewCategoryName)
         }
     }
+
 }

@@ -8,18 +8,21 @@ import com.desiredsoftware.socialquiz.data.model.question.QuestionCategory
     {
         val categoriesList = ArrayList<QuestionCategory>()
 
-        categoriesList.add(QuestionCategory("21","https://img.icons8.com/color/2x/owl.png", "Animals"))
+        categoriesList.add(QuestionCategory("223","https://img.icons8.com/color/2x/owl.png", "Animals"))
         categoriesList.add(QuestionCategory("23", "https://img.icons8.com/color/2x/heart-with-pulse.png", "Health"))
         categoriesList.add(QuestionCategory("43","https://img.icons8.com/doodle/2x/controller--v1.png", "Video Games"))
         categoriesList.add(QuestionCategory("56", "https://img.icons8.com/color/2x/boy-stroller.png", "Children"))
         categoriesList.add(QuestionCategory("21","https://img.icons8.com/color/2x/cheburashka.png", "Cartoons"))
         categoriesList.add(QuestionCategory("23", "https://img.icons8.com/color/2x/project.png", "Business"))
         categoriesList.add(QuestionCategory("21","https://img.icons8.com/cute-clipart/2x/outdoor-swimming-pool.png", "Rest"))
-        categoriesList.add(QuestionCategory("21","https://img.icons8.com/color/2x/owl.png", "Animals"))
+        categoriesList.add(QuestionCategory("223","https://img.icons8.com/color/2x/owl.png", "Animals"))
         categoriesList.add(QuestionCategory("23", "https://img.icons8.com/color/2x/heart-with-pulse.png", "Health"))
         categoriesList.add(QuestionCategory("43","https://img.icons8.com/doodle/2x/controller--v1.png", "Video Games"))
         categoriesList.add(QuestionCategory("56", "https://img.icons8.com/color/2x/boy-stroller.png", "Children"))
         categoriesList.add(QuestionCategory("21","https://img.icons8.com/color/2x/cheburashka.png", "Cartoons"))
+        categoriesList.add(QuestionCategory("23", "https://img.icons8.com/color/2x/heart-with-pulse.png", "Health"))
+        categoriesList.add(QuestionCategory("43","https://img.icons8.com/doodle/2x/controller--v1.png", "Video Games"))
+        categoriesList.add(QuestionCategory("56", "https://img.icons8.com/color/2x/boy-stroller.png", "Children"))
 
         return categoriesList
     }
