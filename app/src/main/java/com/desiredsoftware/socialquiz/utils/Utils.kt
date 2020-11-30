@@ -56,11 +56,19 @@ import com.desiredsoftware.socialquiz.data.model.question.QuestionCategory
         answerVariants.add(Question.Answer(true, "Cat"))
         answerVariants.add(Question.Answer(false, "Shake"))
         answerVariants.add(Question.Answer(true, "Dog"))
+        answerVariants.add(Question.Answer(false, "Dolphin"))
+        answerVariants.add(Question.Answer(true, "Zebra"))
 
         return Question("1",
                 "text",
                 "Who has 4 paws?",
+                generateProfile (),
                 answerVariants
         )
+    }
+
+    fun generateMediaURI() : String
+    {
+        return "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4"
     }
 
