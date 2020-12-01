@@ -1,6 +1,7 @@
 package com.desiredsoftware.socialquiz.ui.question
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,7 @@ import com.desiredsoftware.socialquiz.utils.generateMediaURI
 import com.desiredsoftware.socialquiz.utils.generateQuestion
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.SimpleExoPlayer
+import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
 import com.google.android.exoplayer2.ui.StyledPlayerView
 
 class QuestionShowingFragment : Fragment() {
@@ -24,26 +26,25 @@ class QuestionShowingFragment : Fragment() {
 
     private lateinit var viewModel: QuestionShowingViewModel
 
+    lateinit var player : SimpleExoPlayer
+    lateinit var playerControlView: StyledPlayerView
+    lateinit var root : View
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_question_showing, container, false)
+        root = inflater.inflate(R.layout.fragment_question_showing, container, false)
+
+        val framePlayerLayout : AspectRatioFrameLayout = root.findViewById(R.id.framePlayerLayout)
+        framePlayerLayout.setAspectRatio(16f/9f)
 
         val recyclerView : RecyclerView = root.findViewById(R.id.recyclerViewAnswerVariants)
         recyclerView.layoutManager = GridLayoutManager(requireContext(),1)
 
         recyclerView.adapter = AnswerVariantsAdapter(generateQuestion().answerVariants)
 
-
-
-        val playerControlView: StyledPlayerView = root.findViewById(R.id.playerView)
-        var player : SimpleExoPlayer  = SimpleExoPlayer.Builder(requireContext()).build()
-        playerControlView.player = player
-
-        player.setMediaItem(MediaItem.fromUri(generateMediaURI()))
-        player.prepare()
-        player.play()
+        configurePlayer()
 
         return root
     }
@@ -54,4 +55,46 @@ class QuestionShowingFragment : Fragment() {
         // TODO: Use the ViewModel
     }
 
+    override fun onResume() {
+        super.onResume()
+        configurePlayer()
+        Log.d("QuestionShowingFragment", "onResume")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d("QuestionShowingFragment", "onStop")
+        releasePlayer()
+    }
+
+    override fun onDestroyView() {
+        Log.d("QuestionShowingFragment", "onDestroyView")
+
+        super.onDestroyView()
+    }
+
+    override fun onDestroy() {
+        Log.d("QuestionShowingFragment", "onDestroy")
+
+        super.onDestroy()
+    }
+
+    override fun onDetach() {
+        Log.d("QuestionShowingFragment", "onDetach")
+        super.onDetach()
+    }
+
+    fun configurePlayer()
+    {
+        player = SimpleExoPlayer.Builder(requireContext()).build()
+        playerControlView = root.findViewById(R.id.playerView)
+        playerControlView.player = player
+        player.setMediaItem(MediaItem.fromUri(generateMediaURI()))
+        player.prepare()
+    }
+
+    fun releasePlayer()
+    {
+        player.release()
+    }
 }
