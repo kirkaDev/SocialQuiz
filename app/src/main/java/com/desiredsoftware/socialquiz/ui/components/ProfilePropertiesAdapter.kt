@@ -18,14 +18,14 @@ class ProfilePropertiesAdapter (private val properties: ArrayList<Profile.Profil
         var propertyValue: TextView? = null
 
         init {
-            propertyName = itemView?.findViewById(R.id.propertyName)
-            propertyValue = itemView?.findViewById(R.id.propertyValue)
+            propertyName = itemView.findViewById(R.id.propertyName)
+            propertyValue = itemView.findViewById(R.id.propertyValue)
         }
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PropertiesViewHolder {
-        val itemView = LayoutInflater.from(parent?.context).inflate(R.layout.item_profile_property, parent, false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_profile_property, parent, false)
         return ProfilePropertiesAdapter.PropertiesViewHolder(itemView)
     }
 

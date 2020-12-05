@@ -1,13 +1,10 @@
 package com.desiredsoftware.socialquiz.ui.components
 
-import android.content.ContentResolver
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
-import androidx.core.content.ContentProviderCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.desiredsoftware.socialquiz.R
 import com.desiredsoftware.socialquiz.data.model.question.QuestionCategory
@@ -22,7 +19,7 @@ class CategoriesAdapter (private val categoriesList: ArrayList<QuestionCategory>
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoriesViewHolder {
-        val itemView = LayoutInflater.from(parent?.context).inflate(R.layout.item_category, parent, false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_category, parent, false)
         return CategoriesViewHolder(itemView)
     }
 
@@ -36,7 +33,7 @@ class CategoriesAdapter (private val categoriesList: ArrayList<QuestionCategory>
         holder.textViewCategoryName?.setText(categoriesList[position].categoryName)
 
         holder.imageCategory?.setOnClickListener {
-            onClickCategoryListener.onClicked(categoriesList[position].categoryId)
+            onClickCategoryListener.onClicked(categoriesList[position].categoryName)
         }
 
     }
@@ -48,8 +45,8 @@ class CategoriesAdapter (private val categoriesList: ArrayList<QuestionCategory>
         var textViewCategoryName: TextView? = null
 
         init {
-            imageCategory = itemView?.findViewById(R.id.imageCategory)
-            textViewCategoryName = itemView?.findViewById(R.id.textViewCategoryName)
+            imageCategory = itemView.findViewById(R.id.imageCategory)
+            textViewCategoryName = itemView.findViewById(R.id.textViewCategoryName)
         }
     }
 

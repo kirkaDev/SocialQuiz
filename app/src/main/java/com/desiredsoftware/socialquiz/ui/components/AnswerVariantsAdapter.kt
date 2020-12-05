@@ -8,15 +8,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.desiredsoftware.socialquiz.R
 import com.desiredsoftware.socialquiz.data.model.question.Question
 
-class AnswerVariantsAdapter (private val answerVariantsList: ArrayList<Question.Answer>) : RecyclerView.Adapter<AnswerVariantsAdapter.AnswersViewHolder>() {
+class AnswerVariantsAdapter (private val answerVariantsList: ArrayList<Question.Answer>, private val onClickAnswerListener: OnClickAnswerListener) : RecyclerView.Adapter<AnswerVariantsAdapter.AnswersViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AnswersViewHolder {
-        val itemView = LayoutInflater.from(parent?.context).inflate(R.layout.item_answer_variant, parent, false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_answer_variant, parent, false)
         return AnswerVariantsAdapter.AnswersViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: AnswersViewHolder, position: Int) {
         holder.buttonAnswer?.text = answerVariantsList[position].answer
+
+        holder.buttonAnswer?.setOnClickListener {
+            onClickAnswerListener.onClicked(answerVariantsList[position])
+        }
     }
 
     override fun getItemCount(): Int {
@@ -28,7 +32,7 @@ class AnswerVariantsAdapter (private val answerVariantsList: ArrayList<Question.
         var buttonAnswer: Button? = null
 
         init {
-            buttonAnswer = itemView?.findViewById(R.id.buttonAnswerVariant)
+            buttonAnswer = itemView.findViewById(R.id.buttonAnswerVariant)
         }
     }
 

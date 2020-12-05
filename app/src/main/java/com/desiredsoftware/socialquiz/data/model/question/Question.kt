@@ -1,11 +1,9 @@
 package com.desiredsoftware.socialquiz.data.model.question
 
-import com.desiredsoftware.socialquiz.data.model.Profile
-
-class Question (val questionId: String,
+class Question (val categoryName: String,
                 val questionType: String,
                 val questionBody: String,
-                val questionOwnerId: Profile,
+                val questionOwner: String,
                 val answerVariants : ArrayList<Answer>  ) {
 
     fun hasSeveralCorrectAnswers() : Boolean
@@ -26,7 +24,7 @@ class Question (val questionId: String,
         return false
     }
 
-    class Answer(val isCorrect : Boolean, val answer : String){
+    class Answer(val answer : String, val isCorrect : Boolean){
 
     }
 

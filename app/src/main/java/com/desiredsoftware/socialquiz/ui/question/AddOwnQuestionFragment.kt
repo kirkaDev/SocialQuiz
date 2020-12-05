@@ -1,11 +1,10 @@
 package com.desiredsoftware.socialquiz.ui.question
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.desiredsoftware.socialquiz.R
 
 class AddOwnQuestionFragment : Fragment() {
@@ -23,10 +22,10 @@ class AddOwnQuestionFragment : Fragment() {
         return inflater.inflate(R.layout.add_own_question_fragment, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
+/*    override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(AddOwnQuestionViewModel::class.java)
         // TODO: Use the ViewModel
-    }
+    }*/
 
 }
