@@ -56,6 +56,9 @@
         <action
             android:id="@+id/action_questionResultFragment_to_questionShowingFragment"
             app:destination="@id/questionShowingFragment" />
+        <argument
+            android:name="answerIsCorrect"
+            app:argType="boolean" />
     </fragment>
     <fragment
         android:id="@+id/addOwnQuestionFragment"

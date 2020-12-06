@@ -5,4 +5,8 @@
     <string name="title_notifications">Notifications</string>
     <string name="profile">Profile</string>
     <string name="selectCategory">Select category</string>
+    <string name="tryAgain">Try again</string>
+    <string name="nextQuestion">Next question</string>
+    <string name="congrat">Congratulations!</string>
+    <string name="changeCategory">Change category</string>
 </resources>

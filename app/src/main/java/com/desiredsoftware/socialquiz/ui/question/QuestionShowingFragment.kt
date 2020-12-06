@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -62,6 +63,10 @@ class QuestionShowingFragment : Fragment() {
                         object : OnClickAnswerListener{
                             override fun onClicked(answerVariant: Question.Answer) {
                                 // TODO: Show QuestionResultsFragment
+                                val answerIsCorrect : Boolean = answerVariant.isCorrect
+                                val action = QuestionShowingFragmentDirections.actionQuestionShowingFragmentToQuestionResultFragment(answerIsCorrect)
+                                val navController = requireParentFragment().findNavController()
+                                navController.navigate(action)
                             }
 
                         })
