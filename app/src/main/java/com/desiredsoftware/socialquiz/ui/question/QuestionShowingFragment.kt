@@ -11,11 +11,9 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.desiredsoftware.socialquiz.R
-import com.desiredsoftware.socialquiz.data.model.question.GetQuestionCallback
 import com.desiredsoftware.socialquiz.data.model.question.Question
 import com.desiredsoftware.socialquiz.ui.components.AnswerVariantsAdapter
 import com.desiredsoftware.socialquiz.ui.components.OnClickAnswerListener
-import com.desiredsoftware.socialquiz.utils.convertToQuestion
 import com.desiredsoftware.socialquiz.utils.generateMediaURI
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.SimpleExoPlayer
@@ -35,11 +33,6 @@ class QuestionShowingFragment : Fragment() {
     lateinit var player : SimpleExoPlayer
     lateinit var playerControlView: StyledPlayerView
     lateinit var root : View
-    lateinit var categoryName : String
-
-    lateinit var questionType : String
-    lateinit var currentQuestion : Question
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,33 +44,25 @@ class QuestionShowingFragment : Fragment() {
         framePlayerLayout.setAspectRatio(16f/9f)
 
         viewModel = QuestionShowingViewModel()
-        viewModel.getNextQuestion(args.categoryName, object : GetQuestionCallback{
-            override fun onCallback(questions: ArrayList<Any>) {
-                if (questions!=null)
-                // TODO : Delete this hardcode
-                    currentQuestion = convertToQuestion(questions[0] as HashMap<String, Any>)
+        viewModel.currentQuestion = args.question
 
                 val recyclerView : RecyclerView = root.findViewById(R.id.recyclerViewAnswerVariants)
                 recyclerView.layoutManager = GridLayoutManager(requireContext(),1)
-                recyclerView.adapter = AnswerVariantsAdapter(currentQuestion.answerVariants,
+                recyclerView.adapter = AnswerVariantsAdapter(viewModel.currentQuestion.answerVariants,
                         object : OnClickAnswerListener{
                             override fun onClicked(answerVariant: Question.Answer) {
-                                // TODO: Show QuestionResultsFragment
                                 val answerIsCorrect : Boolean = answerVariant.isCorrect
-                                val action = QuestionShowingFragmentDirections.actionQuestionShowingFragmentToQuestionResultFragment(answerIsCorrect)
+                                val action = QuestionShowingFragmentDirections.actionQuestionShowingFragmentToQuestionResultFragment(answerIsCorrect, viewModel.currentQuestion)
                                 val navController = requireParentFragment().findNavController()
                                 navController.navigate(action)
                             }
-
                         })
 
-                if (currentQuestion.questionType.equals("video"))
-                configurePlayer(currentQuestion.questionBody)
-            }
-        })
+                if (viewModel.currentQuestion.questionType.equals("video"))
+                configurePlayer(viewModel.currentQuestion.questionBody)
 
-        return root
-    }
+                return root
+            }
 
     override fun onResume() {
         super.onResume()

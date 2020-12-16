@@ -1,10 +1,15 @@
 package com.desiredsoftware.socialquiz.data.model.question
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+import kotlinx.android.parcel.RawValue
+
+@Parcelize
 class Question (val categoryName: String,
                 val questionType: String,
                 val questionBody: String,
                 val questionOwner: String,
-                val answerVariants : ArrayList<Answer>  ) {
+                val answerVariants : @RawValue ArrayList<Answer>  ) : Parcelable {
 
     fun hasSeveralCorrectAnswers() : Boolean
     {

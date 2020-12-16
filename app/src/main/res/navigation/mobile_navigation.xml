@@ -45,8 +45,8 @@
             android:id="@+id/action_questionShowingFragment_to_navigation_home"
             app:destination="@id/navigation_home" />
         <argument
-            android:name="categoryName"
-            app:argType="string" />
+            android:name="question"
+            app:argType="com.desiredsoftware.socialquiz.data.model.question.Question" />
     </fragment>
     <fragment
         android:id="@+id/questionResultFragment"
@@ -59,6 +59,12 @@
         <argument
             android:name="answerIsCorrect"
             app:argType="boolean" />
+        <argument
+            android:name="currentQuestion"
+            app:argType="com.desiredsoftware.socialquiz.data.model.question.Question" />
+        <action
+            android:id="@+id/action_questionResultFragment_to_navigation_home"
+            app:destination="@id/navigation_home" />
     </fragment>
     <fragment
         android:id="@+id/addOwnQuestionFragment"

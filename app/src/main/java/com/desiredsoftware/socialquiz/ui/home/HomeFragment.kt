@@ -16,9 +16,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.desiredsoftware.socialquiz.R
 import com.desiredsoftware.socialquiz.api.`in`.ApiClientFirebase
 import com.desiredsoftware.socialquiz.api.`in`.category.GetCategoriesCallback
+import com.desiredsoftware.socialquiz.data.model.question.GetQuestionCallback
 import com.desiredsoftware.socialquiz.data.model.question.QuestionCategory
 import com.desiredsoftware.socialquiz.ui.components.CategoriesAdapter
 import com.desiredsoftware.socialquiz.ui.components.OnClickCategoryListener
+import com.desiredsoftware.socialquiz.utils.convertToQuestion
 
 class HomeFragment : Fragment() {
 
@@ -60,8 +62,17 @@ class HomeFragment : Fragment() {
                          object : OnClickCategoryListener {
                              override fun onClicked(categoryName: String) {
                                  Log.d("RecyclerView clicked", "Category name = $categoryName was selected")
-                                 val action = HomeFragmentDirections.actionNavigationHomeToQuestionShowingFragment(categoryName)
-                                 navController.navigate(action)
+                                 homeViewModel.getNextQuestion(categoryName, object : GetQuestionCallback {
+                                     override fun onCallback(questions: ArrayList<Any>) {
+                                         if (questions!=null)
+                                         {
+                                             // TODO : Delete this hardcode
+                                             val currentQuestion = convertToQuestion(questions[0] as HashMap<String, Any>)
+                                             val action = HomeFragmentDirections.actionNavigationHomeToQuestionShowingFragment(currentQuestion)
+                                             navController.navigate(action)
+                                         }
+                                     }
+                                 })
                              }
                          })
              }
