@@ -3,8 +3,6 @@ package com.desiredsoftware.socialquiz
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.desiredsoftware.socialquiz.api.`in`.ApiClientFirebase
-import com.desiredsoftware.socialquiz.data.model.question.GetQuestionCallback
-import org.junit.Assert
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -31,13 +29,13 @@ class InstrumentedTest {
 
         lateinit var questions: ArrayList<Any>
 
-        client.getQuestion(category, object : GetQuestionCallback {
+/*        client.getQuestion(category, object : GetQuestionsCallback {
             override fun onCallback(questionsArray: ArrayList<Any>) {
                 questions = questionsArray
 
                 Assert.assertEquals(true, false)
             }
-        })
+        })*/
     }
 
 }

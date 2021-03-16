@@ -1,5 +1,5 @@
 package com.desiredsoftware.socialquiz.data.model.question
 
-interface GetQuestionCallback {
+interface GetQuestionsCallback {
         fun onCallback(questions : ArrayList<Any>)
 }

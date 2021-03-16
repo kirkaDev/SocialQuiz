@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.desiredsoftware.socialquiz.api.`in`.ApiClientFirebase
-import com.desiredsoftware.socialquiz.data.model.question.GetQuestionCallback
+import com.desiredsoftware.socialquiz.data.model.question.GetQuestionsCallback
 import com.desiredsoftware.socialquiz.data.model.question.Question
 import com.desiredsoftware.socialquiz.utils.generateQuestion
 
@@ -17,9 +17,11 @@ class HomeViewModel : ViewModel() {
 
     val apiClient: ApiClientFirebase = ApiClientFirebase()
 
-    fun getNextQuestion(questionCategory : String, callback : GetQuestionCallback) : Question
+    lateinit var localQuestionArray : ArrayList<Any>
+
+    fun getQuestionsInCategory(questionCategory : String, callback : GetQuestionsCallback) : Question
     {
-        apiClient.getQuestion(questionCategory, callback)
+        apiClient.getQuestionsArrayByCategory(questionCategory, callback)
 
         return generateQuestion()
     }

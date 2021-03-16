@@ -16,27 +16,29 @@ import androidx.recyclerview.widget.RecyclerView
 import com.desiredsoftware.socialquiz.R
 import com.desiredsoftware.socialquiz.api.`in`.ApiClientFirebase
 import com.desiredsoftware.socialquiz.api.`in`.category.GetCategoriesCallback
-import com.desiredsoftware.socialquiz.data.model.question.GetQuestionCallback
+import com.desiredsoftware.socialquiz.data.model.question.GetQuestionsCallback
 import com.desiredsoftware.socialquiz.data.model.question.QuestionCategory
 import com.desiredsoftware.socialquiz.ui.components.CategoriesAdapter
 import com.desiredsoftware.socialquiz.ui.components.OnClickCategoryListener
 import com.desiredsoftware.socialquiz.utils.convertToQuestion
+import java.util.*
+import kotlin.collections.ArrayList
 
 class HomeFragment : Fragment() {
 
     private lateinit var homeViewModel: HomeViewModel
 
-    lateinit var navController : NavController
+    lateinit var navController: NavController
 
-    val apiClient : ApiClientFirebase = ApiClientFirebase()
+    val apiClient: ApiClientFirebase = ApiClientFirebase()
 
     lateinit var categoriesList: ArrayList<QuestionCategory>
 
-     override fun onCreateView(
-         inflater: LayoutInflater,
-         container: ViewGroup?,
-         savedInstanceState: Bundle?
-     ): View? {
+    override fun onCreateView(
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
+    ): View? {
         homeViewModel =
                 ViewModelProvider(this).get(HomeViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_home, container, false)
@@ -47,36 +49,37 @@ class HomeFragment : Fragment() {
             textView.text = it
         })
 
-         categoriesList = ArrayList()
+        categoriesList = ArrayList()
 
-         navController = requireParentFragment().findNavController()
+        navController = requireParentFragment().findNavController()
 
-         apiClient.getCategories(object : GetCategoriesCallback {
-             override fun onCallback(categories : ArrayList<QuestionCategory>) {
-                 categoriesList = categories
+        apiClient.getCategories(object : GetCategoriesCallback {
+            override fun onCallback(categories: ArrayList<QuestionCategory>) {
+                categoriesList = categories
 
-                 recyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
+                recyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
 
-                 recyclerView.adapter = CategoriesAdapter(
-                         categoriesList,
-                         object : OnClickCategoryListener {
-                             override fun onClicked(categoryName: String) {
-                                 Log.d("RecyclerView clicked", "Category name = $categoryName was selected")
-                                 homeViewModel.getNextQuestion(categoryName, object : GetQuestionCallback {
-                                     override fun onCallback(questions: ArrayList<Any>) {
-                                         if (questions!=null)
-                                         {
-                                             // TODO : Delete this hardcode
-                                             val currentQuestion = convertToQuestion(questions[0] as HashMap<String, Any>)
-                                             val action = HomeFragmentDirections.actionNavigationHomeToQuestionShowingFragment(currentQuestion)
-                                             navController.navigate(action)
-                                         }
-                                     }
-                                 })
-                             }
-                         })
-             }
-         })
+                recyclerView.adapter = CategoriesAdapter(
+                        categoriesList,
+                        object : OnClickCategoryListener {
+                            override fun onClicked(categoryName: String) {
+                                Log.d("RecyclerView clicked", "Category name = $categoryName was selected")
+                                homeViewModel.getQuestionsInCategory(categoryName, object : GetQuestionsCallback {
+                                    override fun onCallback(questions: ArrayList<Any>) {
+                                        if (questions != null) {
+                                            // Select random question
+
+                                            val randomNumber = Random().nextInt(questions.size)
+                                            val currentQuestion = convertToQuestion(questions[randomNumber] as HashMap<String, Any>)
+                                            val action = HomeFragmentDirections.actionNavigationHomeToQuestionShowingFragment(currentQuestion)
+                                            navController.navigate(action)
+                                        }
+                                    }
+                                })
+                            }
+                        })
+            }
+        })
 
         return root
     }

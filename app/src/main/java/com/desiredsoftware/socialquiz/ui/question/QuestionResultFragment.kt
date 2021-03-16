@@ -60,14 +60,12 @@ class QuestionResultFragment : Fragment() {
             }
         })
 
-        buttonNextQuestion.setOnClickListener(object : View.OnClickListener{
-            override fun onClick(v: View?) {
-                // TODO: Replace for real method, at now imitation working
-                val nextQuestion : Question = getNextQuestion()
-                val action = QuestionResultFragmentDirections.actionQuestionResultFragmentToQuestionShowingFragment(nextQuestion)
-                requireParentFragment().findNavController().navigate(action)
-            }
-        })
+        buttonNextQuestion.setOnClickListener {
+            // TODO: Replace for real method, at now imitation working
+            val nextQuestion: Question = getNextQuestion()
+            val action = QuestionResultFragmentDirections.actionQuestionResultFragmentToQuestionShowingFragment(nextQuestion)
+            requireParentFragment().findNavController().navigate(action)
+        }
 
         buttonChangeCategory.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {

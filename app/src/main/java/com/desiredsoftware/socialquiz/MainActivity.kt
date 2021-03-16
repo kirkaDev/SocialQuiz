@@ -41,6 +41,5 @@ class MainActivity : AppCompatActivity() {
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
             )
         )
-
     }
 }
