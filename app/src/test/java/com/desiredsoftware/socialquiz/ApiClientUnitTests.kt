@@ -1,7 +1,7 @@
 package com.desiredsoftware.socialquiz
 
 import com.desiredsoftware.socialquiz.api.`in`.ApiClientFirebase
-import com.desiredsoftware.socialquiz.data.model.question.GetQuestionsCallback
+import com.desiredsoftware.socialquiz.model.question.GetQuestionsCallback
 import org.junit.Assert
 import org.junit.Test
 

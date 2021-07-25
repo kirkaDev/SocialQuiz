@@ -1,4 +1,4 @@
-package com.desiredsoftware.socialquiz.data.model.question
+package com.desiredsoftware.socialquiz.model.question
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

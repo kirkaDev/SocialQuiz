@@ -8,10 +8,8 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.desiredsoftware.socialquiz.R
-import com.desiredsoftware.socialquiz.data.model.question.Question
+import com.desiredsoftware.socialquiz.model.question.Question
 import com.desiredsoftware.socialquiz.utils.generateQuestion
 
 class QuestionResultFragment : Fragment() {
@@ -19,8 +17,6 @@ class QuestionResultFragment : Fragment() {
     companion object {
         fun newInstance() = QuestionResultFragment()
     }
-
-    val args: QuestionResultFragmentArgs by navArgs()
 
     lateinit var viewTryAgain: View
     lateinit var viewNextQuestion : View
@@ -51,27 +47,24 @@ class QuestionResultFragment : Fragment() {
 
         buttonTryAgain.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
-                val action = QuestionResultFragmentDirections.actionQuestionResultFragmentToQuestionShowingFragment(args.currentQuestion)
-                val navController = requireParentFragment().findNavController()
-                navController.navigate(action)
             }
         })
 
         buttonNextQuestion.setOnClickListener {
             // TODO: Replace for real method, at now imitation working
             val nextQuestion: Question = getNextQuestion()
-            val action = QuestionResultFragmentDirections.actionQuestionResultFragmentToQuestionShowingFragment(nextQuestion)
-            requireParentFragment().findNavController().navigate(action)
+            /*val action = QuestionResultFragmentDirections.actionQuestionResultFragmentToQuestionShowingFragment(nextQuestion)
+            requireParentFragment().findNavController().navigate(action)*/
         }
 
         buttonChangeCategory.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
-                val action = QuestionResultFragmentDirections.actionQuestionResultFragmentToNavigationHome()
-                findNavController().navigate(action)
+                /*val action = QuestionResultFragmentDirections.actionQuestionResultFragmentToNavigationHome()
+                findNavController().navigate(action)*/
             }
         })
-        if (args.answerIsCorrect) configureCorrectAnswer()
-        else configureWrongAnswer()
+        /*if (args.answerIsCorrect) configureCorrectAnswer()
+        else configureWrongAnswer()*/
 
         return root
     }

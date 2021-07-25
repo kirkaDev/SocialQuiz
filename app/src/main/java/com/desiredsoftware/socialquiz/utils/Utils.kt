@@ -1,8 +1,8 @@
 package com.desiredsoftware.socialquiz.utils
 
-import com.desiredsoftware.socialquiz.data.model.Profile
-import com.desiredsoftware.socialquiz.data.model.question.Question
-import com.desiredsoftware.socialquiz.data.model.question.QuestionCategory
+import com.desiredsoftware.socialquiz.model.profile.Profile
+import com.desiredsoftware.socialquiz.model.question.Question
+import com.desiredsoftware.socialquiz.model.question.QuestionCategory
 
     fun generateCategories () : ArrayList<QuestionCategory>
     {

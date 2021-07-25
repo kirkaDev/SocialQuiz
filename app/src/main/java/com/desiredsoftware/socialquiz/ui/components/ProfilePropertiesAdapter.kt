@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.desiredsoftware.socialquiz.R
-import com.desiredsoftware.socialquiz.data.model.Profile
+import com.desiredsoftware.socialquiz.model.profile.Profile
 
 class ProfilePropertiesAdapter (private val properties: ArrayList<Profile.ProfileProperty>) :
         RecyclerView.Adapter<ProfilePropertiesAdapter.PropertiesViewHolder>()

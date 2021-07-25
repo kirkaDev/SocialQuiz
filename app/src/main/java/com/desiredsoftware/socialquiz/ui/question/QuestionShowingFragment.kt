@@ -6,12 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.desiredsoftware.socialquiz.R
-import com.desiredsoftware.socialquiz.data.model.question.Question
+import com.desiredsoftware.socialquiz.model.question.Question
 import com.desiredsoftware.socialquiz.ui.components.AnswerVariantsAdapter
 import com.desiredsoftware.socialquiz.ui.components.OnClickAnswerListener
 import com.desiredsoftware.socialquiz.utils.generateMediaURI
@@ -26,7 +24,7 @@ class QuestionShowingFragment : Fragment() {
         fun newInstance() = QuestionShowingFragment()
     }
 
-    val args: QuestionShowingFragmentArgs by navArgs()
+    //val args: QuestionShowingFragmentArgs by navArgs()
 
     private lateinit var viewModel: QuestionShowingViewModel
 
@@ -44,7 +42,7 @@ class QuestionShowingFragment : Fragment() {
         framePlayerLayout.setAspectRatio(16f/9f)
 
         viewModel = QuestionShowingViewModel()
-        viewModel.currentQuestion = args.question
+        //viewModel.currentQuestion = args.question
 
                 val recyclerView : RecyclerView = root.findViewById(R.id.recyclerViewAnswerVariants)
                 recyclerView.layoutManager = GridLayoutManager(requireContext(),1)
@@ -52,9 +50,9 @@ class QuestionShowingFragment : Fragment() {
                         object : OnClickAnswerListener{
                             override fun onClicked(answerVariant: Question.Answer) {
                                 val answerIsCorrect : Boolean = answerVariant.isCorrect
-                                val action = QuestionShowingFragmentDirections.actionQuestionShowingFragmentToQuestionResultFragment(answerIsCorrect, viewModel.currentQuestion)
+                                /*val action = QuestionShowingFragmentDirections.actionQuestionShowingFragmentToQuestionResultFragment(answerIsCorrect, viewModel.currentQuestion)
                                 val navController = requireParentFragment().findNavController()
-                                navController.navigate(action)
+                                navController.navigate(action)*/
                             }
                         })
 

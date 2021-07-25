@@ -6,58 +6,45 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.desiredsoftware.socialquiz.R
-import com.desiredsoftware.socialquiz.api.`in`.ApiClientFirebase
-import com.desiredsoftware.socialquiz.api.`in`.category.GetCategoriesCallback
-import com.desiredsoftware.socialquiz.data.model.question.GetQuestionsCallback
-import com.desiredsoftware.socialquiz.data.model.question.QuestionCategory
-import com.desiredsoftware.socialquiz.ui.components.CategoriesAdapter
-import com.desiredsoftware.socialquiz.ui.components.OnClickCategoryListener
-import com.desiredsoftware.socialquiz.utils.convertToQuestion
-import java.util.*
-import kotlin.collections.ArrayList
+import com.desiredsoftware.socialquiz.di.DaggerApplicationComponent
+import com.desiredsoftware.socialquiz.presenter.CategoriesPresenter
+import moxy.MvpAppCompatFragment
+import moxy.ktx.moxyPresenter
+import javax.inject.Inject
+import javax.inject.Provider
 
-class CategoriesFragment : Fragment() {
+class CategoriesFragment : MvpAppCompatFragment(), CategoriesPresenter.ICategoriesView {
 
-    private lateinit var homeViewModel: HomeViewModel
+
+    @Inject
+    lateinit var presenterProvider: Provider<CategoriesPresenter>
+    private val presenter by moxyPresenter { presenterProvider.get() }
 
     lateinit var navController: NavController
-
-    val apiClient: ApiClientFirebase = ApiClientFirebase()
-
-    lateinit var categoriesList: ArrayList<QuestionCategory>
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        homeViewModel =
-                ViewModelProvider(this).get(HomeViewModel::class.java)
+
+        DaggerApplicationComponent.create().inject(this)
+
+        presenter.showCategories()
+
         val root = inflater.inflate(R.layout.fragment_select_category, container, false)
         val textView: TextView = root.findViewById(R.id.textViewSelectCategory)
         val recyclerView: RecyclerView = root.findViewById(R.id.recyclerViewCategory)
 
-        homeViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
+        var navController = requireParentFragment().findNavController()
 
-        categoriesList = ArrayList()
-
-        navController = requireParentFragment().findNavController()
-
-        apiClient.getCategories(object : GetCategoriesCallback {
+/*        apiClient.getCategories(object : GetCategoriesCallback {
             override fun onCallback(categories: ArrayList<QuestionCategory>) {
                 categoriesList = categories
-
-                recyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
 
                 recyclerView.adapter = CategoriesAdapter(
                         categoriesList,
@@ -71,17 +58,24 @@ class CategoriesFragment : Fragment() {
 
                                             val randomNumber = Random().nextInt(questions.size)
                                             val currentQuestion = convertToQuestion(questions[randomNumber] as HashMap<String, Any>)
-                                            val action = CategoriesFragmentDirections.actionNavigationHomeToQuestionShowingFragment(currentQuestion)
-                                            navController.navigate(action)
                                         }
                                     }
                                 })
                             }
                         })
             }
-        })
+        })*/
 
         return root
+    }
+
+    override fun showCategories() {
+        Log.d("Dagger", "showCategories method called from Fragment, presenter is good!")
+        //TODO("Not yet implemented")
+    }
+
+    override fun openCategory() {
+        //TODO("Not yet implemented")
     }
 
 }

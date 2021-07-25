@@ -2,8 +2,8 @@ package com.desiredsoftware.socialquiz.api.`in`
 
 import android.util.Log
 import com.desiredsoftware.socialquiz.api.`in`.category.GetCategoriesCallback
-import com.desiredsoftware.socialquiz.data.model.question.GetQuestionsCallback
-import com.desiredsoftware.socialquiz.data.model.question.QuestionCategory
+import com.desiredsoftware.socialquiz.model.question.GetQuestionsCallback
+import com.desiredsoftware.socialquiz.model.question.QuestionCategory
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
 
@@ -37,12 +37,14 @@ class ApiClientFirebase {
                 if (task.isSuccessful) {
                     for (document in task.result!!) {
                         Log.d("Firebase read", document.id + " => " + document.data)
-                        questionCategories.add(QuestionCategory(
+                        questionCategories.add(
+                            QuestionCategory(
                                 document.data["category_id"] as String,
                                 document.data["isPremium"] as String,
                                 document.data["imageResource"] as String,
                                 document.data["categoryName"] as String
-                        ))
+                        )
+                        )
                     }
 
                 } else {

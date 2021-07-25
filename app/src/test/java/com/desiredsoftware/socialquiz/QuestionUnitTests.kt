@@ -1,6 +1,6 @@
 package com.desiredsoftware.socialquiz
 
-import com.desiredsoftware.socialquiz.data.model.question.Question
+import com.desiredsoftware.socialquiz.model.question.Question
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

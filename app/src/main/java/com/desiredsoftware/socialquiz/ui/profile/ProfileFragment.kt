@@ -1,23 +1,16 @@
 package com.desiredsoftware.socialquiz.ui.profile
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
-import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.desiredsoftware.socialquiz.R
-import com.desiredsoftware.socialquiz.data.model.Profile
-import com.desiredsoftware.socialquiz.ui.components.CategoriesAdapter
+import com.desiredsoftware.socialquiz.model.profile.Profile
 import com.desiredsoftware.socialquiz.ui.components.ProfilePropertiesAdapter
-import com.desiredsoftware.socialquiz.utils.generateCategories
 import com.desiredsoftware.socialquiz.utils.generateProfile
 import com.squareup.picasso.Picasso
 
