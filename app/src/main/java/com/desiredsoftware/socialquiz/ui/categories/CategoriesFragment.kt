@@ -1,4 +1,4 @@
-package com.desiredsoftware.socialquiz.ui.home
+package com.desiredsoftware.socialquiz.ui.categories
 
 import android.os.Bundle
 import android.util.Log
@@ -24,7 +24,7 @@ import com.desiredsoftware.socialquiz.utils.convertToQuestion
 import java.util.*
 import kotlin.collections.ArrayList
 
-class HomeFragment : Fragment() {
+class CategoriesFragment : Fragment() {
 
     private lateinit var homeViewModel: HomeViewModel
 
@@ -41,7 +41,7 @@ class HomeFragment : Fragment() {
     ): View? {
         homeViewModel =
                 ViewModelProvider(this).get(HomeViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
+        val root = inflater.inflate(R.layout.fragment_select_category, container, false)
         val textView: TextView = root.findViewById(R.id.textViewSelectCategory)
         val recyclerView: RecyclerView = root.findViewById(R.id.recyclerViewCategory)
 
@@ -71,7 +71,7 @@ class HomeFragment : Fragment() {
 
                                             val randomNumber = Random().nextInt(questions.size)
                                             val currentQuestion = convertToQuestion(questions[randomNumber] as HashMap<String, Any>)
-                                            val action = HomeFragmentDirections.actionNavigationHomeToQuestionShowingFragment(currentQuestion)
+                                            val action = CategoriesFragmentDirections.actionNavigationHomeToQuestionShowingFragment(currentQuestion)
                                             navController.navigate(action)
                                         }
                                     }

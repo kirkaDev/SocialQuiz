@@ -1,4 +1,4 @@
-package com.desiredsoftware.socialquiz.ui.home
+package com.desiredsoftware.socialquiz.ui.categories
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

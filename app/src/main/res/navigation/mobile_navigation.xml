@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.desiredsoftware.socialquiz.ui.home.HomeFragment"
+        android:name="com.desiredsoftware.socialquiz.ui.categories.CategoriesFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_select_category" >
         <action
             android:id="@+id/action_navigation_home_to_questionShowingFragment"
             app:destination="@id/questionShowingFragment" />

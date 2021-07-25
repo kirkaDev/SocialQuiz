@@ -20,9 +20,6 @@ class QuestionResultFragment : Fragment() {
         fun newInstance() = QuestionResultFragment()
     }
 
-    //private lateinit var viewModel: QuestionResultViewModel
-
-
     val args: QuestionResultFragmentArgs by navArgs()
 
     lateinit var viewTryAgain: View
