@@ -2,17 +2,18 @@ package com.desiredsoftware.socialquiz.ui.categories
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.desiredsoftware.socialquiz.R
 import com.desiredsoftware.socialquiz.di.App
+import com.desiredsoftware.socialquiz.model.category.Category
 import com.desiredsoftware.socialquiz.presenter.CategoriesPresenter
+import com.desiredsoftware.socialquiz.ui.components.CategoriesAdapter
+import com.desiredsoftware.socialquiz.ui.components.OnClickCategoryListener
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
@@ -25,7 +26,7 @@ class CategoriesFragment : MvpAppCompatFragment(), CategoriesPresenter.ICategori
     lateinit var presenterProvider: Provider<CategoriesPresenter>
     private val presenter by moxyPresenter { presenterProvider.get() }
 
-    lateinit var navController: NavController
+    lateinit var categoryList: RecyclerView
 
     override fun onAttach(context: Context) {
         App.appComponent.inject(this)
@@ -42,45 +43,29 @@ class CategoriesFragment : MvpAppCompatFragment(), CategoriesPresenter.ICategori
         presenter?.showCategories()
 
         val root = inflater.inflate(R.layout.fragment_select_category, container, false)
-        val textView: TextView = root.findViewById(R.id.textViewSelectCategory)
-        val recyclerView: RecyclerView = root.findViewById(R.id.recyclerViewCategory)
+        categoryList = root.findViewById(R.id.recyclerViewCategory)
 
         var navController = requireParentFragment().findNavController()
-
-/*        apiClient.getCategories(object : GetCategoriesCallback {
-            override fun onCallback(categories: ArrayList<QuestionCategory>) {
-                categoriesList = categories
-
-                recyclerView.adapter = CategoriesAdapter(
-                        categoriesList,
-                        object : OnClickCategoryListener {
-                            override fun onClicked(categoryName: String) {
-                                Log.d("RecyclerView clicked", "Category name = $categoryName was selected")
-                                homeViewModel.getQuestionsInCategory(categoryName, object : GetQuestionsCallback {
-                                    override fun onCallback(questions: ArrayList<Any>) {
-                                        if (questions != null) {
-                                            // Select random question
-
-                                            val randomNumber = Random().nextInt(questions.size)
-                                            val currentQuestion = convertToQuestion(questions[randomNumber] as HashMap<String, Any>)
-                                        }
-                                    }
-                                })
-                            }
-                        })
-            }
-        })*/
 
         return root
     }
 
-    override fun showCategories() {
-        Log.d("Dagger", "showCategories method called from Fragment, presenter is good!")
-        //TODO("Not yet implemented")
+    override fun showCategories(categoriesList: List<Category>) {
+        val listener = object : OnClickCategoryListener {
+            override fun onClicked(categoryName: String) {
+                fun onClicked(categoryName: String) {}
+            }
+        }
+
+        categoryList.apply {
+            adapter = CategoriesAdapter(categoriesList as ArrayList<Category>, listener)
+            layoutManager = GridLayoutManager(requireContext(), 3)
+        }
     }
 
-    override fun openCategory() {
-        //TODO("Not yet implemented")
+    override fun openCategory(idCategory: String) {
+        TODO("Not yet implemented")
     }
+
 
 }

@@ -3,7 +3,7 @@ package com.desiredsoftware.socialquiz.ui.categories
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.desiredsoftware.socialquiz.api.`in`.ApiClientFirebase
+import com.desiredsoftware.socialquiz.api.firebase.ApiClientFirebase
 import com.desiredsoftware.socialquiz.model.question.GetQuestionsCallback
 import com.desiredsoftware.socialquiz.model.question.Question
 import com.desiredsoftware.socialquiz.utils.generateQuestion

@@ -1,9 +1,9 @@
-package com.desiredsoftware.socialquiz.api.`in`
+package com.desiredsoftware.socialquiz.api.firebase
 
 import android.util.Log
-import com.desiredsoftware.socialquiz.api.`in`.category.GetCategoriesCallback
+import com.desiredsoftware.socialquiz.api.firebase.category.GetCategoriesCallback
+import com.desiredsoftware.socialquiz.model.category.Category
 import com.desiredsoftware.socialquiz.model.question.GetQuestionsCallback
-import com.desiredsoftware.socialquiz.model.question.QuestionCategory
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
 
@@ -32,13 +32,13 @@ class ApiClientFirebase {
             .get()
             .addOnCompleteListener { task ->
 
-                var questionCategories :  ArrayList<QuestionCategory> = ArrayList()
+                var categories :  ArrayList<Category> = ArrayList()
 
                 if (task.isSuccessful) {
                     for (document in task.result!!) {
                         Log.d("Firebase read", document.id + " => " + document.data)
-                        questionCategories.add(
-                            QuestionCategory(
+                        categories.add(
+                            Category(
                                 document.data["category_id"] as String,
                                 document.data["isPremium"] as String,
                                 document.data["imageResource"] as String,
@@ -50,7 +50,7 @@ class ApiClientFirebase {
                 } else {
                     Log.w("Firebase read", "Error getting documents.", task.exception)
                 }
-                callback.onCallback(questionCategories)
+                callback.onCallback(categories)
             }
     }
 

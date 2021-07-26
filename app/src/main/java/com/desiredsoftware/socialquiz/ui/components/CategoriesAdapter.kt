@@ -7,10 +7,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.desiredsoftware.socialquiz.R
-import com.desiredsoftware.socialquiz.model.question.QuestionCategory
+import com.desiredsoftware.socialquiz.model.category.Category
 import com.squareup.picasso.Picasso
 
-class CategoriesAdapter (private val categoriesList: ArrayList<QuestionCategory>, private val onClickCategoryListener: OnClickCategoryListener):
+class CategoriesAdapter (private val categoriesList: ArrayList<Category>, private val onClickCategoryListener: OnClickCategoryListener):
         RecyclerView.Adapter<CategoriesAdapter.CategoriesViewHolder>(){
 
 

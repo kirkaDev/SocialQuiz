@@ -1,22 +1,22 @@
 package com.desiredsoftware.socialquiz.utils
 
+import com.desiredsoftware.socialquiz.model.category.Category
 import com.desiredsoftware.socialquiz.model.profile.Profile
 import com.desiredsoftware.socialquiz.model.question.Question
-import com.desiredsoftware.socialquiz.model.question.QuestionCategory
 
-    fun generateCategories () : ArrayList<QuestionCategory>
+fun generateCategories () : ArrayList<Category>
     {
-        val categoriesList = ArrayList<QuestionCategory>()
+        val categoriesList = ArrayList<Category>()
 
-        categoriesList.add(QuestionCategory("223", "false", "https://img.icons8.com/color/2x/owl.png", "Animals"))
-        categoriesList.add(QuestionCategory("23","false", "https://img.icons8.com/color/2x/heart-with-pulse.png", "Health"))
-        categoriesList.add(QuestionCategory("43","false","https://img.icons8.com/doodle/2x/controller--v1.png", "Video Games"))
-        categoriesList.add(QuestionCategory("56", "false","https://img.icons8.com/color/2x/boy-stroller.png", "Children"))
-        categoriesList.add(QuestionCategory("21","false","https://img.icons8.com/color/2x/cheburashka.png", "Cartoons"))
-        categoriesList.add(QuestionCategory("23", "true","https://img.icons8.com/color/2x/project.png", "Business"))
-        categoriesList.add(QuestionCategory("21","false","https://img.icons8.com/cute-clipart/2x/outdoor-swimming-pool.png", "Travel"))
-        categoriesList.add(QuestionCategory("223","false","https://img.icons8.com/color/2x/owl.png", "Animals"))
-        categoriesList.add(QuestionCategory("23", "true","https://img.icons8.com/color/2x/heart-with-pulse.png", "Health"))
+        categoriesList.add(Category("223", "false", "https://img.icons8.com/color/2x/owl.png", "Animals"))
+        categoriesList.add(Category("23","false", "https://img.icons8.com/color/2x/heart-with-pulse.png", "Health"))
+        categoriesList.add(Category("43","false","https://img.icons8.com/doodle/2x/controller--v1.png", "Video Games"))
+        categoriesList.add(Category("56", "false","https://img.icons8.com/color/2x/boy-stroller.png", "Children"))
+        categoriesList.add(Category("21","false","https://img.icons8.com/color/2x/cheburashka.png", "Cartoons"))
+        categoriesList.add(Category("23", "true","https://img.icons8.com/color/2x/project.png", "Business"))
+        categoriesList.add(Category("21","false","https://img.icons8.com/cute-clipart/2x/outdoor-swimming-pool.png", "Travel"))
+        categoriesList.add(Category("223","false","https://img.icons8.com/color/2x/owl.png", "Animals"))
+        categoriesList.add(Category("23", "true","https://img.icons8.com/color/2x/heart-with-pulse.png", "Health"))
 
         return categoriesList
     }
