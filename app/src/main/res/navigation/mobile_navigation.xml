@@ -46,7 +46,7 @@
             app:destination="@id/navigation_home" />
         <argument
             android:name="question"
-            app:argType="com.desiredsoftware.socialquiz.data.model.question.Question" />
+            app:argType="com.desiredsoftware.socialquiz.model.question.Question" />
     </fragment>
     <fragment
         android:id="@+id/questionResultFragment"
@@ -61,7 +61,7 @@
             app:argType="boolean" />
         <argument
             android:name="currentQuestion"
-            app:argType="com.desiredsoftware.socialquiz.data.model.question.Question" />
+            app:argType="com.desiredsoftware.socialquiz.model.question.Question" />
         <action
             android:id="@+id/action_questionResultFragment_to_navigation_home"
             app:destination="@id/navigation_home" />

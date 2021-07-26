@@ -1,5 +1,6 @@
 package com.desiredsoftware.socialquiz.ui.categories
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,15 +11,15 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.desiredsoftware.socialquiz.R
-import com.desiredsoftware.socialquiz.di.DaggerApplicationComponent
+import com.desiredsoftware.socialquiz.di.App
 import com.desiredsoftware.socialquiz.presenter.CategoriesPresenter
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 import javax.inject.Provider
 
-class CategoriesFragment : MvpAppCompatFragment(), CategoriesPresenter.ICategoriesView {
 
+class CategoriesFragment : MvpAppCompatFragment(), CategoriesPresenter.ICategoriesView {
 
     @Inject
     lateinit var presenterProvider: Provider<CategoriesPresenter>
@@ -26,15 +27,19 @@ class CategoriesFragment : MvpAppCompatFragment(), CategoriesPresenter.ICategori
 
     lateinit var navController: NavController
 
+    override fun onAttach(context: Context) {
+        App.appComponent.inject(this)
+        super.onAttach(context)
+    }
+
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
 
-        DaggerApplicationComponent.create().inject(this)
-
-        presenter.showCategories()
+        super.onCreate(savedInstanceState)
+        presenter?.showCategories()
 
         val root = inflater.inflate(R.layout.fragment_select_category, container, false)
         val textView: TextView = root.findViewById(R.id.textViewSelectCategory)

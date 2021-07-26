@@ -1,11 +1,14 @@
 package com.desiredsoftware.socialquiz.presenter
 
 import com.desiredsoftware.socialquiz.data.repository.FirebaseRepository
+import moxy.InjectViewState
 import moxy.MvpPresenter
 import moxy.MvpView
-import moxy.viewstate.strategy.alias.AddToEnd
+import moxy.viewstate.strategy.AddToEndSingleStrategy
+import moxy.viewstate.strategy.StateStrategyType
 import javax.inject.Inject
 
+@InjectViewState
 class CategoriesPresenter @Inject constructor(
     private var firebaseRepository : FirebaseRepository
 ) : MvpPresenter<CategoriesPresenter.ICategoriesView>() {
@@ -19,7 +22,7 @@ class CategoriesPresenter @Inject constructor(
         viewState.openCategory()
     }
 
-    @AddToEnd
+    @StateStrategyType(AddToEndSingleStrategy::class)
     interface ICategoriesView : MvpView{
         fun showCategories()
         fun openCategory()
