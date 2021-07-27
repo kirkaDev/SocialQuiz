@@ -23,7 +23,6 @@ class CategoriesPresenter @Inject constructor(
         }
     }
 
-
     fun openCategory(idCategory: String) {
         viewState.openCategory(idCategory)
     }

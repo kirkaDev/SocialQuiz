@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -52,19 +53,24 @@ class CategoriesFragment : MvpAppCompatFragment(), CategoriesPresenter.ICategori
 
     override fun showCategories(categoriesList: List<Category>) {
         val listener = object : OnClickCategoryListener {
-            override fun onClicked(categoryName: String) {
-                fun onClicked(categoryName: String) {}
+            override fun onClicked(categoryId: String) {
+                Toast.makeText(
+                    activity,
+                    "Category with id ${categoryId} clicked",
+                    Toast.LENGTH_SHORT
+                ).show()
+                presenter.openCategory(categoryId)
             }
         }
 
         categoryList.apply {
             adapter = CategoriesAdapter(categoriesList as ArrayList<Category>, listener)
-            layoutManager = GridLayoutManager(requireContext(), 3)
+            layoutManager = GridLayoutManager(requireContext(), 2)
         }
     }
 
     override fun openCategory(idCategory: String) {
-        TODO("Not yet implemented")
+
     }
 
 
