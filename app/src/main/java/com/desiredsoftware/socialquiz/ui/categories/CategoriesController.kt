@@ -1,54 +1,41 @@
 package com.desiredsoftware.socialquiz.ui.categories
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bluelinelabs.conductor.Controller
 import com.desiredsoftware.socialquiz.R
 import com.desiredsoftware.socialquiz.di.App
 import com.desiredsoftware.socialquiz.model.category.Category
 import com.desiredsoftware.socialquiz.presenter.CategoriesPresenter
 import com.desiredsoftware.socialquiz.ui.components.CategoriesAdapter
 import com.desiredsoftware.socialquiz.ui.components.OnClickCategoryListener
-import moxy.MvpAppCompatFragment
-import moxy.ktx.moxyPresenter
 import javax.inject.Inject
-import javax.inject.Provider
 
-
-class CategoriesFragment : MvpAppCompatFragment(), CategoriesPresenter.ICategoriesView {
+class CategoriesController : Controller(), CategoriesPresenter.ICategoriesView {
 
     @Inject
-    lateinit var presenterProvider: Provider<CategoriesPresenter>
-    private val presenter by moxyPresenter { presenterProvider.get() }
+    lateinit var presenter: CategoriesPresenter
 
     lateinit var categoryList: RecyclerView
 
-    override fun onAttach(context: Context) {
-        App.appComponent.inject(this)
-        super.onAttach(context)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+        container: ViewGroup,
+        savedViewState: Bundle?
+    ): View {
+        val view: View = inflater.inflate(R.layout.controller_select_category, container, false)
+        categoryList = view.findViewById(R.id.recyclerViewCategory)
 
-        super.onCreate(savedInstanceState)
-        presenter?.showCategories()
+        App.appComponent.inject(this)
+        presenter.attachView(this)
+        presenter.showCategories()
 
-        val root = inflater.inflate(R.layout.fragment_select_category, container, false)
-        categoryList = root.findViewById(R.id.recyclerViewCategory)
-
-        var navController = requireParentFragment().findNavController()
-
-        return root
+        return view
     }
 
     override fun showCategories(categoriesList: List<Category>) {
@@ -65,13 +52,11 @@ class CategoriesFragment : MvpAppCompatFragment(), CategoriesPresenter.ICategori
 
         categoryList.apply {
             adapter = CategoriesAdapter(categoriesList as ArrayList<Category>, listener)
-            layoutManager = GridLayoutManager(requireContext(), 2)
+            layoutManager = GridLayoutManager(context, 2)
         }
     }
 
     override fun openCategory(idCategory: String) {
 
     }
-
-
 }
