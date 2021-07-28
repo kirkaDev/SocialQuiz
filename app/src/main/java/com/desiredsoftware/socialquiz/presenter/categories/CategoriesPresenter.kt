@@ -1,4 +1,4 @@
-package com.desiredsoftware.socialquiz.presenter
+package com.desiredsoftware.socialquiz.presenter.categories
 
 import com.desiredsoftware.socialquiz.data.repository.FirebaseRepository
 import com.desiredsoftware.socialquiz.model.category.Category

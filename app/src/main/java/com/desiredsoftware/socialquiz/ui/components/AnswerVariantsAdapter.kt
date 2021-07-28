@@ -6,9 +6,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.recyclerview.widget.RecyclerView
 import com.desiredsoftware.socialquiz.R
-import com.desiredsoftware.socialquiz.model.question.Question
+import com.desiredsoftware.socialquiz.model.question.Answer
 
-class AnswerVariantsAdapter (private val answerVariantsList: ArrayList<Question.Answer>, private val onClickAnswerListener: OnClickAnswerListener) : RecyclerView.Adapter<AnswerVariantsAdapter.AnswersViewHolder>() {
+class AnswerVariantsAdapter (private val answerVariantsList: ArrayList<Answer>, private val onClickAnswerListener: OnClickAnswerListener) : RecyclerView.Adapter<AnswerVariantsAdapter.AnswersViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AnswersViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_answer_variant, parent, false)

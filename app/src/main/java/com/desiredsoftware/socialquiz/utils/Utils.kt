@@ -2,6 +2,7 @@ package com.desiredsoftware.socialquiz.utils
 
 import com.desiredsoftware.socialquiz.model.category.Category
 import com.desiredsoftware.socialquiz.model.profile.Profile
+import com.desiredsoftware.socialquiz.model.question.Answer
 import com.desiredsoftware.socialquiz.model.question.Question
 
 fun generateCategories () : ArrayList<Category>
@@ -41,21 +42,25 @@ fun generateCategories () : ArrayList<Category>
 
     fun generateQuestion() : Question
     {
-        val answerVariants : ArrayList<Question.Answer> = ArrayList<Question.Answer>()
+        val answerVariants : ArrayList<Answer> = ArrayList<Answer>()
 
-        answerVariants.add(Question.Answer("Cat", true))
-        answerVariants.add(Question.Answer("Shake", false))
-        answerVariants.add(Question.Answer("Dog", true))
-        answerVariants.add(Question.Answer("Dolphin", false))
-        answerVariants.add(Question.Answer("Zebra",true))
+        answerVariants.add(Answer("Cat", true))
+        answerVariants.add(Answer("Shake", false))
+        answerVariants.add(Answer("Dog", true))
+        answerVariants.add(Answer("Dolphin", false))
+        answerVariants.add(Answer("Zebra",true))
 
-        return Question(
-                "Music",
-                "text",
-                "Who has 4 paws?",
-                "kirkadev",
-                answerVariants
-        )
+        var question : Question = Question(
+            mAnswerVariants = answerVariants,
+            mCategoryName = "Animals",
+            mCategory_id = "AnimalsCategory_id",
+            mLanguage = "ru",
+            mQuestionBody = "Who has 4 paws?",
+            mQuestionOwner = "Nikolay Drozdov",
+       )
+        question.mQuestionType = "text"
+
+        return question
     }
 
     fun generateMediaURI() : String
@@ -65,26 +70,26 @@ fun generateCategories () : ArrayList<Category>
 
     fun convertToQuestion(question : HashMap<String, Any>) : Question
     {
-
         val questionOwner: String = question["questionOwner"] as String
         val questionType: String = question["questionType"] as String
         val questionBody: String = question["questionBody"] as String
         val categoryName: String = question["categoryName"] as String
 
-        val answerVariants : ArrayList<Question.Answer> = ArrayList()
+        val answerVariants : ArrayList<Answer> = ArrayList()
 
-        for (answer in question["answerVariants"] as HashMap<String, Boolean>)
+/*        for (answer in question["answerVariants"] as HashMap<String, Boolean>)
         {
-            answerVariants.add(Question.Answer(answer.key, answer.value))
-        }
+            answerVariants.add(Answer(answer.key, answer.value))
+        }*/
 
-        return Question (
-                categoryName,
-                questionType,
-                questionBody,
-                questionOwner,
-                answerVariants
-                )
-
+        return Question(
+            mAnswerVariants = answerVariants,
+            mCategoryName = "Animals",
+            mCategory_id = "AnimalsCategory_id",
+            mLanguage = "ru",
+            mQuestionBody = generateMediaURI(),
+            mQuestionOwner = "Nikolay Drozdov",
+            mQuestionType = "video"
+            )
     }
 

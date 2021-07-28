@@ -9,7 +9,7 @@
         android:id="@+id/navigation_home"
         android:name="com.desiredsoftware.socialquiz.ui.categories.CategoriesController"
         android:label="@string/title_home"
-        tools:layout="@layout/controller_select_category" >
+        tools:layout="@layout/view_controller_select_category" >
         <action
             android:id="@+id/action_navigation_home_to_questionShowingFragment"
             app:destination="@id/questionShowingFragment" />
@@ -35,9 +35,9 @@
 
     <fragment
         android:id="@+id/questionShowingFragment"
-        android:name="com.desiredsoftware.socialquiz.ui.question.QuestionShowingFragment"
+        android:name="com.desiredsoftware.socialquiz.ui.question.QuestionShowingController"
         android:label="question_showing_fragment"
-        tools:layout="@layout/fragment_question_showing" >
+        tools:layout="@layout/view_controller_question_showing" >
         <action
             android:id="@+id/action_questionShowingFragment_to_questionResultFragment"
             app:destination="@id/questionResultFragment" />
