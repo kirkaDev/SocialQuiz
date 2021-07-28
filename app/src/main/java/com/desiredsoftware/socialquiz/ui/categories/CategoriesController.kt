@@ -7,21 +7,32 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bluelinelabs.conductor.Controller
 import com.desiredsoftware.socialquiz.R
 import com.desiredsoftware.socialquiz.di.App
 import com.desiredsoftware.socialquiz.model.category.Category
 import com.desiredsoftware.socialquiz.presenter.CategoriesPresenter
+import com.desiredsoftware.socialquiz.ui.common.MvpController
 import com.desiredsoftware.socialquiz.ui.components.CategoriesAdapter
 import com.desiredsoftware.socialquiz.ui.components.OnClickCategoryListener
+import moxy.presenter.InjectPresenter
+import moxy.presenter.ProvidePresenter
 import javax.inject.Inject
 
-class CategoriesController : Controller(), CategoriesPresenter.ICategoriesView {
+class CategoriesController : MvpController(), CategoriesPresenter.ICategoriesView {
 
     @Inject
+    @InjectPresenter
     lateinit var presenter: CategoriesPresenter
 
+    @ProvidePresenter
+    fun provides() = presenter
+
     lateinit var categoryList: RecyclerView
+
+    override fun inject() {
+        super.inject()
+        App.appComponent.inject(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,9 +41,6 @@ class CategoriesController : Controller(), CategoriesPresenter.ICategoriesView {
     ): View {
         val view: View = inflater.inflate(R.layout.controller_select_category, container, false)
         categoryList = view.findViewById(R.id.recyclerViewCategory)
-
-        App.appComponent.inject(this)
-        presenter.attachView(this)
         presenter.showCategories()
 
         return view
