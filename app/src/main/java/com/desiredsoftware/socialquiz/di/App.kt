@@ -8,6 +8,9 @@ open class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        appComponent = DaggerApplicationComponent.create()
+        appComponent = DaggerApplicationComponent.builder()
+            .appModule(AppModule(this))
+            .firebaseModule(FirebaseModule())
+            .build()
     }
 }

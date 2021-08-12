@@ -5,11 +5,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.desiredsoftware.socialquiz.R
 import com.desiredsoftware.socialquiz.di.App
+import com.desiredsoftware.socialquiz.model.question.Answer
 import com.desiredsoftware.socialquiz.presenter.question.QuestionShowingPresenter
 import com.desiredsoftware.socialquiz.ui.common.MvpController
+import com.desiredsoftware.socialquiz.ui.components.AnswersAdapter
+import com.desiredsoftware.socialquiz.ui.components.OnClickAnswerListener
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
@@ -18,13 +22,16 @@ import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import javax.inject.Inject
 
-class QuestionShowingController : MvpController(), QuestionShowingPresenter.IQuestionView {
+class QuestionShowingController : MvpController, QuestionShowingPresenter.IQuestionView {
+    constructor() : super()
+    constructor (args: Bundle) : super(args)
 
-    private lateinit var viewModel: QuestionShowingViewModel
+    lateinit var mPlayer: SimpleExoPlayer
+    lateinit var mPlayerControlView: StyledPlayerView
+    lateinit var mRoot: View
 
-    lateinit var player : SimpleExoPlayer
-    lateinit var playerControlView: StyledPlayerView
-    lateinit var root : View
+    lateinit var mListAnswers: RecyclerView
+    lateinit var mAdapter: AnswersAdapter
 
     @Inject
     @InjectPresenter
@@ -38,51 +45,48 @@ class QuestionShowingController : MvpController(), QuestionShowingPresenter.IQue
         App.appComponent.inject(this)
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup,
         savedViewState: Bundle?
     ): View {
-        root = inflater.inflate(R.layout.view_controller_question_showing, container, false)
-        val framePlayerLayout : AspectRatioFrameLayout = root.findViewById(R.id.framePlayerLayout)
-        framePlayerLayout.setAspectRatio(16f/9f)
+        mRoot = inflater.inflate(R.layout.view_controller_question_showing, container, false)
 
-        viewModel = QuestionShowingViewModel()
-        //viewModel.currentQuestion = args.question
+        mListAnswers = mRoot.findViewById(R.id.listAnswers)
 
-                val recyclerView : RecyclerView = root.findViewById(R.id.recyclerViewAnswerVariants)
-/*                recyclerView.layoutManager = GridLayoutManager(requireContext(),1)
-                recyclerView.adapter = AnswerVariantsAdapter(viewModel.currentQuestion.answerVariants,
-                        object : OnClickAnswerListener{
-                            override fun onClicked(answerVariant: Question.Answer) {
-                                val answerIsCorrect : Boolean = answerVariant.isCorrect
-                                *//*val action = QuestionShowingFragmentDirections.actionQuestionShowingFragmentToQuestionResultFragment(answerIsCorrect, viewModel.currentQuestion)
-                                val navController = requireParentFragment().findNavController()
-                                navController.navigate(action)*//*
-                            }
-                        })
+        val framePlayerLayout: AspectRatioFrameLayout = mRoot.findViewById(R.id.framePlayerLayout)
+        framePlayerLayout.setAspectRatio(16f / 9f)
 
-                if (viewModel.currentQuestion.questionType.equals("video"))
-                configurePlayer(viewModel.currentQuestion.questionBody)*/
+        presenter.mQuestionCategoryId = args.getString(CATEGORY_ID_KEY).toString()
+        presenter.showQuestion()
 
-                return root
+        return mRoot
+    }
+
+    private fun configurePlayer(context: Context, videoURI: String) {
+        mPlayer = SimpleExoPlayer.Builder(context).build()
+        mPlayerControlView = mRoot.findViewById(R.id.playerView)
+        mPlayerControlView.player = mPlayer
+        mPlayer.setMediaItem(MediaItem.fromUri(videoURI))
+        mPlayer.prepare()
+    }
+
+    companion object {
+        val CATEGORY_ID_KEY = "CATEGORY_KEY"
+    }
+
+    override fun showVideoQuestion(context: Context, questionBodyVideoUri: String) {
+        configurePlayer(context, questionBodyVideoUri)
+    }
+
+    override fun showAnswers(context: Context, answers: List<Answer>) {
+        mAdapter = AnswersAdapter(answersList = answers, object: OnClickAnswerListener{
+            override fun onClicked(answerVariant: Answer) {
+                // TODO("Not yet implemented")
             }
+        })
 
-    fun configurePlayer(context : Context, videoURI : String )
-    {
-        player = SimpleExoPlayer.Builder(context).build()
-        playerControlView = root.findViewById(R.id.playerView)
-        playerControlView.player = player
-        player.setMediaItem(MediaItem.fromUri(videoURI))
-        player.prepare()
-    }
-
-    override fun showQuestionBody() {
-        TODO("Not yet implemented")
-    }
-
-    override fun showAnswerVariants() {
-        TODO("Not yet implemented")
+        mListAnswers.adapter = mAdapter
+        mListAnswers.layoutManager = LinearLayoutManager(context)
     }
 }

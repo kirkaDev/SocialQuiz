@@ -25,12 +25,12 @@ class CategoriesAdapter (private val categoriesList: ArrayList<Category>, privat
 
     override fun onBindViewHolder(holder: CategoriesViewHolder, position: Int) {
 
-        Picasso.get().load(categoriesList.get(position).imageResource)
+        Picasso.get().load(categoriesList[position].imageResource)
                 .resize(120, 120)
                 .centerCrop()
                 .into(holder.imageCategory)
 
-        holder.textViewCategoryName?.setText(categoriesList[position].categoryName)
+        holder.textViewCategoryName?.text = categoriesList[position].categoryName
 
         holder.imageCategory?.setOnClickListener {
             onClickCategoryListener.onClicked(categoriesList[position].categoryId)

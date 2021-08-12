@@ -67,7 +67,13 @@ class CategoriesController : MvpController(), CategoriesPresenter.ICategoriesVie
     }
 
     override fun openCategory(idCategory: String) {
-        val transaction = RouterTransaction.with(QuestionShowingController())
+        val bundle = Bundle()
+        bundle.putString(CATEGORY_ID_KEY, idCategory)
+        val transaction = RouterTransaction.with(QuestionShowingController(bundle))
         router.pushController(transaction)
+    }
+
+    companion object{
+        val CATEGORY_ID_KEY = "CATEGORY_KEY"
     }
 }

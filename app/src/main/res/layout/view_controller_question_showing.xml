@@ -27,7 +27,7 @@
     </com.google.android.exoplayer2.ui.AspectRatioFrameLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewAnswerVariants"
+        android:id="@+id/listAnswers"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="50dp"

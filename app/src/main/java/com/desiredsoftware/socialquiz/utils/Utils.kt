@@ -42,20 +42,19 @@ fun generateCategories () : ArrayList<Category>
 
     fun generateQuestion() : Question
     {
-        val answerVariants : ArrayList<Answer> = ArrayList<Answer>()
+        val answerVariants : List<Answer> = emptyList()
 
-        answerVariants.add(Answer("Cat", true))
-        answerVariants.add(Answer("Shake", false))
-        answerVariants.add(Answer("Dog", true))
-        answerVariants.add(Answer("Dolphin", false))
-        answerVariants.add(Answer("Zebra",true))
+        var answerMutableList = answerVariants.toMutableList()
+        answerMutableList.add(Answer("Cat", true))
+        answerMutableList.add(Answer("Shake", false))
+        answerMutableList.add(Answer("Dolphin", false))
 
         var question : Question = Question(
-            mAnswerVariants = answerVariants,
+            mAnswers = answerMutableList,
             mCategoryName = "Animals",
             mCategory_id = "AnimalsCategory_id",
             mLanguage = "ru",
-            mQuestionBody = "Who has 4 paws?",
+            mQuestionBody = generateMediaURI(),
             mQuestionOwner = "Nikolay Drozdov",
        )
         question.mQuestionType = "text"
@@ -82,7 +81,7 @@ fun generateCategories () : ArrayList<Category>
             answerVariants.add(Answer(answer.key, answer.value))
         }*/
 
-        return Question(
+/*        return Question(
             mAnswerVariants = answerVariants,
             mCategoryName = "Animals",
             mCategory_id = "AnimalsCategory_id",
@@ -90,6 +89,8 @@ fun generateCategories () : ArrayList<Category>
             mQuestionBody = generateMediaURI(),
             mQuestionOwner = "Nikolay Drozdov",
             mQuestionType = "video"
-            )
+            )*/
+
+        return generateQuestion()
     }
 

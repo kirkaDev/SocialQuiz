@@ -1,25 +1,21 @@
 package com.desiredsoftware.socialquiz.model.question
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
-import kotlinx.parcelize.RawValue
 
-@Parcelize
-class Question (
-    var mAnswerVariants : @RawValue List<Answer> = emptyList<Answer>(),
+class Question(
+    var mAnswers: List<Answer>? = emptyList(),
     var mCategoryName: String = "",
     var mCategory_id: String = "",
     var mLanguage: String = "",
     var mQuestionBody: String = "",
     var mQuestionOwner: String = "",
     var mQuestionType: String = ""
-        ) : Parcelable {
+        ) {
 
-    fun hasSeveralCorrectAnswers() : Boolean
+/*    fun hasSeveralCorrectAnswers() : Boolean
     {
         var hasCurrentAnswer = false
 
         for (answer in mAnswerVariants) {
-            if (answer.isCorrect) {
+            if (answer is Answer && answer.isCorrect) {
                 if (hasCurrentAnswer)
                 {
                     return true
@@ -30,5 +26,5 @@ class Question (
 
         // returns false if here has 0 or 1 correct answer
         return false
-    }
+    }*/
 }
