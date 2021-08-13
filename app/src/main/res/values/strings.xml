@@ -10,4 +10,6 @@
     <string name="congrat">Congratulations!</string>
     <string name="answerIncorrect">Wrong answer!</string>
     <string name="answerCorrect">You\'re right!</string>
+    <string name="questionAuthor">Question\'s author:</string>
+    <string name="questionAuthorExample"><u>kirkadev</u></string>
 </resources>
