@@ -8,5 +8,6 @@
     <string name="tryAgain">Try again</string>
     <string name="nextQuestion">Next question</string>
     <string name="congrat">Congratulations!</string>
-    <string name="changeCategory">Change category</string>
+    <string name="answerIncorrect">Wrong answer!</string>
+    <string name="answerCorrect">You\'re right!</string>
 </resources>

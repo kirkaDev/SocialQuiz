@@ -7,10 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bluelinelabs.conductor.RouterTransaction
 import com.desiredsoftware.socialquiz.R
 import com.desiredsoftware.socialquiz.di.App
 import com.desiredsoftware.socialquiz.model.question.Answer
 import com.desiredsoftware.socialquiz.presenter.question.QuestionShowingPresenter
+import com.desiredsoftware.socialquiz.ui.categories.CategoriesController.Companion.CATEGORY_ID_KEY
 import com.desiredsoftware.socialquiz.ui.common.MvpController
 import com.desiredsoftware.socialquiz.ui.components.AnswersAdapter
 import com.desiredsoftware.socialquiz.ui.components.OnClickAnswerListener
@@ -71,22 +73,25 @@ class QuestionShowingController : MvpController, QuestionShowingPresenter.IQuest
         mPlayer.prepare()
     }
 
-    companion object {
-        val CATEGORY_ID_KEY = "CATEGORY_KEY"
-    }
-
     override fun showVideoQuestion(context: Context, questionBodyVideoUri: String) {
         configurePlayer(context, questionBodyVideoUri)
     }
 
     override fun showAnswers(context: Context, answers: List<Answer>) {
         mAdapter = AnswersAdapter(answersList = answers, object: OnClickAnswerListener{
-            override fun onClicked(answerVariant: Answer) {
-                // TODO("Not yet implemented")
+            override fun onClicked(answer: Answer) {
+                val bundle = Bundle()
+                bundle.putSerializable(ANSWER_IS_CORRECT_KEY, answer.isCorrect)
+                val transaction = RouterTransaction.with(QuestionResultController(bundle))
+                router.pushController(transaction)
             }
         })
 
         mListAnswers.adapter = mAdapter
         mListAnswers.layoutManager = LinearLayoutManager(context)
+    }
+
+    companion object{
+        val ANSWER_IS_CORRECT_KEY = "ANSWER_IS_CORRECT_KEY"
     }
 }

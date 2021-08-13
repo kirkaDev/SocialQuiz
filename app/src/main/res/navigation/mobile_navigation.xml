@@ -50,9 +50,9 @@
     </fragment>
     <fragment
         android:id="@+id/questionResultFragment"
-        android:name="com.desiredsoftware.socialquiz.ui.question.QuestionResultFragment"
+        android:name="com.desiredsoftware.socialquiz.ui.question.QuestionResultController"
         android:label="question_result_fragment"
-        tools:layout="@layout/fragment_question_result" >
+        tools:layout="@layout/view_controller_question_result" >
         <action
             android:id="@+id/action_questionResultFragment_to_questionShowingFragment"
             app:destination="@id/questionShowingFragment" />

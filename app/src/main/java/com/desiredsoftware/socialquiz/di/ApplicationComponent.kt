@@ -1,6 +1,7 @@
 package com.desiredsoftware.socialquiz.di
 
 import com.desiredsoftware.socialquiz.ui.categories.CategoriesController
+import com.desiredsoftware.socialquiz.ui.question.QuestionResultController
 import com.desiredsoftware.socialquiz.ui.question.QuestionShowingController
 import dagger.Component
 
@@ -8,4 +9,5 @@ import dagger.Component
 interface ApplicationComponent {
     fun inject(categoriesController: CategoriesController)
     fun inject(questionShowingController: QuestionShowingController)
+    fun inject(questionResultController: QuestionResultController)
 }

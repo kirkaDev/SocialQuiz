@@ -20,7 +20,7 @@ class AnswersAdapter (private val answersList: List<Answer>,
         holder.buttonAnswer?.text = answersList[position].answer
 
         holder.buttonAnswer?.setOnClickListener {
-            onClickAnswerListener.onClicked(answerVariant = answersList[position])
+            onClickAnswerListener.onClicked(answer = answersList[position])
         }
     }
 
