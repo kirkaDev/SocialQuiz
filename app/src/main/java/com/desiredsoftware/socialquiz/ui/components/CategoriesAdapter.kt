@@ -33,7 +33,7 @@ class CategoriesAdapter (private val categoriesList: ArrayList<Category>, privat
         holder.textViewCategoryName?.text = categoriesList[position].categoryName
 
         holder.imageCategory?.setOnClickListener {
-            onClickCategoryListener.onClicked(categoriesList[position].categoryId)
+            onClickCategoryListener.onClicked(categoriesList[position].id)
         }
 
     }
