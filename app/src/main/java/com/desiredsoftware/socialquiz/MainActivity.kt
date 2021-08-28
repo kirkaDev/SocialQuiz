@@ -3,13 +3,11 @@ package com.desiredsoftware.socialquiz
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
-import androidx.annotation.RequiresApi
 import com.bluelinelabs.conductor.Conductor
 import com.bluelinelabs.conductor.Router
 import com.bluelinelabs.conductor.RouterTransaction
@@ -23,14 +21,13 @@ class MainActivity : MvpAppCompatActivity() {
 
     private var mRouter: Router? = null
 
-    var loginLauncher: ActivityResultLauncher<Intent>? = null
+    var mLoginLauncher: ActivityResultLauncher<Intent>? = null
 
-    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        loginLauncher = getSignInLauncher()
+        mLoginLauncher = getSignInLauncher()
 
         val container: ViewGroup = findViewById(R.id.nav_host_fragment)
         Log.d("Main activity", "onCreate is working")
@@ -40,9 +37,8 @@ class MainActivity : MvpAppCompatActivity() {
         requestPermissions()
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
     private fun getSignInLauncher(): ActivityResultLauncher<Intent> {
-        val signInLauncher: ActivityResultLauncher<Intent> = registerForActivityResult(
+        return registerForActivityResult(
             FirebaseAuthUIActivityResultContract()
         ) { result: FirebaseAuthUIAuthenticationResult? ->
             if (result?.resultCode == -1)   // it means user is logged in
@@ -56,12 +52,8 @@ class MainActivity : MvpAppCompatActivity() {
                 ).show()
             }
         }
-
-        return signInLauncher
     }
 
-
-    @RequiresApi(Build.VERSION_CODES.M)
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<String>, grantResults: IntArray
@@ -74,7 +66,7 @@ class MainActivity : MvpAppCompatActivity() {
                             grantResults[0] == PackageManager.PERMISSION_GRANTED)
                 ) {
                     if (!mRouter!!.hasRootController()) {
-                        mRouter!!.setRoot(RouterTransaction.with(AuthController(loginLauncher!!)))
+                        mRouter!!.setRoot(RouterTransaction.with(AuthController(mLoginLauncher!!)))
                     }
 
                     // Permission is granted. Continue the action or workflow
@@ -97,7 +89,6 @@ class MainActivity : MvpAppCompatActivity() {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
     private fun requestPermissions() {
         requestPermissions(
             arrayOf(

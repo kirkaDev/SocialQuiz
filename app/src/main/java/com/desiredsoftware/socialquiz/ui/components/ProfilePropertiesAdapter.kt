@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.desiredsoftware.socialquiz.R
 import com.desiredsoftware.socialquiz.model.profile.Profile
 
-class ProfilePropertiesAdapter (private val properties: ArrayList<Profile.ProfileProperty>) :
+class ProfilePropertiesAdapter (private val properties: List<Profile.ProfileProperty>) :
         RecyclerView.Adapter<ProfilePropertiesAdapter.PropertiesViewHolder>()
 {
 
@@ -26,12 +26,12 @@ class ProfilePropertiesAdapter (private val properties: ArrayList<Profile.Profil
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PropertiesViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_profile_property, parent, false)
-        return ProfilePropertiesAdapter.PropertiesViewHolder(itemView)
+        return PropertiesViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: PropertiesViewHolder, position: Int) {
-        holder.propertyName?.setText(properties.get(position).propertyName)
-        holder.propertyValue?.setText(properties.get(position).propertyValue)
+        holder.propertyName?.text = properties[position].propertyName
+        holder.propertyValue?.text = properties[position].propertyValue
     }
 
     override fun getItemCount(): Int {

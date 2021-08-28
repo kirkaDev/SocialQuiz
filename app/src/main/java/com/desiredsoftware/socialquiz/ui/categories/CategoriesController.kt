@@ -62,7 +62,7 @@ class CategoriesController : MvpController(), CategoriesPresenter.ICategoriesVie
 
         categoryList.apply {
             adapter = CategoriesAdapter(categoriesList as ArrayList<Category>, listener)
-            layoutManager = GridLayoutManager(context, 2)
+            layoutManager = GridLayoutManager(context, 3)
         }
     }
 

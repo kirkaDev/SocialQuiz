@@ -34,8 +34,7 @@ fun generateCategories () : ArrayList<Category>
         properties.add(Profile.ProfileProperty("Telegram", "@kirkadev"))
         properties.add(Profile.ProfileProperty("About me", "I like music, chess, driving a car, to travel and other things"))
 
-
-        val profile = Profile("21", "https://pngicon.ru/file/uploads/2_16.png", true, properties)
+        val profile = Profile("21", "https://pngicon.ru/file/uploads/2_16.png", true, properties.toList())
 
         return profile
     }

@@ -33,8 +33,6 @@ class QuestionResultController : MvpController, QuestionResultPresenter.IQuestio
         App.appComponent.inject(this)
     }
 
-    lateinit var mRoot: View
-
     lateinit var textViewResult: AppCompatTextView
 
     lateinit var buttonTryAgain: AppCompatButton
@@ -46,17 +44,17 @@ class QuestionResultController : MvpController, QuestionResultPresenter.IQuestio
         container: ViewGroup,
         savedViewState: Bundle?
     ): View {
-        mRoot = inflater.inflate(R.layout.view_controller_question_result, container, false)
+        val view = inflater.inflate(R.layout.view_controller_question_result, container, false)
 
-        buttonTryAgain = mRoot.findViewById(R.id.buttonTryAgain)
-        buttonNextQuestion = mRoot.findViewById(R.id.buttonNextQuestion)
-        buttonSelectCategory = mRoot.findViewById(R.id.buttonSelectCategory)
+        buttonTryAgain = view.findViewById(R.id.buttonTryAgain)
+        buttonNextQuestion = view.findViewById(R.id.buttonNextQuestion)
+        buttonSelectCategory = view.findViewById(R.id.buttonSelectCategory)
 
-        textViewResult = mRoot.findViewById(R.id.textViewResult)
+        textViewResult = view.findViewById(R.id.textViewResult)
 
         initUI()
 
-        return mRoot
+        return view
     }
 
     private fun initUI() {
