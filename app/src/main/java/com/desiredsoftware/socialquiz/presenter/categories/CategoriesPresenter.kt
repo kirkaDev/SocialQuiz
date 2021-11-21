@@ -7,7 +7,7 @@ import moxy.InjectViewState
 import moxy.MvpPresenter
 import moxy.MvpView
 import moxy.presenterScope
-import moxy.viewstate.strategy.AddToEndSingleStrategy
+import moxy.viewstate.strategy.OneExecutionStateStrategy
 import moxy.viewstate.strategy.StateStrategyType
 import javax.inject.Inject
 
@@ -27,7 +27,7 @@ class CategoriesPresenter @Inject constructor(
         viewState.openCategory(idCategory)
     }
 
-    @StateStrategyType(AddToEndSingleStrategy::class)
+    @StateStrategyType(OneExecutionStateStrategy::class)
     interface ICategoriesView : MvpView {
         fun showCategories(categoriesList: List<Category>)
         fun openCategory(idCategory: String)
