@@ -11,6 +11,7 @@
     <color name="textColor">#6FFFFFFF</color>
     <color name="bottomToolbar">#3D4D64</color>>
     <color name="mainBackground">#35445C</color>>
+    <color name="darkBackground">#942A3A53</color>>
     <color name="yellowMain">#F2C94C</color>>
     <color name="orange">#CF9E08</color>>
 </resources>

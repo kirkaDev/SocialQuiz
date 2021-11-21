@@ -1,27 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:background="@color/mainBackground"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
     android:layout_marginBottom="24dp"
-    android:orientation="vertical">
+    android:background="@drawable/shape_background_category"
+    android:orientation="vertical"
+    android:paddingTop="8dp">
 
     <ImageView
         android:id="@+id/imageCategory"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center_horizontal"
-        android:paddingTop="8dp"
-        tools:srcCompat="@tools:sample/avatars" />
-
-    <TextView
-        android:id="@+id/textViewCategoryName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        tools:text="Category name"
-        style="@style/TextViewStyle">
-    </TextView>
+        android:layout_gravity="center"
+        android:minWidth="72dp"
+        android:minHeight="72dp"
+        android:maxHeight="100dp"
+        android:maxWidth="100dp"
+        android:paddingTop="4dp"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:gravity="center"
+        android:background="@drawable/shape_category_name">
+
+        <TextView
+            android:id="@+id/textViewCategoryName"
+            style="@style/TextViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingVertical="4dp"
+            tools:text="Category name">
+        </TextView>
+
+    </LinearLayout>
+
+
 </androidx.appcompat.widget.LinearLayoutCompat>
