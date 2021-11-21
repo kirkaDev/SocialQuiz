@@ -31,6 +31,9 @@ class CategoriesController : MvpController(), CategoriesPresenter.ICategoriesVie
 
     lateinit var categoryList: RecyclerView
 
+    // Spans number for categories list
+    val mSpanCount = 3
+
     override fun inject() {
         super.inject()
         App.appComponent.inject(this)
@@ -61,8 +64,8 @@ class CategoriesController : MvpController(), CategoriesPresenter.ICategoriesVie
         }
 
         categoryList.apply {
-            adapter = CategoriesAdapter(categoriesList as ArrayList<Category>, listener)
-            layoutManager = GridLayoutManager(context, 3)
+            adapter = CategoriesAdapter((categoriesList as ArrayList<Category>), listener)
+            layoutManager = GridLayoutManager(context, mSpanCount)
         }
     }
 
