@@ -4,7 +4,6 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
@@ -30,8 +29,6 @@ class MainActivity : MvpAppCompatActivity() {
         mLoginLauncher = getSignInLauncher()
 
         val container: ViewGroup = findViewById(R.id.nav_host_fragment)
-        Log.d("Main activity", "onCreate is working")
-
         mRouter = Conductor.attachRouter(this, container, savedInstanceState)
 
         requestPermissions()
@@ -43,7 +40,7 @@ class MainActivity : MvpAppCompatActivity() {
         ) { result: FirebaseAuthUIAuthenticationResult? ->
             if (result?.resultCode == -1)   // it means user is logged in
             {
-                mRouter?.pushController(RouterTransaction.with(CategoriesController()))
+                mRouter?.replaceTopController(RouterTransaction.with(CategoriesController()))
             } else {
                 Toast.makeText(
                     this,
