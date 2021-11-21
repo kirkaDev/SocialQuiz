@@ -5,6 +5,7 @@
     tools:background="@color/mainBackground"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="24dp"
     android:orientation="vertical">
 
     <ImageView
@@ -12,13 +13,14 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_gravity="center_horizontal"
-        android:paddingTop="5dp"
+        android:paddingTop="8dp"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/textViewCategoryName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
         tools:text="Category name"
         style="@style/TextViewStyle">
     </TextView>
