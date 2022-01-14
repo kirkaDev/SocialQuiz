@@ -14,4 +14,5 @@
     <string name="questionAuthorExample"><u>kirkadev</u></string>
     <string name="loading">Loading...</string>
     <string name="login">Login</string>
+    <string name="auth_error">Вы не авторизованы, попробуйте повторить вход</string>
 </resources>

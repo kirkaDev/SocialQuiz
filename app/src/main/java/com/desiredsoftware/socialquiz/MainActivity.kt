@@ -44,7 +44,7 @@ class MainActivity : MvpAppCompatActivity() {
             } else {
                 Toast.makeText(
                     this,
-                    "Вы не авторизованы, попробуйте повторить вход",
+                    resources.getString(R.string.auth_error),
                     Toast.LENGTH_LONG
                 ).show()
             }

@@ -5,7 +5,7 @@ import kotlinx.coroutines.launch
 import moxy.MvpPresenter
 import moxy.MvpView
 import moxy.presenterScope
-import moxy.viewstate.strategy.AddToEndSingleStrategy
+import moxy.viewstate.strategy.OneExecutionStateStrategy
 import moxy.viewstate.strategy.StateStrategyType
 import javax.inject.Inject
 
@@ -16,13 +16,13 @@ class SplashPresenter @Inject constructor(
     fun initUI() {
         presenterScope.launch {
             viewState.showAnimation(true)
-            delay(3000L)
+            delay(1000L)
             viewState.showAnimation(false)
             viewState.openAuthScreen()
         }
     }
 
-    @StateStrategyType(AddToEndSingleStrategy::class)
+    @StateStrategyType(OneExecutionStateStrategy::class)
     interface ISplashView : MvpView {
         fun showAnimation(showAnimation: Boolean)
         fun openAuthScreen()

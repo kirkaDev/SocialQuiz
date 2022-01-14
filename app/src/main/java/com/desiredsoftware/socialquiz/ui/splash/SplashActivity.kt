@@ -37,5 +37,6 @@ class SplashActivity : MvpAppCompatActivity(), SplashPresenter.ISplashView {
         val intent = Intent(this, MainActivity::class.java)
         finish()
         startActivity(intent)
+        overridePendingTransition(0, 0)
     }
 }
