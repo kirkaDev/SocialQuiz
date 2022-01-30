@@ -8,7 +8,7 @@ import com.desiredsoftware.socialquiz.ui.question.QuestionShowingController
 import com.desiredsoftware.socialquiz.ui.splash.SplashActivity
 import dagger.Component
 
-@Component (modules = [AppModule::class, FirebaseModule::class])
+@Component(modules = [AppModule::class, FirebaseModule::class])
 interface ApplicationComponent {
     fun inject(categoriesController: CategoriesController)
     fun inject(questionShowingController: QuestionShowingController)
@@ -16,6 +16,4 @@ interface ApplicationComponent {
     fun inject(splashActivity: SplashActivity)
     fun inject(authController: AuthController)
     fun inject(profileController: ProfileController)
-
-
 }

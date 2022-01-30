@@ -1,7 +1,6 @@
 package com.desiredsoftware.socialquiz.utils
 
 import com.desiredsoftware.socialquiz.model.category.Category
-import com.desiredsoftware.socialquiz.model.profile.Profile
 import com.desiredsoftware.socialquiz.model.question.Answer
 import com.desiredsoftware.socialquiz.model.question.Question
 
@@ -22,33 +21,16 @@ fun generateCategories () : ArrayList<Category>
         return categoriesList
     }
 
-    fun generateProfile () : Profile
-    {
-        val properties = ArrayList<Profile.ProfileProperty>()
-
-        properties.add(Profile.ProfileProperty("Username", "kirkadev"))
-        properties.add(Profile.ProfileProperty("First name", "Kirill"))
-        properties.add(Profile.ProfileProperty("Role", "Admin"))
-        properties.add(Profile.ProfileProperty("Github", "https://github.com/kirkaDev"))
-        properties.add(Profile.ProfileProperty("Instagram", "@kirkasukhov"))
-        properties.add(Profile.ProfileProperty("Telegram", "@kirkadev"))
-        properties.add(Profile.ProfileProperty("About me", "I like music, chess, driving a car, to travel and other things"))
-
-        val profile = Profile("21", "https://pngicon.ru/file/uploads/2_16.png", true, properties.toList())
-
-        return profile
-    }
-
     fun generateQuestion() : Question
     {
         val answerVariants : List<Answer> = emptyList()
 
-        var answerMutableList = answerVariants.toMutableList()
+        val answerMutableList = answerVariants.toMutableList()
         answerMutableList.add(Answer("Cat", true))
         answerMutableList.add(Answer("Shake", false))
         answerMutableList.add(Answer("Dolphin", false))
 
-        var question : Question = Question(
+        val question = Question(
             mAnswers = answerMutableList,
             mCategoryName = "Animals",
             mCategory_id = "AnimalsCategory_id",

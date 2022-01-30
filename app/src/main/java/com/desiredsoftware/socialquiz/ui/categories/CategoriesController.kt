@@ -44,7 +44,8 @@ class CategoriesController : MvpController(), CategoriesPresenter.ICategoriesVie
         container: ViewGroup,
         savedViewState: Bundle?
     ): View {
-        val view: View = inflater.inflate(R.layout.view_controller_select_category, container, false)
+        val view: View =
+            inflater.inflate(R.layout.view_controller_select_category, container, false)
         categoryList = view.findViewById(R.id.recyclerViewCategory)
         presenter.showCategories()
 
@@ -76,7 +77,7 @@ class CategoriesController : MvpController(), CategoriesPresenter.ICategoriesVie
         router.pushController(transaction)
     }
 
-    companion object{
+    companion object {
         val CATEGORY_ID_KEY = "CATEGORY_KEY"
     }
 }

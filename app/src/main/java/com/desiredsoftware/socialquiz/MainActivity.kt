@@ -12,8 +12,10 @@ import com.bluelinelabs.conductor.Router
 import com.bluelinelabs.conductor.RouterTransaction
 import com.desiredsoftware.socialquiz.ui.auth.AuthController
 import com.desiredsoftware.socialquiz.ui.categories.CategoriesController
+import com.desiredsoftware.socialquiz.ui.profile.ProfileController
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import moxy.MvpAppCompatActivity
 
 class MainActivity : MvpAppCompatActivity() {
@@ -30,6 +32,20 @@ class MainActivity : MvpAppCompatActivity() {
 
         val container: ViewGroup = findViewById(R.id.nav_host_fragment)
         mRouter = Conductor.attachRouter(this, container, savedInstanceState)
+
+        val bottomMenu: BottomNavigationView = findViewById(R.id.nav_view)
+
+        bottomMenu.setOnItemSelectedListener{
+            when (it.itemId){
+                R.id.navigation_profile ->{
+                    mRouter?.pushController(RouterTransaction.with(ProfileController()))
+                    true
+                }
+                else ->{
+                    true
+                }
+            }
+        }
 
         requestPermissions()
     }

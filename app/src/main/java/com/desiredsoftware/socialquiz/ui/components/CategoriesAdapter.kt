@@ -6,12 +6,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.desiredsoftware.socialquiz.R
 import com.desiredsoftware.socialquiz.model.category.Category
 import com.facebook.shimmer.ShimmerFrameLayout
-import com.squareup.picasso.Callback
-import com.squareup.picasso.Picasso
-
 
 class CategoriesAdapter(
     private val categoriesList: ArrayList<Category>,
@@ -30,35 +28,22 @@ class CategoriesAdapter(
     }
 
     override fun onBindViewHolder(holder: CategoriesViewHolder, position: Int) {
-        Picasso.get().load(categoriesList[position].imageResource)
-            .resize(120, 120)
-            .centerCrop()
-            .into(holder.imageCategory, object : Callback {
-                override fun onSuccess() {
-                    holder.shimmer?.setShimmer(null)
-                }
-
-                override fun onError(e: Exception?) {
-                    // TODO: Set placeholder here
-                    holder.shimmer?.setShimmer(null)
-                }
-            })
-
-        holder.textViewCategoryName?.text = categoriesList[position].categoryName
-        holder.imageCategory?.setOnClickListener {
-            onClickCategoryListener.onClicked(categoriesList[position].id)
-        }
+        holder.bind(categoriesList[position])
     }
 
-    class CategoriesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var imageCategory: ImageView? = null
-        var textViewCategoryName: TextView? = null
-        var shimmer: ShimmerFrameLayout? = null
+    inner class CategoriesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        var shimmer: ShimmerFrameLayout = itemView.findViewById(R.id.shimmer)
+        var imageCategory: ImageView = itemView.findViewById(R.id.imageCategory)
+        var textViewCategoryName: TextView? = itemView.findViewById(R.id.textViewCategoryName)
 
-        init {
-            imageCategory = itemView.findViewById(R.id.imageCategory)
-            textViewCategoryName = itemView.findViewById(R.id.textViewCategoryName)
-            shimmer = itemView.findViewById(R.id.shimmer)
+        fun bind(category: Category) {
+            shimmer.setShimmer(null)
+            Glide.with(itemView).load(category.imageResource).into(imageCategory)
+            textViewCategoryName?.text = category.categoryName
+
+            imageCategory.setOnClickListener {
+                onClickCategoryListener.onClicked(category.id)
+            }
         }
     }
 }

@@ -13,8 +13,8 @@ import javax.inject.Inject
 
 @InjectViewState
 class CategoriesPresenter @Inject constructor(
-        private var firebaseRepository: FirebaseRepository
-) : MvpPresenter<CategoriesPresenter.ICategoriesView>() {
+    private val firebaseRepository: FirebaseRepository,
+    ) : MvpPresenter<CategoriesPresenter.ICategoriesView>() {
 
     fun showCategories() {
         presenterScope.launch {

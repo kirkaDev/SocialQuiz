@@ -8,8 +8,12 @@
         <entry key="..\:/AndroidProjects/SocialQuiz/app/src/main/res/drawable/ic_try_again.xml" value="0.26403508771929823" />
         <entry key="..\:/AndroidProjects/SocialQuiz/app/src/main/res/drawable/shape_background_category.xml" value="0.2890625" />
         <entry key="..\:/AndroidProjects/SocialQuiz/app/src/main/res/drawable/shape_category_name.xml" value="0.2574561403508772" />
+        <entry key="..\:/AndroidProjects/SocialQuiz/app/src/main/res/layout/activity_main.xml" value="0.22324561403508772" />
         <entry key="..\:/AndroidProjects/SocialQuiz/app/src/main/res/layout/item_category.xml" value="0.23999999479814021" />
+        <entry key="..\:/AndroidProjects/SocialQuiz/app/src/main/res/layout/view_controller_profile.xml" value="0.3236842105263158" />
         <entry key="..\:/AndroidProjects/SocialQuiz/app/src/main/res/layout/view_controller_select_category.xml" value="0.19636363210756924" />
+        <entry key="..\:/AndroidProjects/SocialQuiz/app/src/main/res/layout/view_controller_splash.xml" value="0.22324561403508772" />
+        <entry key="..\:/AndroidProjects/SocialQuiz/app/src/main/res/menu/bottom_nav_menu.xml" value="0.22324561403508772" />
       </map>
     </option>
   </component>

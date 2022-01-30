@@ -5,15 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.recyclerview.widget.LinearLayoutManager
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.desiredsoftware.socialquiz.R
 import com.desiredsoftware.socialquiz.di.App
 import com.desiredsoftware.socialquiz.model.profile.Profile
 import com.desiredsoftware.socialquiz.presenter.profile.ProfilePresenter
 import com.desiredsoftware.socialquiz.ui.common.MvpController
-import com.desiredsoftware.socialquiz.ui.components.ProfilePropertiesAdapter
-import com.squareup.picasso.Picasso
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import javax.inject.Inject
@@ -32,8 +31,8 @@ class ProfileController : MvpController(), ProfilePresenter.IProfileView {
         App.appComponent.inject(this)
     }
 
-    private lateinit var avatarImageView : ImageView
-    private lateinit var profilePropertiesList : RecyclerView
+    private lateinit var avatarImageView: ImageView
+    private lateinit var profilePropertiesList: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,16 +49,17 @@ class ProfileController : MvpController(), ProfilePresenter.IProfileView {
         return view
     }
 
-    override fun showAvatar(avatarUrl: String) {
-        Picasso.get().load(avatarUrl)
-            .resize(200, 200)
-            .centerCrop()
-            .into(avatarImageView)
+    override fun showUserInfo(profile: Profile) {
+        showAvatar(profile.avatarURI)
     }
 
-    override fun showPropertiesList(list: List<Profile.ProfileProperty>) {
-        profilePropertiesList.adapter = ProfilePropertiesAdapter(list)
-        profilePropertiesList.layoutManager = LinearLayoutManager(activity?.applicationContext)
+    override fun showError(message: String) {
+        Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
     }
 
+    private fun showAvatar(avatarUrl: String) {
+        view?.context?.let {
+            Glide.with(it).load(avatarUrl).into(avatarImageView)
+        }
+    }
 }
