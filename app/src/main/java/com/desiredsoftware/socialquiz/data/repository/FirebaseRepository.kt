@@ -4,13 +4,14 @@ import android.util.Log
 import com.desiredsoftware.socialquiz.model.category.Category
 import com.desiredsoftware.socialquiz.model.profile.Profile
 import com.desiredsoftware.socialquiz.model.profile.Profile.Companion.FIELD_ABOUT
+import com.desiredsoftware.socialquiz.model.profile.Profile.Companion.FIELD_ACCOUNT_TYPE
 import com.desiredsoftware.socialquiz.model.profile.Profile.Companion.FIELD_AVATAR_URI
 import com.desiredsoftware.socialquiz.model.profile.Profile.Companion.FIELD_ID
 import com.desiredsoftware.socialquiz.model.profile.Profile.Companion.FIELD_INSTAGRAM
-import com.desiredsoftware.socialquiz.model.profile.Profile.Companion.FIELD_IS_PREMIUM
 import com.desiredsoftware.socialquiz.model.profile.Profile.Companion.FIELD_NICK_NAME
 import com.desiredsoftware.socialquiz.model.profile.Profile.Companion.FIELD_ROLE
 import com.desiredsoftware.socialquiz.model.profile.Profile.Companion.FIELD_SCORE
+import com.desiredsoftware.socialquiz.model.profile.Profile.Companion.FIELD_TIK_TOK
 import com.desiredsoftware.socialquiz.model.question.Question
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
@@ -46,13 +47,14 @@ class FirebaseRepository @Inject constructor(
                 try {
                     val profile = Profile(
                         document[FIELD_ID] as String,
-                        document[FIELD_NICK_NAME] as String,
-                        document[FIELD_ROLE] as String,
-                        document[FIELD_IS_PREMIUM] as Boolean,
-                        document[FIELD_SCORE] as Long,
                         document[FIELD_AVATAR_URI] as String,
+                        document[FIELD_NICK_NAME] as String,
+                        document[FIELD_SCORE] as Long,
+                        document[FIELD_ROLE] as String,
                         document[FIELD_ABOUT] as String,
-                        document[FIELD_INSTAGRAM] as String
+                        document[FIELD_INSTAGRAM] as String,
+                        document[FIELD_TIK_TOK] as String,
+                        document[FIELD_ACCOUNT_TYPE] as String,
                     )
 
                     if (profile.id == uid)

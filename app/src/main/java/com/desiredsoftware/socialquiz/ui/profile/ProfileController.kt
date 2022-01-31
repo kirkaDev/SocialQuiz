@@ -4,13 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.Toast
-import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.desiredsoftware.socialquiz.R
+import com.desiredsoftware.socialquiz.databinding.ViewControllerProfileBinding
 import com.desiredsoftware.socialquiz.di.App
-import com.desiredsoftware.socialquiz.model.profile.Profile
 import com.desiredsoftware.socialquiz.presenter.profile.ProfilePresenter
 import com.desiredsoftware.socialquiz.ui.common.MvpController
 import moxy.presenter.InjectPresenter
@@ -31,35 +29,63 @@ class ProfileController : MvpController(), ProfilePresenter.IProfileView {
         App.appComponent.inject(this)
     }
 
-    private lateinit var avatarImageView: ImageView
-    private lateinit var profilePropertiesList: RecyclerView
+    private var _binding: ViewControllerProfileBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup,
         savedViewState: Bundle?
     ): View {
-        val view = inflater.inflate(R.layout.view_controller_profile, container, false)
-
-        avatarImageView = view.findViewById(R.id.imageViewAvatar)
-        profilePropertiesList = view.findViewById(R.id.recyclerViewProfileProperties)
-
+        _binding = ViewControllerProfileBinding.inflate(inflater, container, false)
         mPresenter.initUI()
 
-        return view
-    }
-
-    override fun showUserInfo(profile: Profile) {
-        showAvatar(profile.avatarURI)
+        return binding.root
     }
 
     override fun showError(message: String) {
         Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
     }
 
-    private fun showAvatar(avatarUrl: String) {
+    override fun showAvatar(avatarUrl: String) {
         view?.context?.let {
-            Glide.with(it).load(avatarUrl).into(avatarImageView)
+            Glide.with(it)
+                .load(avatarUrl)
+                .placeholder(it.resources.getDrawable(R.drawable.ic_profile_white_24dp))
+                .into(binding.imageViewAvatar)
         }
+    }
+
+    override fun showNickName(nickName: String) {
+        binding.nicknameEditText.hint = nickName
+    }
+
+    override fun showScore(score: String) {
+        binding.scoreEditText.hint = score
+    }
+
+    override fun showRole(role: String) {
+        binding.roleEditText.hint = role
+    }
+
+    override fun showAbout(about: String) {
+        binding.aboutEditText.hint = about
+    }
+
+    override fun showInstagram(instagram: String) {
+        binding.instagramEditText.hint = instagram
+    }
+
+    override fun showTikTok(tiktok: String) {
+        binding.tikTokEditText.hint = tiktok
+    }
+
+    override fun showAccountType(accountType: String) {
+        binding.accountTypeEditText.hint = accountType
+    }
+
+    override fun onDestroyView(view: View) {
+        super.onDestroyView(view)
+        _binding = null
     }
 }

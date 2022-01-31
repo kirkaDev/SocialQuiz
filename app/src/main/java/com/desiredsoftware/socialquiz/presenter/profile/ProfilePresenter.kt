@@ -22,11 +22,20 @@ class ProfilePresenter @Inject constructor(
     private val firebaseUser: FirebaseUser?,
 ) : MvpPresenter<ProfilePresenter.IProfileView>() {
 
+    var currentUser: Profile? = null
+
     fun initUI() {
         presenterScope.launch {
             firebaseUser?.uid?.let { uid ->
                 firebaseRepository.getProfile(uid)?.let {
-                    viewState.showUserInfo(it)
+                    currentUser = it
+                    viewState.showNickName(it.nickName)
+                    viewState.showScore(it.score.toString())
+                    viewState.showRole(it.role)
+                    viewState.showAbout(it.about)
+                    viewState.showInstagram(it.instagram)
+                    viewState.showTikTok(it.tiktok)
+                    viewState.showAccountType(it.accountType)
                 } ?: run {
                     viewState.showError(context.getString(R.string.profile_error))
                 }
@@ -38,6 +47,13 @@ class ProfilePresenter @Inject constructor(
 
     @StateStrategyType(AddToEndSingleStrategy::class)
     interface IProfileView : MvpView, IError {
-        fun showUserInfo(profile: Profile)
+        fun showAvatar(avatarUri: String)
+        fun showNickName(nickName: String)
+        fun showScore(score: String)
+        fun showRole(role: String)
+        fun showAbout(about: String)
+        fun showInstagram(instagram: String)
+        fun showTikTok(tiktok: String)
+        fun showAccountType(accountType: String)
     }
 }
