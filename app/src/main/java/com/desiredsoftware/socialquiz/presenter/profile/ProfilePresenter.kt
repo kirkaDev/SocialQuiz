@@ -29,6 +29,7 @@ class ProfilePresenter @Inject constructor(
             firebaseUser?.uid?.let { uid ->
                 firebaseRepository.getProfile(uid)?.let {
                     currentUser = it
+                    viewState.showAvatar(it.avatarURI)
                     viewState.showNickName(it.nickName)
                     viewState.showScore(it.score.toString())
                     viewState.showRole(it.role)

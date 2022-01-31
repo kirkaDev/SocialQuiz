@@ -51,6 +51,7 @@ class ProfileController : MvpController(), ProfilePresenter.IProfileView {
         view?.context?.let {
             Glide.with(it)
                 .load(avatarUrl)
+                .error(it.resources.getDrawable(R.drawable.ic_profile_white_24dp))
                 .placeholder(it.resources.getDrawable(R.drawable.ic_profile_white_24dp))
                 .into(binding.imageViewAvatar)
         }
