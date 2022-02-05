@@ -1,8 +1,6 @@
 package com.desiredsoftware.socialquiz
 
-import android.Manifest
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.ViewGroup
 import android.widget.Toast
@@ -49,7 +47,6 @@ class MainActivity : MvpAppCompatActivity() {
         }
 
         router?.replaceTopController(RouterTransaction.with(SplashController()))
-        //requestPermissions()
     }
 
     private fun getSignInLauncher(): ActivityResultLauncher<Intent> {
@@ -69,50 +66,6 @@ class MainActivity : MvpAppCompatActivity() {
         }
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<String>, grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-
-        when (requestCode) {
-            PERMISSIONS_REQUEST_CODE -> {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.isNotEmpty() &&
-                            grantResults[0] == PackageManager.PERMISSION_GRANTED &&
-                            grantResults[1] == PackageManager.PERMISSION_GRANTED &&
-                            grantResults[2] == PackageManager.PERMISSION_GRANTED
-                ) {
-                    if (!router!!.hasRootController()) {
-                        //mRouter!!.setRoot(RouterTransaction.with(AuthController(mLoginLauncher!!)))
-                    }
-
-                } else {
-                    // Explain to the user that the feature is unavailable because
-                    // the features requires a permission that the user has denied.
-                    // At the same time, respect the user's decision. Don't link to
-                    // system settings in an effort to convince the user to change
-                    // their decision.
-                }
-                return
-            }
-
-            else -> {
-                // Ignore all other requests.
-            }
-        }
-    }
-
-    private fun requestPermissions() {
-        requestPermissions(
-            arrayOf(
-                Manifest.permission.INTERNET,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.READ_EXTERNAL_STORAGE
-            ), PERMISSIONS_REQUEST_CODE
-        )
-    }
-
     override fun onBackPressed() {
         if (!router!!.handleBack()) {
             super.onBackPressed()
@@ -120,7 +73,6 @@ class MainActivity : MvpAppCompatActivity() {
     }
 
     companion object{
-        const val PERMISSIONS_REQUEST_CODE = 48573
         var loginLauncher: ActivityResultLauncher<Intent>? = null
     }
 }

@@ -1,7 +1,9 @@
 package com.desiredsoftware.socialquiz.ui.profile
 
+import android.Manifest
 import android.app.Activity.RESULT_OK
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -48,7 +50,7 @@ class ProfileController : MvpController(), ProfilePresenter.IProfileView {
         mPresenter.initUI()
 
         binding.imageViewAvatar.setOnClickListener{
-            startGalleryIntent()
+            checkPermissions()
         }
 
         return binding.root
@@ -61,6 +63,15 @@ class ProfileController : MvpController(), ProfilePresenter.IProfileView {
 
         startActivityForResult(Intent.createChooser(galleryIntent,
             resources?.getString(R.string.choose_your_avatar)), UPLOAD_AVATAR_TO_PROFILE_REQUEST_CODE)
+    }
+
+    private fun checkPermissions(){
+        requestPermissions(
+            arrayOf(
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            ), PERMISSIONS_REQUEST_CODE
+        )
     }
 
     override fun showError(message: String) {
@@ -88,6 +99,27 @@ class ProfileController : MvpController(), ProfilePresenter.IProfileView {
 
     override fun showRole(role: String) {
         binding.roleEditText.hint = role
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode){
+            PERMISSIONS_REQUEST_CODE ->{
+                if (grantResults.all { it == PackageManager.PERMISSION_GRANTED })
+                {
+                    startGalleryIntent()
+                }
+                else{
+                    Toast.makeText(activity, R.string.permissions_failed, Toast.LENGTH_LONG).show()
+                }
+            }
+            else -> {
+            }
+        }
     }
 
     override fun showAbout(about: String) {
@@ -131,6 +163,7 @@ class ProfileController : MvpController(), ProfilePresenter.IProfileView {
 
     companion object{
         val UPLOAD_AVATAR_TO_PROFILE_REQUEST_CODE= 57875
+        const val PERMISSIONS_REQUEST_CODE = 48573
     }
 
 }
