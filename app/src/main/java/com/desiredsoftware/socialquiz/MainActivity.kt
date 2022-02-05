@@ -39,7 +39,7 @@ class MainActivity : MvpAppCompatActivity() {
                     true
                 }
                 R.id.navigation_home ->{
-                    router?.pushController(RouterTransaction.with(ProfileController()))
+                    router?.pushController(RouterTransaction.with(CategoriesController()))
                     true
                 }
                 else ->{

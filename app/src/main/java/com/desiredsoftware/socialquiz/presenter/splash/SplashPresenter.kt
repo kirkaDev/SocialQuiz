@@ -1,6 +1,5 @@
 package com.desiredsoftware.socialquiz.presenter.splash
 
-import android.util.Log
 import com.desiredsoftware.socialquiz.data.repository.FirebaseRepository
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.delay
@@ -21,9 +20,8 @@ class SplashPresenter @Inject constructor(
     fun initUI() {
         presenterScope.launch {
             viewState.showAnimation(true)
-            delay(2000)
+            delay(500)
             firebaseUser?.let {
-                Log.d("auth", "firebase user = ${firebaseUser.uid}")
                 if (checkUserProfileExists(it.uid))
                 {
                     viewState.showAnimation(false)
@@ -34,17 +32,14 @@ class SplashPresenter @Inject constructor(
                     viewState.showAnimation(false)
                     viewState.runCategoriesScreen()
                 }
-
             } ?: run {
-                Log.d("auth", "firebase user is null")
                 viewState.runGetAuthIntent()
             }
         }
     }
 
     private suspend fun checkUserProfileExists(uid: String): Boolean{
-        firebaseRepository.getProfile(uid)
-        return false
+        return firebaseRepository.getProfile(uid) != null
     }
 
     private fun createProfile(uid: String){

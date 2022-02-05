@@ -42,11 +42,12 @@ class FirebaseRepository @Inject constructor(
 
     suspend fun getProfile(uid: String): Profile? {
         firestore.collection(PROFILE_COLLECTION_NAME)
+            .whereEqualTo(FIELD_ID, uid)
             .get()
             .await()
             .documents.map { document ->
                 try {
-                    val profile = Profile(
+                    return Profile(
                         document[FIELD_ID] as String,
                         document[FIELD_AVATAR_URI] as String,
                         document[FIELD_NICK_NAME] as String,
@@ -57,9 +58,6 @@ class FirebaseRepository @Inject constructor(
                         document[FIELD_TIK_TOK] as String,
                         Profile.Companion.ACCOUNT_TYPES.valueOf(document[FIELD_ACCOUNT_TYPE] as String)
                     )
-
-                    if (profile.id == uid)
-                        return profile
                 } catch (e: Exception) {
                     Log.e("Profile", "Casting to profile error: ${e.message}")
                     return null

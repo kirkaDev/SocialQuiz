@@ -33,30 +33,53 @@ class ProfilePresenter @Inject constructor(
     fun initUI() {
         presenterScope.launch {
             firebaseUser?.uid?.let { uid ->
-                firebaseRepository.getProfile(uid)?.let {
-                    currentUser = it
-                    viewState.showAvatar(it.avatarURI)
-                    viewState.showNickName(it.nickName)
-                    viewState.showScore(it.score.toString())
-                    viewState.showRole(it.role.toString())
-                    viewState.showAbout(it.about)
-                    viewState.showInstagram(it.instagram)
-                    viewState.showTikTok(it.tiktok)
-                    viewState.showAccountType(it.accountType.toString())
-                } ?: run {
-                    viewState.showError(context.getString(R.string.profile_error))
+                if (isUserProfileExists(uid)) {
+                    currentUser?.let {
+                        bindProfile(it)
+                    }
+                } else {
+                    createProfile(uid)
+                    currentUser?.let {
+                        bindProfile(it)
+                    } ?: run {
+                        isUserProfileExists(uid)
+                        currentUser?.let {
+                            bindProfile(it)
+                        }
+                    }
                 }
             } ?: run {
-                viewState.showError(context.getString(R.string.profile_error))
+                viewState.showError(context.getString(R.string.auth_error))
             }
         }
     }
+
+    private fun bindProfile(profile: Profile) {
+        viewState.showAvatar(profile.avatarURI)
+        viewState.showNickName(profile.nickName)
+        viewState.showScore(profile.score.toString())
+        viewState.showRole(profile.role.toString())
+        viewState.showAbout(profile.about)
+        viewState.showInstagram(profile.instagram)
+        viewState.showTikTok(profile.tiktok)
+        viewState.showAccountType(profile.accountType.toString())
+    }
+
+    private suspend fun isUserProfileExists(uid: String): Boolean {
+        currentUser = firebaseRepository.getProfile(uid)
+        return currentUser != null
+    }
+
+    private fun createProfile(uid: String) {
+        firebaseRepository.createProfile(uid)
+    }
+
 
     fun uploadAvatarToStorage(avatarPath: String) {
         presenterScope.launch {
             var avatarFullRef: StorageReference? = null
             firebaseUser?.let { user ->
-                getExtension(avatarPath)?.let{ extension ->
+                getExtension(avatarPath)?.let { extension ->
                     val avatarFileName = user.uid + extension
                     avatarFullRef = firebaseStorageRef.child(getPath() + avatarFileName)
 
@@ -66,13 +89,16 @@ class ProfilePresenter @Inject constructor(
                     uploadTask?.addOnFailureListener {
                         Log.d("upload", "upload fail, cause: ${it.message}")
                     }?.addOnSuccessListener { taskSnapshot ->
-                        Log.d("upload", "upload success, bytesTransferred = ${taskSnapshot.bytesTransferred}")
+                        Log.d(
+                            "upload",
+                            "upload success, bytesTransferred = ${taskSnapshot.bytesTransferred}"
+                        )
                     }
                 }
-                    ?: run{
+                    ?: run {
                         viewState.showError("File is broken or is not an image")
                     }
-            } ?: run{
+            } ?: run {
                 viewState.showError("Can't get profile's data")
             }
         }
@@ -93,7 +119,7 @@ class ProfilePresenter @Inject constructor(
         }
     }
 
-    private fun getPath(): String{
+    private fun getPath(): String {
         return "avatars/"
     }
 
