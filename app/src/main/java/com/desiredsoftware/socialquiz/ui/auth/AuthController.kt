@@ -7,11 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.widget.AppCompatButton
-import com.bluelinelabs.conductor.RouterTransaction
 import com.desiredsoftware.socialquiz.R
 import com.desiredsoftware.socialquiz.di.App
 import com.desiredsoftware.socialquiz.presenter.auth.AuthPresenter
-import com.desiredsoftware.socialquiz.ui.categories.CategoriesController
 import com.desiredsoftware.socialquiz.ui.common.MvpController
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
@@ -60,9 +58,5 @@ class AuthController : MvpController, AuthPresenter.IAuthView {
         signInIntent: Intent
     ) {
         signInLauncher?.launch(signInIntent)
-    }
-
-    override fun openMainController() {
-        router.pushController(RouterTransaction.with(CategoriesController()))
     }
 }

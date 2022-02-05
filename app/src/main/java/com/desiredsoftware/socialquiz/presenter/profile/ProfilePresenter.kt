@@ -38,11 +38,11 @@ class ProfilePresenter @Inject constructor(
                     viewState.showAvatar(it.avatarURI)
                     viewState.showNickName(it.nickName)
                     viewState.showScore(it.score.toString())
-                    viewState.showRole(it.role)
+                    viewState.showRole(it.role.toString())
                     viewState.showAbout(it.about)
                     viewState.showInstagram(it.instagram)
                     viewState.showTikTok(it.tiktok)
-                    viewState.showAccountType(it.accountType)
+                    viewState.showAccountType(it.accountType.toString())
                 } ?: run {
                     viewState.showError(context.getString(R.string.profile_error))
                 }

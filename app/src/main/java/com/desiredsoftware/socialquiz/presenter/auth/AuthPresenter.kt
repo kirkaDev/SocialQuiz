@@ -43,6 +43,5 @@ class AuthPresenter @Inject constructor(
     @StateStrategyType(AddToEndSingleStrategy::class)
     interface IAuthView : MvpView {
         fun checkLogin(signInLauncher: ActivityResultLauncher<Intent>?, signInIntent: Intent)
-        fun openMainController()
     }
 }

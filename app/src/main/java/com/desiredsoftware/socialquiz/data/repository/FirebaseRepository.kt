@@ -1,6 +1,7 @@
 package com.desiredsoftware.socialquiz.data.repository
 
 import android.util.Log
+import com.desiredsoftware.socialquiz.data.CommonDataSets.Companion.newUserProfileDataSet
 import com.desiredsoftware.socialquiz.model.category.Category
 import com.desiredsoftware.socialquiz.model.profile.Profile
 import com.desiredsoftware.socialquiz.model.profile.Profile.Companion.FIELD_ABOUT
@@ -50,11 +51,11 @@ class FirebaseRepository @Inject constructor(
                         document[FIELD_AVATAR_URI] as String,
                         document[FIELD_NICK_NAME] as String,
                         document[FIELD_SCORE] as Long,
-                        document[FIELD_ROLE] as String,
+                        Profile.Companion.ROLES.valueOf(document[FIELD_ROLE] as String),
                         document[FIELD_ABOUT] as String,
                         document[FIELD_INSTAGRAM] as String,
                         document[FIELD_TIK_TOK] as String,
-                        document[FIELD_ACCOUNT_TYPE] as String,
+                        Profile.Companion.ACCOUNT_TYPES.valueOf(document[FIELD_ACCOUNT_TYPE] as String)
                     )
 
                     if (profile.id == uid)
@@ -67,6 +68,13 @@ class FirebaseRepository @Inject constructor(
         return null
     }
 
+    suspend fun createProfile(uid: String) {
+        val profileCollection = firestore.collection(PROFILE_COLLECTION_NAME)
+
+        val userProfileDataSet = newUserProfileDataSet.toMutableMap()
+        userProfileDataSet[FIELD_ID] = uid
+        profileCollection.document(uid).set(HashMap(userProfileDataSet))
+    }
 
     suspend fun getQuestionsArrayByCategory(
         questionCategoryId: String,
