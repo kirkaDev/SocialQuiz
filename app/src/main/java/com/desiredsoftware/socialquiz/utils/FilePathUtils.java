@@ -9,7 +9,7 @@ import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 
-public class PathUtils {
+public class FilePathUtils {
 
     public static String getPath(final Context context, final Uri uri) {
 

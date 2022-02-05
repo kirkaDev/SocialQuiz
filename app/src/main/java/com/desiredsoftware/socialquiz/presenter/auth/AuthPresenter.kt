@@ -36,12 +36,12 @@ class AuthPresenter @Inject constructor(
             .build()
 
         presenterScope.launch {
-            viewState.checkLogin(signInLauncher, signInIntent)
+            viewState.checkAuth(signInLauncher, signInIntent)
         }
     }
 
     @StateStrategyType(AddToEndSingleStrategy::class)
     interface IAuthView : MvpView {
-        fun checkLogin(signInLauncher: ActivityResultLauncher<Intent>?, signInIntent: Intent)
+        fun checkAuth(signInLauncher: ActivityResultLauncher<Intent>?, signInIntent: Intent)
     }
 }

@@ -15,7 +15,7 @@ import com.desiredsoftware.socialquiz.databinding.ViewControllerProfileBinding
 import com.desiredsoftware.socialquiz.di.App
 import com.desiredsoftware.socialquiz.presenter.profile.ProfilePresenter
 import com.desiredsoftware.socialquiz.ui.common.MvpController
-import com.desiredsoftware.socialquiz.utils.PathUtils
+import com.desiredsoftware.socialquiz.utils.FilePathUtils
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import javax.inject.Inject
@@ -122,7 +122,7 @@ class ProfileController : MvpController(), ProfilePresenter.IProfileView {
                 {
                     avatarUri = data.data
 
-                    val absolutePath = PathUtils.getPath(activity, avatarUri)
+                    val absolutePath = FilePathUtils.getPath(activity, avatarUri)
                     mPresenter.uploadAvatarToStorage(absolutePath)
                 }
             }

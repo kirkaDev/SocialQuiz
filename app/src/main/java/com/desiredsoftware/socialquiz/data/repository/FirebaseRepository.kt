@@ -68,7 +68,7 @@ class FirebaseRepository @Inject constructor(
         return null
     }
 
-    suspend fun createProfile(uid: String) {
+    fun createProfile(uid: String) {
         val profileCollection = firestore.collection(PROFILE_COLLECTION_NAME)
 
         val userProfileDataSet = newUserProfileDataSet.toMutableMap()

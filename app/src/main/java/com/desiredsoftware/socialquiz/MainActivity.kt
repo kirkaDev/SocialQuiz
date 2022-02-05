@@ -10,9 +10,9 @@ import androidx.activity.result.ActivityResultLauncher
 import com.bluelinelabs.conductor.Conductor
 import com.bluelinelabs.conductor.Router
 import com.bluelinelabs.conductor.RouterTransaction
-import com.desiredsoftware.socialquiz.ui.auth.AuthController
 import com.desiredsoftware.socialquiz.ui.categories.CategoriesController
 import com.desiredsoftware.socialquiz.ui.profile.ProfileController
+import com.desiredsoftware.socialquiz.ui.splash.SplashController
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -20,29 +20,26 @@ import moxy.MvpAppCompatActivity
 
 class MainActivity : MvpAppCompatActivity() {
 
-    private var mRouter: Router? = null
-
-    var mLoginLauncher: ActivityResultLauncher<Intent>? = null
+    private var router: Router? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        mLoginLauncher = getSignInLauncher()
+        loginLauncher = getSignInLauncher()
 
         val container: ViewGroup = findViewById(R.id.nav_host_fragment)
-        mRouter = Conductor.attachRouter(this, container, savedInstanceState)
-
+        router = Conductor.attachRouter(this, container, savedInstanceState)
         val bottomMenu: BottomNavigationView = findViewById(R.id.nav_view)
 
         bottomMenu.setOnItemSelectedListener{
             when (it.itemId){
                 R.id.navigation_profile ->{
-                    mRouter?.pushController(RouterTransaction.with(ProfileController()))
+                    router?.pushController(RouterTransaction.with(ProfileController()))
                     true
                 }
                 R.id.navigation_home ->{
-                    mRouter?.pushController(RouterTransaction.with(ProfileController()))
+                    router?.pushController(RouterTransaction.with(ProfileController()))
                     true
                 }
                 else ->{
@@ -51,7 +48,8 @@ class MainActivity : MvpAppCompatActivity() {
             }
         }
 
-        requestPermissions()
+        router?.replaceTopController(RouterTransaction.with(SplashController()))
+        //requestPermissions()
     }
 
     private fun getSignInLauncher(): ActivityResultLauncher<Intent> {
@@ -60,7 +58,7 @@ class MainActivity : MvpAppCompatActivity() {
         ) { result: FirebaseAuthUIAuthenticationResult? ->
             if (result?.resultCode == -1)   // it means user is logged in
             {
-                mRouter?.replaceTopController(RouterTransaction.with(CategoriesController()))
+                router?.replaceTopController(RouterTransaction.with(CategoriesController()))
             } else {
                 Toast.makeText(
                     this,
@@ -85,12 +83,10 @@ class MainActivity : MvpAppCompatActivity() {
                             grantResults[1] == PackageManager.PERMISSION_GRANTED &&
                             grantResults[2] == PackageManager.PERMISSION_GRANTED
                 ) {
-                    if (!mRouter!!.hasRootController()) {
-                        mRouter!!.setRoot(RouterTransaction.with(AuthController(mLoginLauncher!!)))
+                    if (!router!!.hasRootController()) {
+                        //mRouter!!.setRoot(RouterTransaction.with(AuthController(mLoginLauncher!!)))
                     }
 
-                    // Permission is granted. Continue the action or workflow
-                    // in your app.
                 } else {
                     // Explain to the user that the feature is unavailable because
                     // the features requires a permission that the user has denied.
@@ -101,8 +97,6 @@ class MainActivity : MvpAppCompatActivity() {
                 return
             }
 
-            // Add other 'when' lines to check for other
-            // permissions this app might request.
             else -> {
                 // Ignore all other requests.
             }
@@ -120,12 +114,13 @@ class MainActivity : MvpAppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if (!mRouter!!.handleBack()) {
+        if (!router!!.handleBack()) {
             super.onBackPressed()
         }
     }
 
     companion object{
         const val PERMISSIONS_REQUEST_CODE = 48573
+        var loginLauncher: ActivityResultLauncher<Intent>? = null
     }
 }
