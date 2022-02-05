@@ -74,14 +74,12 @@ class MainActivity : MvpAppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
         when (requestCode) {
-            1 -> {
+            PERMISSIONS_REQUEST_CODE -> {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.isNotEmpty() &&
                             grantResults[0] == PackageManager.PERMISSION_GRANTED &&
                             grantResults[1] == PackageManager.PERMISSION_GRANTED &&
-                            grantResults[2] == PackageManager.PERMISSION_GRANTED &&
-                            grantResults[3] == PackageManager.PERMISSION_GRANTED &&
-                            grantResults[4] == PackageManager.PERMISSION_GRANTED
+                            grantResults[2] == PackageManager.PERMISSION_GRANTED
                 ) {
                     if (!mRouter!!.hasRootController()) {
                         mRouter!!.setRoot(RouterTransaction.with(AuthController(mLoginLauncher!!)))
@@ -111,11 +109,9 @@ class MainActivity : MvpAppCompatActivity() {
         requestPermissions(
             arrayOf(
                 Manifest.permission.INTERNET,
-                Manifest.permission.ACCESS_NETWORK_STATE,
-                Manifest.permission.ACCESS_WIFI_STATE,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.READ_EXTERNAL_STORAGE
-            ), 1
+            ), PERMISSIONS_REQUEST_CODE
         )
     }
 
@@ -123,5 +119,9 @@ class MainActivity : MvpAppCompatActivity() {
         if (!mRouter!!.handleBack()) {
             super.onBackPressed()
         }
+    }
+
+    companion object{
+        const val PERMISSIONS_REQUEST_CODE = 48573
     }
 }
