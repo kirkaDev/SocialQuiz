@@ -3,17 +3,22 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidProjects/SocialQuiz/app/src/main/res/drawable/circle_avatar.xml" value="0.2235" />
         <entry key="..\:/AndroidProjects/SocialQuiz/app/src/main/res/drawable/ic_change_category.xml" value="0.26403508771929823" />
         <entry key="..\:/AndroidProjects/SocialQuiz/app/src/main/res/drawable/ic_next_question.xml" value="0.26403508771929823" />
+        <entry key="..\:/AndroidProjects/SocialQuiz/app/src/main/res/drawable/ic_profile_white_24dp.xml" value="0.2235" />
         <entry key="..\:/AndroidProjects/SocialQuiz/app/src/main/res/drawable/ic_try_again.xml" value="0.26403508771929823" />
+        <entry key="..\:/AndroidProjects/SocialQuiz/app/src/main/res/drawable/profile_property_shape.xml" value="0.2235" />
         <entry key="..\:/AndroidProjects/SocialQuiz/app/src/main/res/drawable/shape_background_category.xml" value="0.2890625" />
         <entry key="..\:/AndroidProjects/SocialQuiz/app/src/main/res/drawable/shape_category_name.xml" value="0.2574561403508772" />
         <entry key="..\:/AndroidProjects/SocialQuiz/app/src/main/res/layout/activity_main.xml" value="0.22324561403508772" />
         <entry key="..\:/AndroidProjects/SocialQuiz/app/src/main/res/layout/item_category.xml" value="0.23999999479814021" />
+        <entry key="..\:/AndroidProjects/SocialQuiz/app/src/main/res/layout/view_controller_auth.xml" value="0.2267543859649123" />
         <entry key="..\:/AndroidProjects/SocialQuiz/app/src/main/res/layout/view_controller_profile.xml" value="0.3236842105263158" />
         <entry key="..\:/AndroidProjects/SocialQuiz/app/src/main/res/layout/view_controller_select_category.xml" value="0.19636363210756924" />
         <entry key="..\:/AndroidProjects/SocialQuiz/app/src/main/res/layout/view_controller_splash.xml" value="0.22324561403508772" />
         <entry key="..\:/AndroidProjects/SocialQuiz/app/src/main/res/menu/bottom_nav_menu.xml" value="0.22324561403508772" />
+        <entry key="..\:/AndroidProjects/SocialQuiz/app/src/main/res/xml/network_security_config.xml" value="0.12324561403508771" />
       </map>
     </option>
   </component>

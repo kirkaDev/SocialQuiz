@@ -3,8 +3,8 @@ package com.desiredsoftware.socialquiz.presenter.profile
 import android.content.Context
 import android.util.Log
 import com.desiredsoftware.socialquiz.R
+import com.desiredsoftware.socialquiz.data.model.profile.Profile
 import com.desiredsoftware.socialquiz.data.repository.FirebaseRepository
-import com.desiredsoftware.socialquiz.model.profile.Profile
 import com.desiredsoftware.socialquiz.view.IError
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.storage.StorageReference

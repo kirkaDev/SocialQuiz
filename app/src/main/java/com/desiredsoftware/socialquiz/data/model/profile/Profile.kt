@@ -1,4 +1,4 @@
-package com.desiredsoftware.socialquiz.model.profile
+package com.desiredsoftware.socialquiz.data.model.profile
 
 class Profile (
     val id: String,

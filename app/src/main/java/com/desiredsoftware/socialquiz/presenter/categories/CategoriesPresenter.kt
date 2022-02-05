@@ -1,7 +1,7 @@
 package com.desiredsoftware.socialquiz.presenter.categories
 
+import com.desiredsoftware.socialquiz.data.model.category.Category
 import com.desiredsoftware.socialquiz.data.repository.FirebaseRepository
-import com.desiredsoftware.socialquiz.model.category.Category
 import kotlinx.coroutines.launch
 import moxy.InjectViewState
 import moxy.MvpPresenter

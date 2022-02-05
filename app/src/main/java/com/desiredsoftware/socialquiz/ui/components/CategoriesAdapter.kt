@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.desiredsoftware.socialquiz.R
-import com.desiredsoftware.socialquiz.model.category.Category
+import com.desiredsoftware.socialquiz.data.model.category.Category
 import com.facebook.shimmer.ShimmerFrameLayout
 
 class CategoriesAdapter(

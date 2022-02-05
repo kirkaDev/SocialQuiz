@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bluelinelabs.conductor.RouterTransaction
 import com.desiredsoftware.socialquiz.R
+import com.desiredsoftware.socialquiz.data.model.question.Answer
 import com.desiredsoftware.socialquiz.di.App
-import com.desiredsoftware.socialquiz.model.question.Answer
 import com.desiredsoftware.socialquiz.presenter.question.QuestionShowingPresenter
 import com.desiredsoftware.socialquiz.ui.categories.CategoriesController.Companion.CATEGORY_ID_KEY
 import com.desiredsoftware.socialquiz.ui.common.MvpController

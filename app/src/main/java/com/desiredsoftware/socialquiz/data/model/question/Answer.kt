@@ -1,4 +1,4 @@
-package com.desiredsoftware.socialquiz.model.question
+package com.desiredsoftware.socialquiz.data.model.question
 
 import java.io.Serializable
 

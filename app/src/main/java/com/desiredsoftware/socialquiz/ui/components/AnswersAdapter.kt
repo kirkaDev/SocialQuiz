@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.recyclerview.widget.RecyclerView
 import com.desiredsoftware.socialquiz.R
-import com.desiredsoftware.socialquiz.model.question.Answer
+import com.desiredsoftware.socialquiz.data.model.question.Answer
 
 class AnswersAdapter (private val answersList: List<Answer>,
                       private val onClickAnswerListener: OnClickAnswerListener) : RecyclerView.Adapter<AnswersAdapter.AnswersViewHolder>() {

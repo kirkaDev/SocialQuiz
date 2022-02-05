@@ -1,9 +1,9 @@
 package com.desiredsoftware.socialquiz.presenter.question
 
 import android.content.Context
+import com.desiredsoftware.socialquiz.data.model.question.Answer
+import com.desiredsoftware.socialquiz.data.model.question.Question
 import com.desiredsoftware.socialquiz.data.repository.FirebaseRepository
-import com.desiredsoftware.socialquiz.model.question.Answer
-import com.desiredsoftware.socialquiz.model.question.Question
 import com.desiredsoftware.socialquiz.utils.generateQuestion
 import kotlinx.coroutines.launch
 import moxy.InjectViewState

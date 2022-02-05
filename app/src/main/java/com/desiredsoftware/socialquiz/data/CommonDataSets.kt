@@ -1,6 +1,6 @@
 package com.desiredsoftware.socialquiz.data
 
-import com.desiredsoftware.socialquiz.model.profile.Profile
+import com.desiredsoftware.socialquiz.data.model.profile.Profile
 
 class CommonDataSets {
     companion object{

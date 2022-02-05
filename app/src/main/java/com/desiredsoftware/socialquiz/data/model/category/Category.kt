@@ -1,4 +1,4 @@
-package com.desiredsoftware.socialquiz.model.category
+package com.desiredsoftware.socialquiz.data.model.category
 
 data class Category constructor (val id: String,
                                  val isPremium: String,
