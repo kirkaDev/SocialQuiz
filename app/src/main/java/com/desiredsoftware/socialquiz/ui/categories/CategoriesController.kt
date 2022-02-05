@@ -32,7 +32,7 @@ class CategoriesController : MvpController(), CategoriesPresenter.ICategoriesVie
     lateinit var categoryList: RecyclerView
 
     // Spans number for categories list
-    val mSpanCount = 3
+    var mSpanCount = SPAN_COUNT_FOR_PHONE
 
     override fun inject() {
         super.inject()
@@ -64,6 +64,9 @@ class CategoriesController : MvpController(), CategoriesPresenter.ICategoriesVie
             }
         }
 
+        if(resources?.getBoolean(R.bool.isTablet) == true)
+            mSpanCount = SPAN_COUNT_FOR_TABLET
+
         categoryList.apply {
             adapter = CategoriesAdapter((categoriesList as ArrayList<Category>), listener)
             layoutManager = GridLayoutManager(context, mSpanCount)
@@ -79,5 +82,7 @@ class CategoriesController : MvpController(), CategoriesPresenter.ICategoriesVie
 
     companion object {
         val CATEGORY_ID_KEY = "CATEGORY_KEY"
+        const val SPAN_COUNT_FOR_PHONE = 3
+        const val SPAN_COUNT_FOR_TABLET = 5
     }
 }
