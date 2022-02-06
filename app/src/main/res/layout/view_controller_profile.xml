@@ -36,12 +36,17 @@
                 android:id="@+id/nickNameLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/profile_property_label"
                 android:text="@string/nick_name_label">
             </androidx.appcompat.widget.AppCompatTextView>
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/nicknameEditText"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:minWidth="80dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/profile_property_shape"
                 tools:text="kirkaDev">
             </androidx.appcompat.widget.AppCompatEditText>
 
@@ -49,12 +54,17 @@
                 android:id="@+id/scoreLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/profile_property_label"
                 android:text="@string/score_label">
             </androidx.appcompat.widget.AppCompatTextView>
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/scoreEditText"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:minWidth="80dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/profile_property_shape"
                 tools:text="100500">
             </androidx.appcompat.widget.AppCompatEditText>
 
@@ -62,12 +72,17 @@
                 android:id="@+id/roleLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/profile_property_label"
                 android:text="@string/role_label">
             </androidx.appcompat.widget.AppCompatTextView>
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/roleEditText"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:minWidth="80dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/profile_property_shape"
                 tools:text="Игрок">
             </androidx.appcompat.widget.AppCompatEditText>
 
@@ -75,12 +90,17 @@
                 android:id="@+id/aboutLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/profile_property_label"
                 android:text="@string/about_label">
             </androidx.appcompat.widget.AppCompatTextView>
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/aboutEditText"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="8dp"
+                android:minWidth="80dp"
+                android:background="@drawable/profile_property_shape"
                 tools:text="Люблю кататься на горных лыжах, а еще путешествовать,
         плавать, играть на гитаре, путешествовать и гулять">
             </androidx.appcompat.widget.AppCompatEditText>
@@ -89,12 +109,17 @@
                 android:id="@+id/instagram_Label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/profile_property_label"
                 android:text="@string/instagram_label">
             </androidx.appcompat.widget.AppCompatTextView>
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/instagramEditText"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:minWidth="80dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/profile_property_shape"
                 tools:text="kirkasukhov">
             </androidx.appcompat.widget.AppCompatEditText>
 
@@ -102,12 +127,17 @@
                 android:id="@+id/tiktok_Label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/profile_property_label"
                 android:text="@string/tiktok_label">
             </androidx.appcompat.widget.AppCompatTextView>
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/tikTokEditText"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:minWidth="80dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/profile_property_shape"
                 tools:text="kirkadev">
             </androidx.appcompat.widget.AppCompatEditText>
 
@@ -115,12 +145,17 @@
                 android:id="@+id/accountTypeLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/profile_property_label"
                 android:text="@string/account_type_label">
             </androidx.appcompat.widget.AppCompatTextView>
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/accountTypeEditText"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:minWidth="80dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/profile_property_shape"
                 tools:text="@string/is_paid">
             </androidx.appcompat.widget.AppCompatEditText>
 

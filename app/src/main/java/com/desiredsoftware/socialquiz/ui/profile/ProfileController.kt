@@ -49,23 +49,27 @@ class ProfileController : MvpController(), ProfilePresenter.IProfileView {
         _binding = ViewControllerProfileBinding.inflate(inflater, container, false)
         mPresenter.initUI()
 
-        binding.imageViewAvatar.setOnClickListener{
+        binding.imageViewAvatar.setOnClickListener {
             checkPermissions()
         }
 
         return binding.root
     }
 
-    private fun startGalleryIntent(){
+    private fun startGalleryIntent() {
         val galleryIntent = Intent()
         galleryIntent.type = "image/*"
         galleryIntent.action = Intent.ACTION_GET_CONTENT
 
-        startActivityForResult(Intent.createChooser(galleryIntent,
-            resources?.getString(R.string.choose_your_avatar)), UPLOAD_AVATAR_TO_PROFILE_REQUEST_CODE)
+        startActivityForResult(
+            Intent.createChooser(
+                galleryIntent,
+                resources?.getString(R.string.choose_your_avatar)
+            ), UPLOAD_AVATAR_TO_PROFILE_REQUEST_CODE
+        )
     }
 
-    private fun checkPermissions(){
+    private fun checkPermissions() {
         requestPermissions(
             arrayOf(
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -107,13 +111,11 @@ class ProfileController : MvpController(), ProfilePresenter.IProfileView {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        when (requestCode){
-            PERMISSIONS_REQUEST_CODE ->{
-                if (grantResults.all { it == PackageManager.PERMISSION_GRANTED })
-                {
+        when (requestCode) {
+            PERMISSIONS_REQUEST_CODE -> {
+                if (grantResults.all { it == PackageManager.PERMISSION_GRANTED }) {
                     startGalleryIntent()
-                }
-                else{
+                } else {
                     Toast.makeText(activity, R.string.permissions_failed, Toast.LENGTH_LONG).show()
                 }
             }
@@ -123,15 +125,21 @@ class ProfileController : MvpController(), ProfilePresenter.IProfileView {
     }
 
     override fun showAbout(about: String) {
-        binding.aboutEditText.hint = about
+        if (about.isEmpty())
+            binding.aboutEditText.hint = resources?.getString(R.string.empty)
+        else binding.aboutEditText.hint = about
     }
 
     override fun showInstagram(instagram: String) {
-        binding.instagramEditText.hint = instagram
+        if (instagram.isEmpty())
+            binding.instagramEditText.hint = resources?.getString(R.string.empty)
+        else binding.instagramEditText.hint = instagram
     }
 
     override fun showTikTok(tiktok: String) {
-        binding.tikTokEditText.hint = tiktok
+        if (tiktok.isEmpty())
+            binding.tikTokEditText.hint = resources?.getString(R.string.empty)
+        else binding.tikTokEditText.hint = tiktok
     }
 
     override fun showAccountType(accountType: String) {
@@ -146,12 +154,12 @@ class ProfileController : MvpController(), ProfilePresenter.IProfileView {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        when (requestCode){
-            UPLOAD_AVATAR_TO_PROFILE_REQUEST_CODE ->{
-                if (resultCode==RESULT_OK
-                    && data!=null
-                    && data.data!=null)
-                {
+        when (requestCode) {
+            UPLOAD_AVATAR_TO_PROFILE_REQUEST_CODE -> {
+                if (resultCode == RESULT_OK
+                    && data != null
+                    && data.data != null
+                ) {
                     avatarUri = data.data
 
                     val absolutePath = FilePathUtils.getPath(activity, avatarUri)
@@ -161,8 +169,8 @@ class ProfileController : MvpController(), ProfilePresenter.IProfileView {
         }
     }
 
-    companion object{
-        val UPLOAD_AVATAR_TO_PROFILE_REQUEST_CODE= 57875
+    companion object {
+        val UPLOAD_AVATAR_TO_PROFILE_REQUEST_CODE = 57875
         const val PERMISSIONS_REQUEST_CODE = 48573
     }
 
