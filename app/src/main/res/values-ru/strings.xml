@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">SocialQuiz</string>
+    <string name="title_home">Категории</string>
+    <string name="profile">Профиль</string>
+    <string name="selectCategory">Выбери категорию</string>
+    <string name="tryAgain">Попробовать снова</string>
+    <string name="nextQuestion">Следующий вопрос</string>
+    <string name="congrat">Поздравляем!</string>
+    <string name="answerIncorrect">Неверный ответ!</string>
+    <string name="answerCorrect">Верно!</string>
+    <string name="questionAuthor">Автор вопроса:</string>
+    <string name="questionAuthorExample"><u>kirkadev</u></string>
+    <string name="loading">Загрузка…</string>
+    <string name="auth_error">Вы не авторизованы, попробуйте повторить вход</string>
+    <string name="permissions_failed">Для того, чтобы загрузить аватар, нужно разрешение на чтение файлов</string>
+    <string name="profile_error">Ошибка получения информации о профиле</string>
+    <string name="nick_name_label">Никнейм</string>
+    <string name="about_label">Обо мне</string>
+    <string name="avatar_description">Твой аватар</string>
+    <string name="role_label">Роль</string>
+    <string name="score_label">Очки</string>
+    <string name="account_type_label">Аккаунт</string>
+    <string name="not_paid">Обычный</string>
+    <string name="is_paid">Премиум</string>
+    <string name="tiktok_label">Tik-Tok</string>
+    <string name="instagram_label">Instagram</string>
+    <string name="choose_your_avatar">Выбери себе аватар</string>
+    <string name="empty">Пусто</string>
+    <string name="cant_upload_avatar">Не удалось загрузить аватар, попробуй позже</string>
+</resources>
