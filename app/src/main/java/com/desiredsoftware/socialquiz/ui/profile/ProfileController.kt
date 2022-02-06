@@ -162,8 +162,15 @@ class ProfileController : MvpController(), ProfilePresenter.IProfileView {
                 ) {
                     avatarUri = data.data
 
-                    val absolutePath = FilePathUtils.getPath(activity, avatarUri)
-                    mPresenter.uploadAvatarToStorage(absolutePath)
+                    try {
+                        val absolutePath = FilePathUtils.getPath(activity, avatarUri)
+                        mPresenter.uploadAvatarToStorage(absolutePath)
+                    }
+                    catch (e:Exception)
+                    {
+                        e.printStackTrace()
+                        Toast.makeText(activity, resources?.getString(R.string.cant_upload_avatar), Toast.LENGTH_LONG).show()
+                    }
                 }
             }
         }

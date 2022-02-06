@@ -19,20 +19,6 @@
         android:text="@string/loading">
     </androidx.appcompat.widget.AppCompatTextView>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/authButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="@+id/progressBar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_bias="0.7"
-        android:visibility="invisible"
-        android:text="@string/login">
-
-    </androidx.appcompat.widget.AppCompatButton>
-
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
