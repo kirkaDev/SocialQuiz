@@ -2,7 +2,7 @@ package com.desiredsoftware.socialquiz.data.model.profile
 
 class Profile (
     val id: String,
-    val avatarURI: String = "https://img.icons8.com/color/48/000000/anonymous-mask.png",
+    val avatarURI: String = "",
     var nickName: String = "Anonymous",
     var score: Long = 0,
     var role: ROLES = ROLES.NEW,
