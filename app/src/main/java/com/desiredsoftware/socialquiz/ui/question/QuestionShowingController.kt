@@ -18,8 +18,7 @@ import com.desiredsoftware.socialquiz.ui.components.AnswersAdapter
 import com.desiredsoftware.socialquiz.ui.components.OnClickAnswerListener
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.SimpleExoPlayer
-import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
-import com.google.android.exoplayer2.ui.StyledPlayerView
+import com.google.android.exoplayer2.ui.PlayerView
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import javax.inject.Inject
@@ -29,7 +28,7 @@ class QuestionShowingController : MvpController, QuestionShowingPresenter.IQuest
     constructor (args: Bundle) : super(args)
 
     lateinit var mPlayer: SimpleExoPlayer
-    lateinit var mPlayerControlView: StyledPlayerView
+    lateinit var mPlayerControlView: PlayerView
     lateinit var mRoot: View
 
     lateinit var mListAnswers: RecyclerView
@@ -55,9 +54,7 @@ class QuestionShowingController : MvpController, QuestionShowingPresenter.IQuest
         mRoot = inflater.inflate(R.layout.view_controller_question_showing, container, false)
 
         mListAnswers = mRoot.findViewById(R.id.listAnswers)
-
-        val framePlayerLayout: AspectRatioFrameLayout = mRoot.findViewById(R.id.framePlayerLayout)
-        framePlayerLayout.setAspectRatio(16f / 9f)
+        mPlayerControlView = mRoot.findViewById(R.id.playerView)
 
         presenter.mQuestionCategoryId = args.getString(CATEGORY_ID_KEY).toString()
         presenter.showQuestion()
@@ -66,8 +63,9 @@ class QuestionShowingController : MvpController, QuestionShowingPresenter.IQuest
     }
 
     private fun configurePlayer(context: Context, videoURI: String) {
-        mPlayer = SimpleExoPlayer.Builder(context).build()
-        mPlayerControlView = mRoot.findViewById(R.id.playerView)
+        mPlayer = SimpleExoPlayer.Builder(context)
+            .build()
+
         mPlayerControlView.player = mPlayer
         mPlayer.setMediaItem(MediaItem.fromUri(videoURI))
         mPlayer.prepare()

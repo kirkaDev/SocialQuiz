@@ -29,6 +29,9 @@ fun generateCategories () : ArrayList<Category>
         answerMutableList.add(Answer("Cat", true))
         answerMutableList.add(Answer("Shake", false))
         answerMutableList.add(Answer("Dolphin", false))
+        answerMutableList.add(Answer("Cat", true))
+        answerMutableList.add(Answer("Shake", false))
+        answerMutableList.add(Answer("Dolphin", false))
 
         val question = Question(
             mAnswers = answerMutableList,

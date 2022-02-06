@@ -1,44 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:background="@color/mainBackground"
-    tools:context=".ui.question.QuestionShowingController">
+    tools:background="@color/mainBackground">
 
-    <com.google.android.exoplayer2.ui.AspectRatioFrameLayout
-        android:id="@+id/framePlayerLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <!-- Video player -->
+    <com.google.android.exoplayer2.ui.PlayerView
+        android:id="@+id/playerView"
+        android:layout_height="260dp"
+        android:layout_width="wrap_content"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:resize_mode="fixed_width">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- Video player -->
-        <com.google.android.exoplayer2.ui.StyledPlayerView
-            android:id="@+id/playerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/yellowMain"
-            android:visibility="visible" />
-
-    </com.google.android.exoplayer2.ui.AspectRatioFrameLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/listAnswers"
-        android:layout_width="match_parent"
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginStart="50dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="50dp"
-        android:layout_marginTop="24dp"
-
-        android:layout_marginBottom="?attr/actionBarSize"
-        app:layout_constraintTop_toBottomOf="@id/framePlayerLayout"
+        android:layout_marginBottom="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:itemCount="4"
-        tools:listitem="@layout/item_answer_variant" />
+        app:layout_constraintTop_toBottomOf="@id/playerView"
+        app:layout_constraintBottom_toBottomOf="parent">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/listAnswers"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_gravity="center_vertical"
+            tools:itemCount="4"
+            tools:listitem="@layout/item_answer_variant" />
+
+    </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
