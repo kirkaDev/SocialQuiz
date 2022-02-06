@@ -53,29 +53,26 @@ class ProfileController : MvpController(), ProfilePresenter.IProfileView {
         _binding = ViewControllerProfileBinding.inflate(inflater, container, false)
         mPresenter.initUI()
 
-        val fieldFocusChangeListener = object: View.OnFocusChangeListener{
-            override fun onFocusChange(v: View?, hasFocus: Boolean) {
-                if (!hasFocus){
-                    when (v){
-                        binding.nicknameEditText ->{
-                            mPresenter.commitChanges(FIELD_NICK_NAME, binding.nicknameEditText.text.toString())
-                        }
-                        binding.aboutEditText ->{
-                            mPresenter.commitChanges(FIELD_ABOUT, binding.aboutEditText.text.toString())
-                        }
-                        binding.instagramEditText ->{
-                            mPresenter.commitChanges(FIELD_INSTAGRAM, binding.instagramEditText.text.toString())
-                        }
-                        binding.tikTokEditText ->{
-                            mPresenter.commitChanges(FIELD_TIK_TOK, binding.tikTokEditText.text.toString())
-                        }
-                        else ->{
+        val fieldFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
+            if (!hasFocus){
+                when (v){
+                    binding.nicknameEditText ->{
+                        mPresenter.commitChanges(FIELD_NICK_NAME, binding.nicknameEditText.text.toString())
+                    }
+                    binding.aboutEditText ->{
+                        mPresenter.commitChanges(FIELD_ABOUT, binding.aboutEditText.text.toString())
+                    }
+                    binding.instagramEditText ->{
+                        mPresenter.commitChanges(FIELD_INSTAGRAM, binding.instagramEditText.text.toString())
+                    }
+                    binding.tikTokEditText ->{
+                        mPresenter.commitChanges(FIELD_TIK_TOK, binding.tikTokEditText.text.toString())
+                    }
+                    else ->{
 
-                        }
                     }
                 }
             }
-
         }
 
         binding.nicknameEditText.onFocusChangeListener = fieldFocusChangeListener
