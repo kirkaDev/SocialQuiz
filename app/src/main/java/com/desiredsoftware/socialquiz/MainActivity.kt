@@ -32,12 +32,12 @@ class MainActivity : MvpAppCompatActivity() {
 
         bottomMenu.setOnItemSelectedListener{
             when (it.itemId){
-                R.id.navigation_profile ->{
-                    router?.pushController(RouterTransaction.with(ProfileController()))
+                R.id.navigation_categories ->{
+                    router?.pushController(RouterTransaction.with(CategoriesController()))
                     true
                 }
-                R.id.navigation_home ->{
-                    router?.pushController(RouterTransaction.with(CategoriesController()))
+                R.id.navigation_profile ->{
+                    router?.pushController(RouterTransaction.with(ProfileController()))
                     true
                 }
                 else ->{
