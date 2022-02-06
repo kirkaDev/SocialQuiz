@@ -27,8 +27,8 @@ class QuestionShowingController : MvpController, QuestionShowingPresenter.IQuest
     constructor() : super()
     constructor (args: Bundle) : super(args)
 
-    var mPlayer: SimpleExoPlayer? = null
-    lateinit var mPlayerControlView: PlayerView
+    private var mPlayer: SimpleExoPlayer? = null
+    private lateinit var mPlayerControlView: PlayerView
     lateinit var mRoot: View
 
     lateinit var mListAnswers: RecyclerView
@@ -100,7 +100,7 @@ class QuestionShowingController : MvpController, QuestionShowingPresenter.IQuest
 
     override fun onDestroyView(view: View) {
         super.onDestroyView(view)
-        if (mPlayer!=null){
+        if (mPlayer != null) {
             mPlayer?.stop()
             mPlayer?.release()
             mPlayer = null
