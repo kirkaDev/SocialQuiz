@@ -15,12 +15,14 @@ import com.desiredsoftware.socialquiz.data.model.profile.Profile.Companion.FIELD
 import com.desiredsoftware.socialquiz.data.model.profile.Profile.Companion.FIELD_TIK_TOK
 import com.desiredsoftware.socialquiz.data.model.question.Answer
 import com.desiredsoftware.socialquiz.data.model.question.Question
-import com.desiredsoftware.socialquiz.data.model.question.Question.Companion.FIELD_ANSWERS_VARIANTS
+import com.desiredsoftware.socialquiz.data.model.question.Question.Companion.FIELD_ANSWERS
 import com.desiredsoftware.socialquiz.data.model.question.Question.Companion.FIELD_CATEGORY_ID
+import com.desiredsoftware.socialquiz.data.model.question.Question.Companion.FIELD_IS_CORRECT
 import com.desiredsoftware.socialquiz.data.model.question.Question.Companion.FIELD_QUESTION_AUTHOR_ID
 import com.desiredsoftware.socialquiz.data.model.question.Question.Companion.FIELD_QUESTION_BODY
 import com.desiredsoftware.socialquiz.data.model.question.Question.Companion.FIELD_QUESTION_ID
 import com.desiredsoftware.socialquiz.data.model.question.Question.Companion.FIELD_QUESTION_TYPE
+import com.desiredsoftware.socialquiz.data.model.question.Question.Companion.FIELD_VARIANT
 import com.desiredsoftware.socialquiz.utils.ProfileUtils
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
@@ -95,17 +97,27 @@ class FirebaseRepository @Inject constructor(
         Log.d("question", "Repository: getQuestionsOfCategory called")
         val questionList = mutableListOf<Question>()
 
+        var answers: ArrayList<*>? = null
+
         firestore.collection(QUESTIONS_ROOT_COLLECTION)
             .whereEqualTo(FIELD_CATEGORY_ID, questionCategoryId)
             .get()
             .await()
             .documents.map { document ->
                 try {
+                    val cleanAnswers: List<Answer> = (document.get(FIELD_ANSWERS)
+                            as ArrayList<HashMap<String, Any>>).map {
+                        Answer(
+                                it[FIELD_VARIANT] as String,
+                                it[FIELD_IS_CORRECT] as Boolean
+                            )
+                    }
+
                     questionList.add(
                         Question(
                             document[FIELD_QUESTION_ID] as String,
                             document[FIELD_CATEGORY_ID] as String,
-                            document[FIELD_ANSWERS_VARIANTS] as List<Answer>,
+                            cleanAnswers,
                             document[FIELD_QUESTION_BODY] as String,
                             document[FIELD_QUESTION_AUTHOR_ID] as String,
                             Question.Companion.QUESTION_TYPE.valueOf(document[FIELD_QUESTION_TYPE] as String)
