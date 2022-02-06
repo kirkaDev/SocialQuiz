@@ -6,7 +6,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,6 +21,7 @@ import com.desiredsoftware.socialquiz.di.App
 import com.desiredsoftware.socialquiz.presenter.profile.ProfilePresenter
 import com.desiredsoftware.socialquiz.ui.common.MvpController
 import com.desiredsoftware.socialquiz.utils.FilePathUtils
+import com.google.firebase.storage.StorageReference
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import javax.inject.Inject
@@ -113,13 +113,10 @@ class ProfileController : MvpController(), ProfilePresenter.IProfileView {
         Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
     }
 
-    override fun showAvatar(avatarUrl: String) {
-        Log.d("image URI", "show avatar called")
+    override fun showAvatar(avatarStorageReference: StorageReference) {
         view?.context?.let {
             Glide.with(it)
-                .load(avatarUrl)
-                .error(it.resources.getDrawable(R.drawable.ic_profile_white_24dp))
-                .placeholder(it.resources.getDrawable(R.drawable.ic_profile_white_24dp))
+                .load(avatarStorageReference)
                 .into(binding.imageViewAvatar)
         }
     }

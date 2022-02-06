@@ -55,7 +55,7 @@ class ProfilePresenter @Inject constructor(
     }
 
     private fun bindProfile(profile: Profile) {
-        viewState.showAvatar(profile.avatarURI)
+        viewState.showAvatar(firebaseStorageRef.child(profile.avatarURI))
         viewState.showNickName(profile.nickName)
         viewState.showScore(profile.score.toString())
         viewState.showRole(profile.role.toString())
@@ -116,6 +116,14 @@ class ProfilePresenter @Inject constructor(
                             "upload",
                             "upload success, bytesTransferred = ${taskSnapshot.bytesTransferred}"
                         )
+                        currentUser?.apply {
+                            avatarURI = taskSnapshot.storage.path
+                            firebaseRepository.commitProfile(this)
+
+                            val avatarStorageReference = firebaseStorageRef.child(avatarURI)
+
+                            viewState.showAvatar(avatarStorageReference)
+                        }
                     }
                 }
                     ?: run {
@@ -149,7 +157,7 @@ class ProfilePresenter @Inject constructor(
     @StateStrategyType(AddToEndSingleStrategy::class)
     interface IProfileView : MvpView, IError {
         @OneExecution
-        fun showAvatar(avatarUri: String)
+        fun showAvatar(avatarStorageReference: StorageReference)
         fun showNickName(nickName: String)
         fun showScore(score: String)
         fun showRole(role: String)
