@@ -14,6 +14,7 @@ import com.desiredsoftware.socialquiz.data.model.profile.Profile.Companion.FIELD
 import com.desiredsoftware.socialquiz.data.model.profile.Profile.Companion.FIELD_SCORE
 import com.desiredsoftware.socialquiz.data.model.profile.Profile.Companion.FIELD_TIK_TOK
 import com.desiredsoftware.socialquiz.data.model.question.Question
+import com.desiredsoftware.socialquiz.utils.ProfileUtils
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
 import kotlinx.coroutines.tasks.await
@@ -72,6 +73,13 @@ class FirebaseRepository @Inject constructor(
         val userProfileDataSet = newUserProfileDataSet.toMutableMap()
         userProfileDataSet[FIELD_ID] = uid
         profileCollection.document(uid).set(HashMap(userProfileDataSet))
+    }
+
+    fun commitProfile(profileToCommit: Profile){
+        val profileCollection = firestore.collection(PROFILE_COLLECTION_NAME)
+        val userProfileDataSet = ProfileUtils.getDataSetForProfile(profileToCommit)
+        // this action overrides exists document
+        profileCollection.document(profileToCommit.id).set(HashMap(userProfileDataSet))
     }
 
     suspend fun getQuestionsArrayByCategory(

@@ -3,13 +3,13 @@ package com.desiredsoftware.socialquiz.data.model.profile
 class Profile (
     val id: String,
     val avatarURI: String = "https://img.icons8.com/color/48/000000/anonymous-mask.png",
-    val nickName: String = "Anonymous",
-    val score: Long = 0,
-    val role: ROLES = ROLES.NEW,
-    val about: String = "",
-    val instagram: String = "",
-    val tiktok: String = "",
-    val accountType : ACCOUNT_TYPES = ACCOUNT_TYPES.FREE,
+    var nickName: String = "Anonymous",
+    var score: Long = 0,
+    var role: ROLES = ROLES.NEW,
+    var about: String = "",
+    var instagram: String = "",
+    var tiktok: String = "",
+    var accountType : ACCOUNT_TYPES = ACCOUNT_TYPES.FREE,
     )
 {
 

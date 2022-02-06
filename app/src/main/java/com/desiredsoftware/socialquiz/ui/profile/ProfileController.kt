@@ -13,6 +13,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.desiredsoftware.socialquiz.R
+import com.desiredsoftware.socialquiz.data.model.profile.Profile.Companion.FIELD_ABOUT
+import com.desiredsoftware.socialquiz.data.model.profile.Profile.Companion.FIELD_INSTAGRAM
+import com.desiredsoftware.socialquiz.data.model.profile.Profile.Companion.FIELD_NICK_NAME
+import com.desiredsoftware.socialquiz.data.model.profile.Profile.Companion.FIELD_TIK_TOK
 import com.desiredsoftware.socialquiz.databinding.ViewControllerProfileBinding
 import com.desiredsoftware.socialquiz.di.App
 import com.desiredsoftware.socialquiz.presenter.profile.ProfilePresenter
@@ -48,6 +52,36 @@ class ProfileController : MvpController(), ProfilePresenter.IProfileView {
     ): View {
         _binding = ViewControllerProfileBinding.inflate(inflater, container, false)
         mPresenter.initUI()
+
+        val fieldFocusChangeListener = object: View.OnFocusChangeListener{
+            override fun onFocusChange(v: View?, hasFocus: Boolean) {
+                if (!hasFocus){
+                    when (v){
+                        binding.nicknameEditText ->{
+                            mPresenter.commitChanges(FIELD_NICK_NAME, binding.nicknameEditText.text.toString())
+                        }
+                        binding.aboutEditText ->{
+                            mPresenter.commitChanges(FIELD_ABOUT, binding.aboutEditText.text.toString())
+                        }
+                        binding.instagramEditText ->{
+                            mPresenter.commitChanges(FIELD_INSTAGRAM, binding.instagramEditText.text.toString())
+                        }
+                        binding.tikTokEditText ->{
+                            mPresenter.commitChanges(FIELD_TIK_TOK, binding.tikTokEditText.text.toString())
+                        }
+                        else ->{
+
+                        }
+                    }
+                }
+            }
+
+        }
+
+        binding.nicknameEditText.onFocusChangeListener = fieldFocusChangeListener
+        binding.aboutEditText.onFocusChangeListener = fieldFocusChangeListener
+        binding.instagramEditText.onFocusChangeListener = fieldFocusChangeListener
+        binding.tikTokEditText.onFocusChangeListener = fieldFocusChangeListener
 
         binding.imageViewAvatar.setOnClickListener {
             checkPermissions()
@@ -94,11 +128,12 @@ class ProfileController : MvpController(), ProfilePresenter.IProfileView {
     }
 
     override fun showNickName(nickName: String) {
+        binding.nicknameEditText.visibility = View.VISIBLE
         binding.nicknameEditText.hint = nickName
     }
 
     override fun showScore(score: String) {
-        binding.scoreEditText.hint = score
+        binding.scoreTextView.hint = score
     }
 
     override fun showRole(role: String) {
@@ -143,7 +178,7 @@ class ProfileController : MvpController(), ProfilePresenter.IProfileView {
     }
 
     override fun showAccountType(accountType: String) {
-        binding.accountTypeEditText.hint = accountType
+        binding.accountTypeTextView.hint = accountType
     }
 
     override fun onDestroyView(view: View) {

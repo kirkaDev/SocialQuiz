@@ -74,6 +74,29 @@ class ProfilePresenter @Inject constructor(
         firebaseRepository.createProfile(uid)
     }
 
+    fun commitChanges(field: String, newValue: String){
+        when (field){
+            Profile.FIELD_NICK_NAME ->{
+                currentUser?.nickName = newValue
+                currentUser?.let { firebaseRepository.commitProfile(it) }
+            }
+            Profile.FIELD_ABOUT ->{
+                currentUser?.about = newValue
+                currentUser?.let { firebaseRepository.commitProfile(it) }
+            }
+            Profile.FIELD_INSTAGRAM ->{
+                currentUser?.instagram = newValue
+                currentUser?.let { firebaseRepository.commitProfile(it) }
+            }
+            Profile.FIELD_TIK_TOK ->{
+                currentUser?.tiktok = newValue
+                currentUser?.let { firebaseRepository.commitProfile(it) }
+            }
+            else ->{
+            }
+        }
+
+    }
 
     fun uploadAvatarToStorage(avatarPath: String) {
         presenterScope.launch {

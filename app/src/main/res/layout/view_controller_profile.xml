@@ -35,11 +35,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:minWidth="80dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="4dp"
                 android:layout_marginBottom="8dp"
                 android:layout_gravity="center_horizontal"
+                android:textAlignment="center"
                 android:background="@drawable/profile_property_shape"
-                tools:text="kirkaDev">
+                tools:text="kirkaDev"
+                android:visibility="gone"
+                tools:visibility="visible">
             </androidx.appcompat.widget.AppCompatEditText>
         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -59,8 +62,8 @@
                 android:background="@drawable/profile_property_label"
                 android:text="@string/score_label">
             </androidx.appcompat.widget.AppCompatTextView>
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/scoreEditText"
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/scoreTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:minWidth="80dp"
@@ -68,7 +71,7 @@
                 android:layout_marginBottom="8dp"
                 android:background="@drawable/profile_property_shape"
                 tools:text="100500">
-            </androidx.appcompat.widget.AppCompatEditText>
+            </androidx.appcompat.widget.AppCompatTextView>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/roleLabel"
@@ -77,7 +80,7 @@
                 android:background="@drawable/profile_property_label"
                 android:text="@string/role_label">
             </androidx.appcompat.widget.AppCompatTextView>
-            <androidx.appcompat.widget.AppCompatEditText
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/roleEditText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -86,7 +89,7 @@
                 android:layout_marginBottom="8dp"
                 android:background="@drawable/profile_property_shape"
                 tools:text="Игрок">
-            </androidx.appcompat.widget.AppCompatEditText>
+            </androidx.appcompat.widget.AppCompatTextView>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/aboutLabel"
@@ -150,8 +153,8 @@
                 android:background="@drawable/profile_property_label"
                 android:text="@string/account_type_label">
             </androidx.appcompat.widget.AppCompatTextView>
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/accountTypeEditText"
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/accountTypeTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:minWidth="80dp"
@@ -159,7 +162,7 @@
                 android:layout_marginBottom="8dp"
                 android:background="@drawable/profile_property_shape"
                 tools:text="@string/is_paid">
-            </androidx.appcompat.widget.AppCompatEditText>
+            </androidx.appcompat.widget.AppCompatTextView>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.constraintlayout.widget.ConstraintLayout>
