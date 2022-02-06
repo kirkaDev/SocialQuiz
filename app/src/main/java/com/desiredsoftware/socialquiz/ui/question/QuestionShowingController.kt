@@ -27,7 +27,7 @@ class QuestionShowingController : MvpController, QuestionShowingPresenter.IQuest
     constructor() : super()
     constructor (args: Bundle) : super(args)
 
-    lateinit var mPlayer: SimpleExoPlayer
+    var mPlayer: SimpleExoPlayer? = null
     lateinit var mPlayerControlView: PlayerView
     lateinit var mRoot: View
 
@@ -67,8 +67,12 @@ class QuestionShowingController : MvpController, QuestionShowingPresenter.IQuest
             .build()
 
         mPlayerControlView.player = mPlayer
-        mPlayer.setMediaItem(MediaItem.fromUri(videoURI))
-        mPlayer.prepare()
+        mPlayer?.let {
+            it.setMediaItem(MediaItem.fromUri(videoURI))
+            it.prepare()
+            it.playWhenReady = true
+        }
+        mPlayerControlView.hideController()
     }
 
     override fun showVideoQuestion(context: Context, questionBodyVideoUri: String) {
@@ -76,7 +80,7 @@ class QuestionShowingController : MvpController, QuestionShowingPresenter.IQuest
     }
 
     override fun showAnswers(context: Context, answers: List<Answer>) {
-        mAdapter = AnswersAdapter(answersList = answers, object: OnClickAnswerListener{
+        mAdapter = AnswersAdapter(answersList = answers, object : OnClickAnswerListener {
             override fun onClicked(answer: Answer) {
                 val bundle = Bundle()
                 bundle.putSerializable(ANSWER_IS_CORRECT_KEY, answer.isCorrect)
@@ -89,7 +93,21 @@ class QuestionShowingController : MvpController, QuestionShowingPresenter.IQuest
         mListAnswers.layoutManager = LinearLayoutManager(context)
     }
 
-    companion object{
+    override fun onDetach(view: View) {
+        super.onDetach(view)
+        mPlayer?.pause()
+    }
+
+    override fun onDestroyView(view: View) {
+        super.onDestroyView(view)
+        if (mPlayer!=null){
+            mPlayer?.stop()
+            mPlayer?.release()
+            mPlayer = null
+        }
+    }
+
+    companion object {
         val ANSWER_IS_CORRECT_KEY = "ANSWER_IS_CORRECT_KEY"
     }
 }
