@@ -28,10 +28,10 @@ class QuestionShowingController : MvpController, QuestionShowingPresenter.IQuest
     constructor (args: Bundle) : super(args)
 
     private var mPlayer: SimpleExoPlayer? = null
-    private lateinit var mPlayerControlView: PlayerView
-    lateinit var mRoot: View
+    private lateinit var playerControlView: PlayerView
+    lateinit var rootView: View
 
-    lateinit var mListAnswers: RecyclerView
+    lateinit var answerVariants: RecyclerView
     lateinit var mAdapter: AnswersAdapter
 
     @Inject
@@ -51,32 +51,37 @@ class QuestionShowingController : MvpController, QuestionShowingPresenter.IQuest
         container: ViewGroup,
         savedViewState: Bundle?
     ): View {
-        mRoot = inflater.inflate(R.layout.view_controller_question_showing, container, false)
+        rootView = inflater.inflate(R.layout.view_controller_question_showing, container, false)
 
-        mListAnswers = mRoot.findViewById(R.id.listAnswers)
-        mPlayerControlView = mRoot.findViewById(R.id.playerView)
+        answerVariants = rootView.findViewById(R.id.listAnswers)
+        playerControlView = rootView.findViewById(R.id.playerView)
 
-        presenter.mQuestionCategoryId = args.getString(CATEGORY_ID_KEY).toString()
-        presenter.showQuestion()
+        presenter.questionCategoryId = args.getString(CATEGORY_ID_KEY).toString()
 
-        return mRoot
+        presenter.initUI()
+
+        return rootView
     }
 
     private fun configurePlayer(context: Context, videoURI: String) {
         mPlayer = SimpleExoPlayer.Builder(context)
             .build()
 
-        mPlayerControlView.player = mPlayer
+        playerControlView.player = mPlayer
         mPlayer?.let {
             it.setMediaItem(MediaItem.fromUri(videoURI))
             it.prepare()
             it.playWhenReady = true
         }
-        mPlayerControlView.hideController()
+        playerControlView.hideController()
     }
 
     override fun showVideoQuestion(context: Context, questionBodyVideoUri: String) {
         configurePlayer(context, questionBodyVideoUri)
+    }
+
+    override fun showTextQuestion(context: Context, questionBodyVideoUri: String) {
+        // TODO("Not yet implemented")
     }
 
     override fun showAnswers(context: Context, answers: List<Answer>) {
@@ -89,8 +94,8 @@ class QuestionShowingController : MvpController, QuestionShowingPresenter.IQuest
             }
         })
 
-        mListAnswers.adapter = mAdapter
-        mListAnswers.layoutManager = LinearLayoutManager(context)
+        answerVariants.adapter = mAdapter
+        answerVariants.layoutManager = LinearLayoutManager(context)
     }
 
     override fun onDetach(view: View) {

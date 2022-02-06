@@ -13,7 +13,14 @@ import com.desiredsoftware.socialquiz.data.model.profile.Profile.Companion.FIELD
 import com.desiredsoftware.socialquiz.data.model.profile.Profile.Companion.FIELD_ROLE
 import com.desiredsoftware.socialquiz.data.model.profile.Profile.Companion.FIELD_SCORE
 import com.desiredsoftware.socialquiz.data.model.profile.Profile.Companion.FIELD_TIK_TOK
+import com.desiredsoftware.socialquiz.data.model.question.Answer
 import com.desiredsoftware.socialquiz.data.model.question.Question
+import com.desiredsoftware.socialquiz.data.model.question.Question.Companion.FIELD_ANSWERS_VARIANTS
+import com.desiredsoftware.socialquiz.data.model.question.Question.Companion.FIELD_CATEGORY_ID
+import com.desiredsoftware.socialquiz.data.model.question.Question.Companion.FIELD_QUESTION_AUTHOR_ID
+import com.desiredsoftware.socialquiz.data.model.question.Question.Companion.FIELD_QUESTION_BODY
+import com.desiredsoftware.socialquiz.data.model.question.Question.Companion.FIELD_QUESTION_ID
+import com.desiredsoftware.socialquiz.data.model.question.Question.Companion.FIELD_QUESTION_TYPE
 import com.desiredsoftware.socialquiz.utils.ProfileUtils
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
@@ -75,53 +82,47 @@ class FirebaseRepository @Inject constructor(
         profileCollection.document(uid).set(HashMap(userProfileDataSet))
     }
 
-    fun commitProfile(profileToCommit: Profile){
+    fun commitProfile(profileToCommit: Profile) {
         val profileCollection = firestore.collection(PROFILE_COLLECTION_NAME)
         val userProfileDataSet = ProfileUtils.getDataSetForProfile(profileToCommit)
         // this action overrides exists document
         profileCollection.document(profileToCommit.id).set(HashMap(userProfileDataSet))
     }
 
-    suspend fun getQuestionsArrayByCategory(
+    suspend fun getQuestionsOfCategory(
         questionCategoryId: String,
     ): List<Question> {
-        var questionList = mutableListOf<Question>()
+        Log.d("question", "Repository: getQuestionsOfCategory called")
+        val questionList = mutableListOf<Question>()
 
-        val eventList = firestore.collection(QUESTIONS_ROOT_COLLECTION)
+        firestore.collection(QUESTIONS_ROOT_COLLECTION)
             .whereEqualTo(FIELD_CATEGORY_ID, questionCategoryId)
             .get()
-            .await()/* {
-                Question(
-                    mAnswerVariants = it["answerVariants"] as List<Any?>,
-                    mCategoryName = it["categoryName"] as String,
-                    mCategory_id = it["category_id"] as String,
-                    mLanguage = it["language"] as String,
-                    mQuestionBody = it["questionBody"] as String,
-                    mQuestionOwner = it["questionOwner"] as String,
-                    mQuestionType = it["questionType"] as String
-                )
-                Log.d("Firebase", "Questions is read: ${it.toString()}")
-            }*/
+            .await()
+            .documents.map { document ->
+                try {
+                    questionList.add(
+                        Question(
+                            document[FIELD_QUESTION_ID] as String,
+                            document[FIELD_CATEGORY_ID] as String,
+                            document[FIELD_ANSWERS_VARIANTS] as List<Answer>,
+                            document[FIELD_QUESTION_BODY] as String,
+                            document[FIELD_QUESTION_AUTHOR_ID] as String,
+                            Question.Companion.QUESTION_TYPE.valueOf(document[FIELD_QUESTION_TYPE] as String)
+                        )
+                    )
+                } catch (e: Exception) {
+                    Log.e("Profile", "Casting to Question error: ${e.message}")
+                }
+            }
 
-        for (document in eventList) {
-            //val a: MutableMap<"answerVariants", Boolean> = document.data
-            val mCategoryName = document.getString("categoryName")
-            val mCategory_id = document.getString("category_id")
-            val mLanguage = document.getString("language")
-            val mQuestionBody = document.getString("questionBody")
-            val mQuestionOwner = document.getString("questionOwner")
-            val mQuestionType = document.getString("questionType")
-        }
-
-        return emptyList()
+        return questionList
     }
 
     companion object {
-        val PROFILE_COLLECTION_NAME = "users"
-        val CATEGORY_ROOT_COLLECTION = "question_category"
-        val QUESTIONS_ROOT_COLLECTION = "questions"
-        val FIELD_CATEGORY_NAME = "categoryName"
-        val FIELD_CATEGORY_ID = "category_id"
+        const val PROFILE_COLLECTION_NAME = "users"
+        const val CATEGORY_ROOT_COLLECTION = "question_category"
+        const val QUESTIONS_ROOT_COLLECTION = "questions"
     }
 
 }

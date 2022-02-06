@@ -21,60 +21,29 @@ fun generateCategories () : ArrayList<Category>
         return categoriesList
     }
 
-    fun generateQuestion() : Question
-    {
-        val answerVariants : List<Answer> = emptyList()
+fun generateQuestion(): Question {
+    val answerVariants: List<Answer> = emptyList()
 
-        val answerMutableList = answerVariants.toMutableList()
-        answerMutableList.add(Answer("Cat", true))
-        answerMutableList.add(Answer("Shake", false))
-        answerMutableList.add(Answer("Dolphin", false))
-        answerMutableList.add(Answer("Cat", true))
-        answerMutableList.add(Answer("Shake", false))
-        answerMutableList.add(Answer("Dolphin", false))
+    val answerMutableList = answerVariants.toMutableList()
+    answerMutableList.add(Answer("Cat", true))
+    answerMutableList.add(Answer("Shake", false))
+    answerMutableList.add(Answer("Dolphin", false))
+    answerMutableList.add(Answer("Cat", true))
+    answerMutableList.add(Answer("Shake", false))
+    answerMutableList.add(Answer("Dolphin", false))
 
-        val question = Question(
-            mAnswers = answerMutableList,
-            mCategoryName = "Animals",
-            mCategory_id = "AnimalsCategory_id",
-            mLanguage = "ru",
-            mQuestionBody = generateMediaURI(),
-            mQuestionOwner = "Nikolay Drozdov",
-       )
-        question.mQuestionType = "text"
-
-        return question
-    }
+    return Question(
+        questionId = "23",
+        categoryId = "2",
+        answerVariants = answerMutableList,
+        questionBody = generateMediaURI(),
+        questionAuthorUid = "Nikolay Drozdov",
+        questionType = Question.Companion.QUESTION_TYPE.TEXT
+    )
+}
 
     fun generateMediaURI() : String
     {
         return "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4"
-    }
-
-    fun convertToQuestion(question : HashMap<String, Any>) : Question
-    {
-        val questionOwner: String = question["questionOwner"] as String
-        val questionType: String = question["questionType"] as String
-        val questionBody: String = question["questionBody"] as String
-        val categoryName: String = question["categoryName"] as String
-
-        val answerVariants : ArrayList<Answer> = ArrayList()
-
-/*        for (answer in question["answerVariants"] as HashMap<String, Boolean>)
-        {
-            answerVariants.add(Answer(answer.key, answer.value))
-        }*/
-
-/*        return Question(
-            mAnswerVariants = answerVariants,
-            mCategoryName = "Animals",
-            mCategory_id = "AnimalsCategory_id",
-            mLanguage = "ru",
-            mQuestionBody = generateMediaURI(),
-            mQuestionOwner = "Nikolay Drozdov",
-            mQuestionType = "video"
-            )*/
-
-        return generateQuestion()
     }
 

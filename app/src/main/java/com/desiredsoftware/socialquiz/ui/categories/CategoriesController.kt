@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bluelinelabs.conductor.RouterTransaction
+import com.bluelinelabs.conductor.changehandler.VerticalChangeHandler
 import com.desiredsoftware.socialquiz.R
 import com.desiredsoftware.socialquiz.data.model.category.Category
 import com.desiredsoftware.socialquiz.di.App
@@ -77,6 +78,8 @@ class CategoriesController : MvpController(), CategoriesPresenter.ICategoriesVie
         val bundle = Bundle()
         bundle.putString(CATEGORY_ID_KEY, idCategory)
         val transaction = RouterTransaction.with(QuestionShowingController(bundle))
+            .pushChangeHandler(VerticalChangeHandler())
+            .popChangeHandler(VerticalChangeHandler())
         router.pushController(transaction)
     }
 
