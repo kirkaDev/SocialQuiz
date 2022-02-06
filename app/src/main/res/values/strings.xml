@@ -4,7 +4,7 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="profile">Profile</string>
-    <string name="selectCategory">Select category</string>
+    <string name="selectCategory">Выбери категорию</string>
     <string name="tryAgain">Try again</string>
     <string name="nextQuestion">Next question</string>
     <string name="congrat">Congratulations!</string>
