@@ -62,6 +62,7 @@ class MainActivity : MvpAppCompatActivity() {
                     resources.getString(R.string.auth_error),
                     Toast.LENGTH_LONG
                 ).show()
+                finish()
             }
         }
     }
