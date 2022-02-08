@@ -79,7 +79,7 @@ class CategoriesController : MvpController(), CategoriesPresenter.ICategoriesVie
 
     companion object {
         val CATEGORY_ID_KEY = "CATEGORY_KEY"
-        const val SPAN_COUNT_FOR_PHONE = 3
+        const val SPAN_COUNT_FOR_PHONE = 2
         const val SPAN_COUNT_FOR_TABLET = 4
     }
 }
