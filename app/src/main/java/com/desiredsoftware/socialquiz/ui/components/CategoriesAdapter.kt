@@ -45,7 +45,7 @@ class CategoriesAdapter(
             shimmer.startShimmer()
             Glide.with(itemView)
                 .load(category.imageResource)
-
+                .placeholder(R.drawable.ic_broken_category_24_white)
                 .listener(object: RequestListener<Drawable> {
                     override fun onLoadFailed(
                         e: GlideException?,

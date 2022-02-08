@@ -39,16 +39,28 @@ class FirebaseRepository @Inject constructor(
         firestore.firestoreSettings = settings
     }
 
-    suspend fun getCategories() = firestore.collection(CATEGORY_ROOT_COLLECTION)
-        .get()
-        .await().documents.map {
-            Category(
-                it["category_id"] as String,
-                it["isPremium"] as String,
-                it["imageResource"] as String,
-                it["categoryName"] as String
-            )
-        }
+    suspend fun getCategories(): List<Category> {
+        val categoriesList = mutableListOf<Category>()
+        firestore.collection(CATEGORY_ROOT_COLLECTION)
+            .get()
+            .await().documents.forEach {
+                try {
+                    categoriesList.add(
+                        Category(
+                            it["category_id"] as String,
+                            it["isPremium"] as Boolean,
+                            it["imageResource"] as String,
+                            it["categoryName"] as String
+                        )
+                    )
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    Log.e("Casting from DB error", "Categories casting error, document=${it.data}")
+                }
+            }
+
+        return categoriesList
+    }
 
     suspend fun getProfile(uid: String): Profile? {
         firestore.collection(PROFILE_COLLECTION_NAME)
@@ -96,11 +108,8 @@ class FirebaseRepository @Inject constructor(
     ): List<Question> {
         Log.d("question", "Repository: getQuestionsOfCategory called")
         val questionList = mutableListOf<Question>()
-
-        var answers: ArrayList<*>? = null
-
         firestore.collection(QUESTIONS_ROOT_COLLECTION)
-            .whereEqualTo(FIELD_CATEGORY_ID, questionCategoryId)
+            //.whereEqualTo(FIELD_CATEGORY_ID, questionCategoryId)
             .get()
             .await()
             .documents.map { document ->
@@ -108,9 +117,9 @@ class FirebaseRepository @Inject constructor(
                     val cleanAnswers: List<Answer> = (document.get(FIELD_ANSWERS)
                             as ArrayList<HashMap<String, Any>>).map {
                         Answer(
-                                it[FIELD_VARIANT] as String,
-                                it[FIELD_IS_CORRECT] as Boolean
-                            )
+                            it[FIELD_VARIANT] as String,
+                            it[FIELD_IS_CORRECT] as Boolean
+                        )
                     }
 
                     questionList.add(

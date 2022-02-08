@@ -8,15 +8,15 @@ fun generateCategories () : ArrayList<Category>
     {
         val categoriesList = ArrayList<Category>()
 
-        categoriesList.add(Category("223", "false", "https://img.icons8.com/color/2x/owl.png", "Animals"))
-        categoriesList.add(Category("23","false", "https://img.icons8.com/color/2x/heart-with-pulse.png", "Health"))
-        categoriesList.add(Category("43","false","https://img.icons8.com/doodle/2x/controller--v1.png", "Video Games"))
-        categoriesList.add(Category("56", "false","https://img.icons8.com/color/2x/boy-stroller.png", "Children"))
-        categoriesList.add(Category("21","false","https://img.icons8.com/color/2x/cheburashka.png", "Cartoons"))
-        categoriesList.add(Category("23", "true","https://img.icons8.com/color/2x/project.png", "Business"))
-        categoriesList.add(Category("21","false","https://img.icons8.com/cute-clipart/2x/outdoor-swimming-pool.png", "Travel"))
-        categoriesList.add(Category("223","false","https://img.icons8.com/color/2x/owl.png", "Animals"))
-        categoriesList.add(Category("23", "true","https://img.icons8.com/color/2x/heart-with-pulse.png", "Health"))
+        categoriesList.add(Category("223", false, "https://img.icons8.com/color/2x/owl.png", "Animals"))
+        categoriesList.add(Category("23",false, "https://img.icons8.com/color/2x/heart-with-pulse.png", "Health"))
+        categoriesList.add(Category("43",false,"https://img.icons8.com/doodle/2x/controller--v1.png", "Video Games"))
+        categoriesList.add(Category("56", false,"https://img.icons8.com/color/2x/boy-stroller.png", "Children"))
+        categoriesList.add(Category("21",false,"https://img.icons8.com/color/2x/cheburashka.png", "Cartoons"))
+        categoriesList.add(Category("23", false,"https://img.icons8.com/color/2x/project.png", "Business"))
+        categoriesList.add(Category("21",false,"https://img.icons8.com/cute-clipart/2x/outdoor-swimming-pool.png", "Travel"))
+        categoriesList.add(Category("223",false,"https://img.icons8.com/color/2x/owl.png", "Animals"))
+        categoriesList.add(Category("23", true,"https://img.icons8.com/color/2x/heart-with-pulse.png", "Health"))
 
         return categoriesList
     }

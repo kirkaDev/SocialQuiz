@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bluelinelabs.conductor.RouterTransaction
@@ -56,11 +55,6 @@ class CategoriesController : MvpController(), CategoriesPresenter.ICategoriesVie
     override fun showCategories(categoriesList: List<Category>) {
         val listener = object : OnClickCategoryListener {
             override fun onClicked(categoryId: String) {
-                Toast.makeText(
-                    activity,
-                    "Category with id ${categoryId} clicked",
-                    Toast.LENGTH_SHORT
-                ).show()
                 presenter.openCategory(categoryId)
             }
         }
@@ -86,6 +80,6 @@ class CategoriesController : MvpController(), CategoriesPresenter.ICategoriesVie
     companion object {
         val CATEGORY_ID_KEY = "CATEGORY_KEY"
         const val SPAN_COUNT_FOR_PHONE = 3
-        const val SPAN_COUNT_FOR_TABLET = 5
+        const val SPAN_COUNT_FOR_TABLET = 4
     }
 }

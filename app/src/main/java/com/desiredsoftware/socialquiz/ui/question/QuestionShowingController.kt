@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bluelinelabs.conductor.RouterTransaction
@@ -84,6 +85,10 @@ class QuestionShowingController : MvpController, QuestionShowingPresenter.IQuest
         // TODO("Not yet implemented")
     }
 
+    override fun popCurrentController() {
+        router.popCurrentController()
+    }
+
     override fun showAnswers(context: Context, answers: List<Answer>) {
         mAdapter = AnswersAdapter(answersList = answers, object : OnClickAnswerListener {
             override fun onClicked(answer: Answer) {
@@ -96,6 +101,10 @@ class QuestionShowingController : MvpController, QuestionShowingPresenter.IQuest
 
         answerVariants.adapter = mAdapter
         answerVariants.layoutManager = LinearLayoutManager(context)
+    }
+
+    override fun showError(message: String) {
+        Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
     }
 
     override fun onDetach(view: View) {

@@ -27,4 +27,5 @@
     <string name="choose_your_avatar">Выбери себе аватар</string>
     <string name="empty">Пусто</string>
     <string name="cant_upload_avatar">Не удалось загрузить аватар, попробуй позже</string>
+    <string name="get_question_error">Не могу показать вопрос. Такое редко, но случается :(</string>
 </resources>
