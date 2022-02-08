@@ -6,15 +6,21 @@
     android:layout_height="match_parent"
     tools:background="@color/mainBackground">
 
-    <com.google.android.exoplayer2.ui.PlayerView
-        android:id="@+id/playerView"
-        android:layout_height="320dp"
+    <FrameLayout
         android:layout_width="320dp"
-        android:visibility="visible"
+        android:layout_height="320dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.exoplayer2.ui.PlayerView
+            android:id="@+id/playerView"
+            android:layout_height="320dp"
+            android:layout_width="320dp"
+            app:controller_layout_id="@layout/view_controller_custom_player"
+            android:visibility="visible" />
+    </FrameLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/listAnswers"
@@ -30,5 +36,4 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             tools:listitem="@layout/item_answer_variant" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
