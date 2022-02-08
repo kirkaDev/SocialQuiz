@@ -18,6 +18,7 @@ import com.desiredsoftware.socialquiz.ui.common.MvpController
 import com.desiredsoftware.socialquiz.ui.components.AnswersAdapter
 import com.desiredsoftware.socialquiz.ui.components.OnClickAnswerListener
 import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.ui.PlayerView
 import moxy.presenter.InjectPresenter
@@ -28,7 +29,7 @@ class QuestionShowingController : MvpController, QuestionShowingPresenter.IQuest
     constructor() : super()
     constructor (args: Bundle) : super(args)
 
-    private var mPlayer: SimpleExoPlayer? = null
+    private var player: SimpleExoPlayer? = null
     private lateinit var playerControlView: PlayerView
     lateinit var rootView: View
 
@@ -65,15 +66,26 @@ class QuestionShowingController : MvpController, QuestionShowingPresenter.IQuest
     }
 
     private fun configurePlayer(context: Context, videoURI: String) {
-        mPlayer = SimpleExoPlayer.Builder(context)
+        player = SimpleExoPlayer.Builder(context)
             .build()
 
-        playerControlView.player = mPlayer
-        mPlayer?.let {
+        playerControlView.player = player
+        player?.let {
             it.setMediaItem(MediaItem.fromUri(videoURI))
             it.prepare()
             it.playWhenReady = true
+
+            it.addListener(object: Player.Listener{
+                override fun onPlaybackStateChanged(state: Int) {
+                    when (state) {
+                        Player.STATE_ENDED -> {
+                            answerVariants.visibility = View.VISIBLE
+                        }
+                    }
+                }
+            })
         }
+
         playerControlView.hideController()
     }
 
@@ -109,15 +121,15 @@ class QuestionShowingController : MvpController, QuestionShowingPresenter.IQuest
 
     override fun onDetach(view: View) {
         super.onDetach(view)
-        mPlayer?.pause()
+        player?.pause()
     }
 
     override fun onDestroyView(view: View) {
         super.onDestroyView(view)
-        if (mPlayer != null) {
-            mPlayer?.stop()
-            mPlayer?.release()
-            mPlayer = null
+        if (player != null) {
+            player?.stop()
+            player?.release()
+            player = null
         }
     }
 
