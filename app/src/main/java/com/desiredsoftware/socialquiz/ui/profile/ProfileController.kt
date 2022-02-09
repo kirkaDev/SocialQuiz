@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.desiredsoftware.socialquiz.R
 import com.desiredsoftware.socialquiz.data.model.profile.Profile.Companion.FIELD_ABOUT
 import com.desiredsoftware.socialquiz.data.model.profile.Profile.Companion.FIELD_INSTAGRAM
@@ -117,6 +118,7 @@ class ProfileController : MvpController(), ProfilePresenter.IProfileView {
         view?.context?.let {
             Glide.with(it)
                 .load(avatarStorageReference)
+                .apply(RequestOptions.circleCropTransform())
                 .error(it.resources.getDrawable(R.drawable.ic_profile_white_24dp))
                 .placeholder(it.resources.getDrawable(R.drawable.ic_profile_white_24dp))
                 .into(binding.imageViewAvatar)
