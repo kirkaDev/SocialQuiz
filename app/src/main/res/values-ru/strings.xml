@@ -28,4 +28,5 @@
     <string name="empty">Пусто</string>
     <string name="cant_upload_avatar">Не удалось загрузить аватар, попробуй позже</string>
     <string name="get_question_error">Не могу показать вопрос. Такое редко, но случается :(</string>
+    <string name="repeat_video">Повторить вопрос</string>
 </resources>

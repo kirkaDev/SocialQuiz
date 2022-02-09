@@ -7,10 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.bluelinelabs.conductor.RouterTransaction
-import com.desiredsoftware.socialquiz.R
 import com.desiredsoftware.socialquiz.data.model.question.Answer
+import com.desiredsoftware.socialquiz.databinding.ViewControllerQuestionShowingBinding
 import com.desiredsoftware.socialquiz.di.App
 import com.desiredsoftware.socialquiz.presenter.question.QuestionShowingPresenter
 import com.desiredsoftware.socialquiz.ui.categories.CategoriesController.Companion.CATEGORY_ID_KEY
@@ -20,7 +19,6 @@ import com.desiredsoftware.socialquiz.ui.components.OnClickAnswerListener
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.SimpleExoPlayer
-import com.google.android.exoplayer2.ui.PlayerView
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import javax.inject.Inject
@@ -30,11 +28,10 @@ class QuestionShowingController : MvpController, QuestionShowingPresenter.IQuest
     constructor (args: Bundle) : super(args)
 
     private var player: SimpleExoPlayer? = null
-    private lateinit var playerControlView: PlayerView
-    lateinit var rootView: View
-
-    lateinit var answerVariants: RecyclerView
     lateinit var mAdapter: AnswersAdapter
+
+    private var _binding: ViewControllerQuestionShowingBinding? = null
+    private val binding get() = _binding!!
 
     @Inject
     @InjectPresenter
@@ -53,40 +50,51 @@ class QuestionShowingController : MvpController, QuestionShowingPresenter.IQuest
         container: ViewGroup,
         savedViewState: Bundle?
     ): View {
-        rootView = inflater.inflate(R.layout.view_controller_question_showing, container, false)
-
-        answerVariants = rootView.findViewById(R.id.listAnswers)
-        playerControlView = rootView.findViewById(R.id.playerView)
+        _binding = ViewControllerQuestionShowingBinding.inflate(inflater, container, false)
 
         presenter.questionCategoryId = args.getString(CATEGORY_ID_KEY).toString()
-
         presenter.initUI()
 
-        return rootView
+        return binding.root
     }
 
     private fun configurePlayer(context: Context, videoURI: String) {
-        player = SimpleExoPlayer.Builder(context)
-            .build()
+        if (player == null) {
+            player = SimpleExoPlayer.Builder(context)
+                .build()
 
-        playerControlView.player = player
-        player?.let {
-            it.setMediaItem(MediaItem.fromUri(videoURI))
-            it.prepare()
-            it.playWhenReady = true
-
-            it.addListener(object: Player.Listener{
-                override fun onPlaybackStateChanged(state: Int) {
-                    when (state) {
-                        Player.STATE_ENDED -> {
-                            answerVariants.visibility = View.VISIBLE
+            binding.playerView.player = player
+            player?.let {
+                it.setMediaItem(MediaItem.fromUri(videoURI))
+                it.prepare()
+                it.playWhenReady = true
+                it.addListener(object : Player.Listener {
+                    override fun onPlaybackStateChanged(state: Int) {
+                        when (state) {
+                            Player.STATE_ENDED -> {
+                                binding.listAnswers.visibility = View.VISIBLE
+                                binding.buttonRepeatVideo.apply {
+                                    visibility = View.VISIBLE
+                                    this.setOnClickListener {
+                                        player?.let { player ->
+                                            // Replay video
+                                            player.seekTo(0)
+                                            player.playWhenReady = true
+                                            this.visibility = View.INVISIBLE
+                                            binding.listAnswers.visibility = View.INVISIBLE
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
-                }
-            })
+                })
+            }
         }
-
-        playerControlView.hideController()
+        else{
+            player?.seekTo(0)
+            player?.playWhenReady = true
+        }
     }
 
     override fun showVideoQuestion(context: Context, questionBodyVideoUri: String) {
@@ -111,8 +119,10 @@ class QuestionShowingController : MvpController, QuestionShowingPresenter.IQuest
             }
         })
 
-        answerVariants.adapter = mAdapter
-        answerVariants.layoutManager = LinearLayoutManager(context)
+        binding.listAnswers.apply {
+            adapter = mAdapter
+            layoutManager = LinearLayoutManager(context)
+        }
     }
 
     override fun showError(message: String) {
@@ -121,13 +131,13 @@ class QuestionShowingController : MvpController, QuestionShowingPresenter.IQuest
 
     override fun onDetach(view: View) {
         super.onDetach(view)
-        player?.pause()
+        player?.stop()
+        player?.release()
     }
 
     override fun onDestroyView(view: View) {
         super.onDestroyView(view)
         if (player != null) {
-            player?.stop()
             player?.release()
             player = null
         }

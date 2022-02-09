@@ -28,4 +28,5 @@
     <string name="empty">Empty</string>
     <string name="cant_upload_avatar">Can\'t upload avatar</string>
     <string name="get_question_error">Get question error. Please, try again later.</string>
+    <string name="repeat_video">Repeat video</string>
 </resources>
