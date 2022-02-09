@@ -2,7 +2,7 @@
     <string name="app_name">SocialQuiz</string>
     <string name="title_home">Категории</string>
     <string name="profile">Профиль</string>
-    <string name="selectCategory">Выбери категорию</string>
+    <string name="selectCategory">Выбрать категорию</string>
     <string name="tryAgain">Попробовать снова</string>
     <string name="nextQuestion">Следующий вопрос</string>
     <string name="congrat">Поздравляем!</string>
