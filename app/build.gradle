@@ -20,8 +20,8 @@ android {
         applicationId "com.desiredsoftware.socialquiz"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 3
-        versionName "1.0.3"
+        versionCode 4
+        versionName "1.0.4"
 
         multiDexEnabled true
         resConfigs "ru"
