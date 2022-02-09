@@ -8,9 +8,9 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/playerContainerCardView"
-        android:layout_width="320dp"
-        android:layout_height="320dp"
-        app:cardCornerRadius="320dp"
+        android:layout_width="280dp"
+        android:layout_height="280dp"
+        app:cardCornerRadius="280dp"
         app:cardBackgroundColor="@color/yellowMain"
         app:cardElevation="0dp"
         android:elevation="0dp"
@@ -21,8 +21,8 @@
 
         <com.google.android.exoplayer2.ui.PlayerView
             android:id="@+id/playerView"
-            android:layout_height="320dp"
-            android:layout_width="320dp"
+            android:layout_height="280dp"
+            android:layout_width="280dp"
             android:layout_gravity="center"
             app:controller_layout_id="@layout/view_controller_custom_player"
             android:visibility="visible" />
