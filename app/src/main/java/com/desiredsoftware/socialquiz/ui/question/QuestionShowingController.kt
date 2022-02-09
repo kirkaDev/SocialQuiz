@@ -16,6 +16,7 @@ import com.desiredsoftware.socialquiz.ui.categories.CategoriesController.Compani
 import com.desiredsoftware.socialquiz.ui.common.MvpController
 import com.desiredsoftware.socialquiz.ui.components.AnswersAdapter
 import com.desiredsoftware.socialquiz.ui.components.OnClickAnswerListener
+import com.google.android.exoplayer2.ExoPlaybackException
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.SimpleExoPlayer
@@ -87,6 +88,13 @@ class QuestionShowingController : MvpController, QuestionShowingPresenter.IQuest
                                 }
                             }
                         }
+                    }
+
+                    override fun onPlayerError(error: ExoPlaybackException) {
+                        super.onPlayerError(error)
+                        Toast.makeText(activity, "Playback error, message: ${error.message}", Toast.LENGTH_LONG).show()
+                        error.printStackTrace()
+                        binding.listAnswers.visibility = View.VISIBLE
                     }
                 })
             }
