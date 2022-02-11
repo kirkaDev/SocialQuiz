@@ -6,6 +6,7 @@
     tools:context=".ui.profile.ProfileController"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="12dp"
     android:paddingTop="12dp">
 
     <androidx.cardview.widget.CardView
@@ -198,7 +199,7 @@
                 android:layout_height="wrap_content"
                 android:minWidth="80dp"
                 android:layout_marginTop="2dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="16dp"
                 android:layout_marginHorizontal="4dp"
                 android:background="@drawable/profile_property_shape"
                 android:elevation="4dp"
