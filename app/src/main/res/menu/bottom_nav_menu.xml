@@ -9,4 +9,9 @@
         android:id="@+id/navigation_profile"
         android:icon="@drawable/ic_profile_white_24dp"
         android:title="@string/profile" />
+
+    <item
+        android:id="@+id/navigation_add_question"
+        android:icon="@drawable/ic_add_question_24"
+        android:title="@string/add_question" />
 </menu>

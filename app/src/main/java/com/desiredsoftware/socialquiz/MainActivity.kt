@@ -10,6 +10,7 @@ import com.bluelinelabs.conductor.Router
 import com.bluelinelabs.conductor.RouterTransaction
 import com.desiredsoftware.socialquiz.ui.categories.CategoriesController
 import com.desiredsoftware.socialquiz.ui.profile.ProfileController
+import com.desiredsoftware.socialquiz.ui.question.AddOwnQuestionController
 import com.desiredsoftware.socialquiz.ui.splash.SplashController
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
@@ -38,6 +39,10 @@ class MainActivity : MvpAppCompatActivity() {
                 }
                 R.id.navigation_profile ->{
                     router?.pushController(RouterTransaction.with(ProfileController()))
+                    true
+                }
+                R.id.navigation_add_question ->{
+                    router?.pushController(RouterTransaction.with(AddOwnQuestionController()))
                     true
                 }
                 else ->{

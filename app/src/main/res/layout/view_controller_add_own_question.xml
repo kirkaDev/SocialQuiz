@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.question.AddOwnQuestionFragment">
+    tools:context=".ui.question.AddOwnQuestionController">
 
     <TextView
         android:layout_width="match_parent"
