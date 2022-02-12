@@ -29,4 +29,5 @@
     <string name="cant_upload_avatar">Can\'t upload avatar</string>
     <string name="get_question_error">Get question error. Please, try again later.</string>
     <string name="repeat_video">Repeat video</string>
+    <string name="write_result_failed">Ошибка операции записи</string>
 </resources>

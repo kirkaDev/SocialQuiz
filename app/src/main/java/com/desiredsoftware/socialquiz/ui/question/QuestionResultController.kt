@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatTextView
 import com.bluelinelabs.conductor.RouterTransaction
@@ -95,6 +96,10 @@ class QuestionResultController : MvpController, QuestionResultPresenter.IQuestio
     override fun selectCategory() {
         val transaction = RouterTransaction.with(CategoriesController())
         router.pushController(transaction)
+    }
+
+    override fun showError(message: String) {
+        Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
     }
 
 }

@@ -24,8 +24,10 @@ import com.desiredsoftware.socialquiz.data.model.question.Question.Companion.FIE
 import com.desiredsoftware.socialquiz.data.model.question.Question.Companion.FIELD_QUESTION_TYPE
 import com.desiredsoftware.socialquiz.data.model.question.Question.Companion.FIELD_VARIANT
 import com.desiredsoftware.socialquiz.utils.ProfileUtils
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
@@ -140,10 +142,27 @@ class FirebaseRepository @Inject constructor(
         return questionList
     }
 
+    suspend fun addPoints(points: Long): Int {
+        val profile: Profile?
+
+        Firebase.auth.currentUser?.let {
+            profile = getProfile(it.uid)
+            profile?.let { profile ->
+                profile.score += points
+                commitProfile(profile)
+                return OPERATION_RESULT_SUCCESS
+            }
+        } ?: kotlin.run {
+            return OPERATION_RESULT_FAILED
+        }
+    }
+
     companion object {
         const val PROFILE_COLLECTION_NAME = "users"
         const val CATEGORY_ROOT_COLLECTION = "question_category"
         const val QUESTIONS_ROOT_COLLECTION = "questions"
+        const val OPERATION_RESULT_SUCCESS = 1
+        const val OPERATION_RESULT_FAILED = -1
     }
 
 }

@@ -106,7 +106,8 @@ class QuestionShowingController : MvpController, QuestionShowingPresenter.IQuest
     }
 
     override fun showVideoQuestion(context: Context, questionBodyVideoUri: String) {
-        configurePlayer(context, questionBodyVideoUri)
+        // Temporary to prevent Firebase charging
+        //configurePlayer(context, questionBodyVideoUri)
     }
 
     override fun showTextQuestion(context: Context, questionBodyVideoUri: String) {
@@ -131,6 +132,9 @@ class QuestionShowingController : MvpController, QuestionShowingPresenter.IQuest
             adapter = mAdapter
             layoutManager = LinearLayoutManager(context)
         }
+
+        // Temporary to prevent Firebase charging (video switched off)
+        binding.listAnswers.visibility = View.VISIBLE
     }
 
     override fun showError(message: String) {
