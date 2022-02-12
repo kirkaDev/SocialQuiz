@@ -31,4 +31,6 @@
     <string name="repeat_video">Повторить вопрос</string>
     <string name="write_result_failed">Ошибка операции записи</string>
     <string name="add_question">Свой вопрос</string>
+    <string name="add_question_hint">Здесь можно добавить свой собственный вопрос и прославиться на весь Интернет :)</string>
+    <string name="category_label">Категория</string>
 </resources>

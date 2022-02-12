@@ -15,8 +15,8 @@ import com.desiredsoftware.socialquiz.MainActivity
 import com.desiredsoftware.socialquiz.R
 import com.desiredsoftware.socialquiz.di.App
 import com.desiredsoftware.socialquiz.presenter.splash.SplashPresenter
-import com.desiredsoftware.socialquiz.ui.categories.CategoriesController
 import com.desiredsoftware.socialquiz.ui.common.MvpController
+import com.desiredsoftware.socialquiz.ui.question.AddOwnQuestionController
 import com.firebase.ui.auth.AuthUI
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
@@ -60,7 +60,10 @@ class SplashController: MvpController, SplashPresenter.ISplashView {
     }
 
     override fun runCategoriesScreen() {
-        router?.replaceTopController(RouterTransaction.with(CategoriesController())
+        // TODO: Return Categories controller to default
+        // Made for dev process
+        router?.replaceTopController(RouterTransaction.with(AddOwnQuestionController())
+        //router?.replaceTopController(RouterTransaction.with(CategoriesController())
         .pushChangeHandler(VerticalChangeHandler())
         .popChangeHandler(VerticalChangeHandler()))
     }

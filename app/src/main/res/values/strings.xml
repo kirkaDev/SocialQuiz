@@ -31,4 +31,6 @@
     <string name="repeat_video">Repeat video</string>
     <string name="write_result_failed">Can\'t write result</string>
     <string name="add_question">Add question</string>
+    <string name="add_question_hint">Here you may pull in your own question and become famous :)</string>
+    <string name="category_label">Category</string>
 </resources>
