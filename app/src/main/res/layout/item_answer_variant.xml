@@ -7,4 +7,5 @@
         android:layout_width="wrap_content"
         android:minWidth="160dp"
         tools:text="answer variant"
+        android:layout_gravity="center_horizontal"
         android:textColor="@color/bottomToolbar"/>

@@ -33,4 +33,6 @@
     <string name="add_question">Свой вопрос</string>
     <string name="add_question_hint">Здесь можно добавить свой собственный вопрос и прославиться на весь Интернет :)</string>
     <string name="category_label">Категория</string>
+    <string name="isCorrectAnswer">Верный ответ</string>
+    <string name="add_video">Добавить видео</string>
 </resources>

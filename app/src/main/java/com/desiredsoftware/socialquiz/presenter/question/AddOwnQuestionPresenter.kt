@@ -2,6 +2,7 @@ package com.desiredsoftware.socialquiz.presenter.question
 
 import android.content.Context
 import com.desiredsoftware.socialquiz.data.model.category.Category
+import com.desiredsoftware.socialquiz.data.model.question.Question
 import com.desiredsoftware.socialquiz.data.repository.FirebaseRepository
 import com.desiredsoftware.socialquiz.view.IError
 import kotlinx.coroutines.launch
@@ -19,12 +20,13 @@ class AddOwnQuestionPresenter @Inject constructor(
     private var context: Context
 ) : MvpPresenter<AddOwnQuestionPresenter.IAddOwnQuestionView>() {
 
+    var proposedQuestion: Question = Question()
+
     fun initCategoriesSpinner(){
         presenterScope.launch {
             viewState.initCategoriesSpinner(
                 firebaseRepository.getCategories()
             )
-
         }
     }
 

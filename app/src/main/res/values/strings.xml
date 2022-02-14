@@ -33,4 +33,6 @@
     <string name="add_question">Add question</string>
     <string name="add_question_hint">Here you may pull in your own question and become famous :)</string>
     <string name="category_label">Category</string>
+    <string name="isCorrectAnswer">Correct answer</string>
+    <string name="add_video">Add video</string>
 </resources>
