@@ -7,6 +7,5 @@
         android:left="8dp"
         android:right="8dp"
         android:top="2dp" />
-
-    <solid android:color="@color/propertyLabel" />
+    <solid android:color="@color/purple" />
 </shape>

@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
     <TextView
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/spinnerItem"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:paddingHorizontal="12dp"
         android:paddingVertical="8dp"
-        android:singleLine="true"/>
+        android:singleLine="true"
+        tools:text="Cartoons"
+        android:textColor="@color/white"/>

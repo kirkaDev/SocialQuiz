@@ -19,7 +19,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="20dp"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
             android:textSize="18sp"
@@ -50,9 +50,11 @@
             app:layout_constraintTop_toBottomOf="@+id/selectCategoryLabel"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="4dp"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp">
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="@color/yellowMain"
+            android:popupBackground="@drawable/profile_property_label">
         </androidx.appcompat.widget.AppCompatSpinner>
 
         <androidx.cardview.widget.CardView
@@ -62,17 +64,18 @@
             app:layout_constraintTop_toBottomOf="@+id/categoriesSpinner"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="24dp"
             app:cardBackgroundColor="@color/yellowMain"
             app:cardElevation="0dp"
             android:elevation="0dp"
             app:cardCornerRadius="160dp">
                 <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/addVideo"
-                    android:layout_width="64dp"
-                    android:layout_height="48dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
                     android:layout_gravity="center"
-                    android:src="@drawable/ic_add_video_24">
+                    android:src="@drawable/ic_add_video_64dp">
                 </androidx.appcompat.widget.AppCompatImageButton>
         </androidx.cardview.widget.CardView>
 
@@ -98,7 +101,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:text="@string/submit_for_approval"
-            android:layout_marginTop="16dp">
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp">
         </androidx.appcompat.widget.AppCompatButton>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
