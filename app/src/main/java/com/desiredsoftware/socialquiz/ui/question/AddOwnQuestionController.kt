@@ -1,6 +1,5 @@
 package com.desiredsoftware.socialquiz.ui.question
 
-import android.R
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,6 +10,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.desiredsoftware.socialquiz.R
 import com.desiredsoftware.socialquiz.data.model.category.Category
 import com.desiredsoftware.socialquiz.data.model.question.Answer
 import com.desiredsoftware.socialquiz.databinding.ViewControllerAddOwnQuestionBinding
@@ -58,7 +58,7 @@ class AddOwnQuestionController : MvpController(), AddOwnQuestionPresenter.IAddOw
         binding.categoriesSpinner.apply {
             adapter = ArrayAdapter(
                 activity?.applicationContext!!,
-                R.layout.simple_spinner_item,
+                R.layout.item_spinner,
                 categoriesList.map { category ->
                     category.categoryName
                 }
