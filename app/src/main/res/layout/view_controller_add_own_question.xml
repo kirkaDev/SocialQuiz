@@ -63,22 +63,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="20dp"
-            app:cardCornerRadius="160dp"
-            android:background="@color/yellowMain">
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/yellowMain">
+            app:cardBackgroundColor="@color/yellowMain"
+            app:cardElevation="0dp"
+            android:elevation="0dp"
+            app:cardCornerRadius="160dp">
                 <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/addVideo"
                     android:layout_width="64dp"
                     android:layout_height="48dp"
                     android:layout_gravity="center"
-                    android:elevation="24dp"
                     android:src="@drawable/ic_add_video_24">
                 </androidx.appcompat.widget.AppCompatImageButton>
-            </FrameLayout>
         </androidx.cardview.widget.CardView>
 
         <androidx.recyclerview.widget.RecyclerView

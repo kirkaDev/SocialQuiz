@@ -37,5 +37,5 @@
     <string name="add_video">Добавить видео</string>
     <string name="submit_for_approval">Отправить на проверку</string>
     <string name="answer_number">Ответ %1$s</string>
-    <string name="answer_variant_number">Вариант ответа  %1$s</string>
+    <string name="answer_variant_number">Напиши ответ</string>
 </resources>

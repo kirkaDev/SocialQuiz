@@ -31,7 +31,7 @@ class OwnAnswerVariantsAdapter(val answerVariants: MutableList<Answer>):
             val answerLabel = itemView.findViewById<AppCompatTextView>(R.id.answerLabel)
 
             answerLabel.text = itemView.context.getString(R.string.answer_number, (position+1).toString())
-            answerEditText.hint = itemView.context.getString(R.string.answer_variant_number, (position+1).toString())
+            answerEditText.hint = itemView.context.getString(R.string.answer_variant_number)
         }
     }
 }
