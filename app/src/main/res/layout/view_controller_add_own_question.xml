@@ -1,95 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.question.AddOwnQuestionController"
-    tools:background="@color/bottomToolbar">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/titleTextView"
-        android:layout_height="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="24dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:textSize="18sp"
-        android:gravity="center_horizontal"
-        android:textColor="@color/white"
-        android:text="@string/add_question_hint" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/selectCategoryLabel"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/titleTextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="24dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:textColor="@color/white"
-        android:textSize="12sp"
-        android:background="@drawable/profile_property_label"
-        android:text="@string/category_label">
-    </androidx.appcompat.widget.AppCompatTextView>
+        tools:background="@color/bottomToolbar">
 
-    <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/categoriesSpinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/selectCategoryLabel"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="12dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp">
-    </androidx.appcompat.widget.AppCompatSpinner>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/videoContainer"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
-        app:layout_constraintTop_toBottomOf="@+id/categoriesSpinner"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="20dp"
-        app:cardCornerRadius="160dp">
-
-        <FrameLayout
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/titleTextView"
+            android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:textSize="18sp"
+            android:gravity="center_horizontal"
+            android:textColor="@color/white"
+            android:text="@string/add_question_hint" />
 
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/addVideo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-            </androidx.appcompat.widget.AppCompatImageButton>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/selectCategoryLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/titleTextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:background="@drawable/profile_property_label"
+            android:text="@string/category_label">
+        </androidx.appcompat.widget.AppCompatTextView>
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/add_video">
-            </androidx.appcompat.widget.AppCompatTextView>
-        </FrameLayout>
-    </androidx.cardview.widget.CardView>
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/categoriesSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/selectCategoryLabel"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp">
+        </androidx.appcompat.widget.AppCompatSpinner>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/videoContainer"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="24dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginEnd="28dp"
-        tools:itemCount="5"
-        tools:listitem="@layout/item_own_question_answer_variant">
-    </androidx.recyclerview.widget.RecyclerView>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/videoContainer"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            app:layout_constraintTop_toBottomOf="@+id/categoriesSpinner"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="20dp"
+            app:cardCornerRadius="160dp"
+            android:background="@color/yellowMain">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/yellowMain">
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/addVideo"
+                    android:layout_width="64dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center"
+                    android:elevation="24dp"
+                    android:src="@drawable/ic_add_video_24">
+                </androidx.appcompat.widget.AppCompatImageButton>
+            </FrameLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/answersList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/videoContainer"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginEnd="28dp"
+            tools:itemCount="5"
+            tools:listitem="@layout/item_own_question_answer_variant">
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/proposeQuestionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/answersList"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@string/submit_for_approval"
+            android:layout_marginTop="16dp">
+        </androidx.appcompat.widget.AppCompatButton>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

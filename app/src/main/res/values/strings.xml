@@ -35,4 +35,7 @@
     <string name="category_label">Category</string>
     <string name="isCorrectAnswer">Correct answer</string>
     <string name="add_video">Add video</string>
+    <string name="submit_for_approval">Submit for approval</string>
+    <string name="answer_number">Answer %1$s</string>
+    <string name="answer_variant_number">Answer\'s variant %1$s</string>
 </resources>

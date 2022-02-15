@@ -35,4 +35,7 @@
     <string name="category_label">Категория</string>
     <string name="isCorrectAnswer">Верный ответ</string>
     <string name="add_video">Добавить видео</string>
+    <string name="submit_for_approval">Отправить на проверку</string>
+    <string name="answer_number">Ответ %1$s</string>
+    <string name="answer_variant_number">Вариант ответа  %1$s</string>
 </resources>
