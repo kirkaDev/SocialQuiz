@@ -12,7 +12,7 @@
     <string name="questionAuthorExample"><u>kirkadev</u></string>
     <string name="loading">Loading…</string>
     <string name="auth_error">You\'re not authorized, try again later, please</string>
-    <string name="permissions_failed">To upload the avatar, you should take the permissions</string>
+    <string name="permissions_failed">To upload the file, the app should get permissions</string>
     <string name="profile_error">Can\'t get info about profile</string>
     <string name="nick_name_label">Nickname</string>
     <string name="about_label">About me</string>
@@ -25,6 +25,7 @@
     <string name="tiktok_label">Tik-Tok</string>
     <string name="instagram_label">Instagram</string>
     <string name="choose_your_avatar">Choose your avatar</string>
+    <string name="choose_your_video">Choose your video question</string>
     <string name="empty">Empty</string>
     <string name="cant_upload_avatar">Can\'t upload avatar</string>
     <string name="get_question_error">Get question error. Please, try again later.</string>

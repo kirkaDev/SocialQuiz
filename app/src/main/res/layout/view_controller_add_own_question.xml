@@ -54,7 +54,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:backgroundTint="@color/yellowMain"
-            android:popupBackground="@drawable/profile_property_label">
+            android:popupBackground="@color/bottomToolbar">
         </androidx.appcompat.widget.AppCompatSpinner>
 
         <androidx.cardview.widget.CardView
@@ -70,7 +70,7 @@
             android:elevation="0dp"
             app:cardCornerRadius="160dp">
                 <androidx.appcompat.widget.AppCompatImageButton
-                    android:id="@+id/addVideo"
+                    android:id="@+id/addVideoButton"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@null"

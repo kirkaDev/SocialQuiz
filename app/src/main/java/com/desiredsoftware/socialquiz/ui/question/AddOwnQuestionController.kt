@@ -1,6 +1,10 @@
 package com.desiredsoftware.socialquiz.ui.question
 
+import android.Manifest
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.provider.MediaStore.INTENT_ACTION_VIDEO_CAMERA
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +21,7 @@ import com.desiredsoftware.socialquiz.databinding.ViewControllerAddOwnQuestionBi
 import com.desiredsoftware.socialquiz.di.App
 import com.desiredsoftware.socialquiz.presenter.question.AddOwnQuestionPresenter
 import com.desiredsoftware.socialquiz.ui.common.MvpController
+import com.desiredsoftware.socialquiz.ui.profile.ProfileController
 import com.desiredsoftware.socialquiz.ui.question.adapters.OwnAnswerVariantsAdapter
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
@@ -50,6 +55,10 @@ class AddOwnQuestionController : MvpController(), AddOwnQuestionPresenter.IAddOw
 
         presenter.initCategoriesSpinner()
         presenter.initAnswersList()
+
+        binding.addVideoButton.setOnClickListener {
+            checkPermissionForVideoUploading()
+        }
 
         return binding.root
     }
@@ -94,7 +103,52 @@ class AddOwnQuestionController : MvpController(), AddOwnQuestionPresenter.IAddOw
         }
     }
 
+    private fun checkPermissionForVideoUploading(){
+            requestPermissions(
+                arrayOf(
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.CAMERA
+                ), PERMISSIONS_REQUEST_CODE
+            )
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            PERMISSIONS_REQUEST_CODE -> {
+                if (grantResults.all { it == PackageManager.PERMISSION_GRANTED }) {
+                    startChooseVideoIntent()
+                } else {
+                    Toast.makeText(activity, R.string.permissions_failed, Toast.LENGTH_LONG).show()
+                }
+            }
+            else -> {
+            }
+        }
+    }
+
+    private fun startChooseVideoIntent() {
+        Log.d("startChooseVideoIntent", "startChooseVideoIntent")
+        val videoIntent = Intent(INTENT_ACTION_VIDEO_CAMERA)
+
+        startActivityForResult(
+            Intent.createChooser(
+                videoIntent,
+                resources?.getString(R.string.choose_your_avatar)
+            ), ProfileController.UPLOAD_AVATAR_TO_PROFILE_REQUEST_CODE
+        )
+    }
+
     override fun showError(message: String) {
         Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
+    }
+
+    companion object{
+        const val PERMISSIONS_REQUEST_CODE = 48345573
     }
 }

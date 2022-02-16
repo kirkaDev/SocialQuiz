@@ -31,7 +31,7 @@
         android:background="@drawable/profile_property_shape"
         android:maxLines="1"
         android:inputType="text"
-        tools:text="A cat has one paw">
+        tools:text="A cat has four paws">
     </androidx.appcompat.widget.AppCompatEditText>
 
     <androidx.appcompat.widget.AppCompatImageButton
