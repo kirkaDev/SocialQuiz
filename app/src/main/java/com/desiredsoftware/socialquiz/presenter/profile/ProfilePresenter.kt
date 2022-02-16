@@ -104,7 +104,7 @@ class ProfilePresenter @Inject constructor(
             firebaseUser?.let { user ->
                 getExtension(avatarPath)?.let { extension ->
                     val avatarFileName = user.uid + extension
-                    avatarFullRef = firebaseStorageRef.child(getPath() + avatarFileName)
+                    avatarFullRef = firebaseStorageRef.child(AVATAR_PATH + avatarFileName)
 
                     val stream = FileInputStream(File(avatarPath))
 
@@ -150,8 +150,8 @@ class ProfilePresenter @Inject constructor(
         }
     }
 
-    private fun getPath(): String {
-        return "avatars/"
+    companion object{
+        val AVATAR_PATH = "avatars/"
     }
 
     @StateStrategyType(AddToEndSingleStrategy::class)

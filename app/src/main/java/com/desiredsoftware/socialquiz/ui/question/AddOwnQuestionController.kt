@@ -1,10 +1,12 @@
 package com.desiredsoftware.socialquiz.ui.question
 
 import android.Manifest
+import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore.INTENT_ACTION_VIDEO_CAMERA
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -21,8 +23,8 @@ import com.desiredsoftware.socialquiz.databinding.ViewControllerAddOwnQuestionBi
 import com.desiredsoftware.socialquiz.di.App
 import com.desiredsoftware.socialquiz.presenter.question.AddOwnQuestionPresenter
 import com.desiredsoftware.socialquiz.ui.common.MvpController
-import com.desiredsoftware.socialquiz.ui.profile.ProfileController
 import com.desiredsoftware.socialquiz.ui.question.adapters.OwnAnswerVariantsAdapter
+import com.desiredsoftware.socialquiz.utils.FilePathUtils
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import javax.inject.Inject
@@ -45,6 +47,7 @@ class AddOwnQuestionController : MvpController(), AddOwnQuestionPresenter.IAddOw
         super.inject()
         App.appComponent.inject(this)
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -103,14 +106,32 @@ class AddOwnQuestionController : MvpController(), AddOwnQuestionPresenter.IAddOw
         }
     }
 
-    private fun checkPermissionForVideoUploading(){
-            requestPermissions(
-                arrayOf(
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                    Manifest.permission.READ_EXTERNAL_STORAGE,
-                    Manifest.permission.CAMERA
-                ), PERMISSIONS_REQUEST_CODE
-            )
+    private fun startChooseVideoIntent() {
+        try {
+            Intent(MediaStore.ACTION_VIDEO_CAPTURE).also { takeVideoIntent ->
+                takeVideoIntent.resolveActivity(activity?.packageManager!!)?.also {
+                    startActivityForResult(takeVideoIntent, CAPTURE_VIDEO_REQUEST_CODE)
+                }
+            }
+        }
+        // For cases if device has not camera or any activities for taking video
+        catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    override fun showError(message: String) {
+        Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
+    }
+
+    private fun checkPermissionForVideoUploading() {
+        requestPermissions(
+            arrayOf(
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.CAMERA
+            ), PERMISSIONS_REQUEST_CODE
+        )
     }
 
     override fun onRequestPermissionsResult(
@@ -132,23 +153,31 @@ class AddOwnQuestionController : MvpController(), AddOwnQuestionPresenter.IAddOw
         }
     }
 
-    private fun startChooseVideoIntent() {
-        Log.d("startChooseVideoIntent", "startChooseVideoIntent")
-        val videoIntent = Intent(INTENT_ACTION_VIDEO_CAMERA)
+    override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
+        when (requestCode) {
+            CAPTURE_VIDEO_REQUEST_CODE -> {
+                if (resultCode == RESULT_OK && intent != null) {
+                    var videoUri: Uri? = null
+                    intent.data?.let {
+                        try {
+                            videoUri = it
+                            val absolutePath = FilePathUtils.getPath(activity, videoUri)
+                            presenter.initVideoUrl(absolutePath)
+                        } catch (e: Exception) {
+                            Log.e("getPath", "can't get absolute path for a file: $videoUri")
+                            e.printStackTrace()
+                        }
+                    }
+                }
+            }
 
-        startActivityForResult(
-            Intent.createChooser(
-                videoIntent,
-                resources?.getString(R.string.choose_your_avatar)
-            ), ProfileController.UPLOAD_AVATAR_TO_PROFILE_REQUEST_CODE
-        )
+            else -> super.onActivityResult(requestCode, resultCode, intent)
+        }
     }
 
-    override fun showError(message: String) {
-        Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
-    }
 
-    companion object{
+    companion object {
         const val PERMISSIONS_REQUEST_CODE = 48345573
+        const val CAPTURE_VIDEO_REQUEST_CODE = 3406730
     }
 }
