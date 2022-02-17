@@ -39,4 +39,5 @@
     <string name="answer_number">Ответ %1$s</string>
     <string name="answer_variant_number">Напиши ответ</string>
     <string name="choose_your_video">Выбери свой видео вопрос</string>
+    <string name="video_not_choosen">Добавь видео, покажи себя ;)</string>
 </resources>

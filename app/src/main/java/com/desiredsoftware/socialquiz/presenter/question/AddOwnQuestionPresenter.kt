@@ -2,6 +2,7 @@ package com.desiredsoftware.socialquiz.presenter.question
 
 import android.content.Context
 import android.util.Log
+import com.desiredsoftware.socialquiz.R
 import com.desiredsoftware.socialquiz.data.model.category.Category
 import com.desiredsoftware.socialquiz.data.model.question.Answer
 import com.desiredsoftware.socialquiz.data.model.question.Question
@@ -34,7 +35,9 @@ class AddOwnQuestionPresenter @Inject constructor(
     var answers: MutableList<Answer> = MutableList(answersCount) {
         Answer("", false)
     }
-    var videoAbsolutePath: String = ""
+
+    // Path get from intent after recording
+    var videoAbsolutePath = String()
 
     fun initVideoUrl(videoAbsolutePath: String) {
         this.videoAbsolutePath = videoAbsolutePath
@@ -57,11 +60,10 @@ class AddOwnQuestionPresenter @Inject constructor(
         }
     }
 
-    fun uploadVideoToStorage(videoAbsolutePath: String) {
+    fun uploadVideoToStorage(videoFileName: String, videoAbsolutePath: String) {
         presenterScope.launch {
             var videoFullRef: StorageReference? = null
             firebaseUser?.let { user ->
-                val videoFileName = user.uid + ".mp4"
                 videoFullRef = firebaseStorageRef.child(VIDEO_PATH + videoFileName)
 
                 val stream = FileInputStream(File(videoAbsolutePath))
@@ -89,7 +91,6 @@ class AddOwnQuestionPresenter @Inject constructor(
                 questionId = firebaseUser.uid + unixTimestamp
                 // categoryId - should be set from spinner in controller already
                 answerVariants = answers
-
                 questionBody = firebaseUser.uid + unixTimestamp
                 questionAuthorUid = firebaseUser.uid
                 questionType = Question.Companion.QUESTION_TYPE.VIDEO
@@ -120,18 +121,32 @@ class AddOwnQuestionPresenter @Inject constructor(
             return false
         }
 
-        if (proposedQuestion.questionAuthorUid.isNullOrEmpty()) {
+        if (proposedQuestion.questionBody.isEmpty()) {
+            Log.d("checkQuestionContract", "questionBody is empty")
+            return false
+        }
+
+        if (proposedQuestion.questionAuthorUid.isEmpty()) {
             Log.d(
                 "checkQuestionContract",
                 "firebaseUser.uid = ${proposedQuestion.questionAuthorUid}"
             )
             return false
         }
+
+        // If this instruction runs then all properties is filled and probably, ok
+        Log.d("checkQuestionContract", "contract is OK!")
         return true
     }
 
     fun sendQuestion() {
-
+        if (videoAbsolutePath.isNotEmpty())
+        {
+            uploadVideoToStorage(proposedQuestion.questionBody, videoAbsolutePath)
+        }
+        else{
+            viewState.showError(context.resources.getString(R.string.video_not_choosen))
+        }
     }
 
     companion object {

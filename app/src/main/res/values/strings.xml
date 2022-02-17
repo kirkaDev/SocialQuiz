@@ -39,4 +39,5 @@
     <string name="submit_for_approval">Submit for approval</string>
     <string name="answer_number">Answer %1$s</string>
     <string name="answer_variant_number">Enter answer here</string>
+    <string name="video_not_choosen">Video doesn\'t choosen</string>
 </resources>
