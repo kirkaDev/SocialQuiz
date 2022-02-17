@@ -36,17 +36,20 @@ class AddOwnQuestionPresenter @Inject constructor(
     }
     var videoAbsolutePath: String = ""
 
-    fun initVideoUrl(videoAbsolutePath: String){
+    fun initVideoUrl(videoAbsolutePath: String) {
         this.videoAbsolutePath = videoAbsolutePath
+        presenterScope.launch {
+            viewState.showVideoThumbnail(videoAbsolutePath)
+        }
     }
 
-    fun initAnswersList(){
+    fun initAnswersList() {
         presenterScope.launch {
             viewState.initAnswersList(answers)
         }
     }
 
-    fun initCategoriesSpinner(){
+    fun initCategoriesSpinner() {
         presenterScope.launch {
             viewState.initCategoriesSpinner(
                 firebaseRepository.getCategories()
@@ -54,31 +57,84 @@ class AddOwnQuestionPresenter @Inject constructor(
         }
     }
 
-    fun uploadVideoToStorage(videoAbsolutePath: String){
+    fun uploadVideoToStorage(videoAbsolutePath: String) {
         presenterScope.launch {
             var videoFullRef: StorageReference? = null
             firebaseUser?.let { user ->
-                    val videoFileName = user.uid + ".mp4"
-                    videoFullRef = firebaseStorageRef.child(VIDEO_PATH + videoFileName)
+                val videoFileName = user.uid + ".mp4"
+                videoFullRef = firebaseStorageRef.child(VIDEO_PATH + videoFileName)
 
-                    val stream = FileInputStream(File(videoAbsolutePath))
+                val stream = FileInputStream(File(videoAbsolutePath))
 
-                    val uploadTask = videoFullRef?.putStream(stream)
-                    uploadTask?.addOnFailureListener {
-                        Log.d("upload", "upload fail, cause: ${it.message}")
-                    }?.addOnSuccessListener { taskSnapshot ->
-                        Log.d(
-                            "upload",
-                            "upload success, bytesTransferred = ${taskSnapshot.bytesTransferred}"
-                        )
-                    }
+                val uploadTask = videoFullRef?.putStream(stream)
+                uploadTask?.addOnFailureListener {
+                    Log.d("upload", "upload fail, cause: ${it.message}")
+                }?.addOnSuccessListener { taskSnapshot ->
+                    Log.d(
+                        "upload",
+                        "upload success, bytesTransferred = ${taskSnapshot.bytesTransferred}"
+                    )
+                }
             } ?: run {
                 viewState.showError("Can't get profile's data")
             }
         }
     }
 
-    companion object{
+    fun buildQuestion() {
+        val unixTimestamp = "_" + System.currentTimeMillis() / 1000
+        proposedQuestion.apply {
+            firebaseUser?.let{ firebaseUser ->
+                // Restriction for document name is 1024KiB (1024 bit)
+                questionId = firebaseUser.uid + unixTimestamp
+                // categoryId - should be set from spinner in controller already
+                answerVariants = answers
+
+                questionBody = firebaseUser.uid + unixTimestamp
+                questionAuthorUid = firebaseUser.uid
+                questionType = Question.Companion.QUESTION_TYPE.VIDEO
+            } ?: kotlin.run {
+                Log.d("buildQuestion", "buildQuestion: firebaseUser is null. " +
+                        "Question must be stopped with contract checking")
+            }
+        }
+    }
+
+    fun checkQuestionContract(): Boolean {
+        var rightAnswersCount = 0
+
+        if (proposedQuestion.categoryId.isEmpty()) {
+            Log.d("checkQuestionContract", "checkQuestionContract: categoryId is empty")
+            return false
+        }
+        proposedQuestion.answerVariants.forEachIndexed() { index, answer ->
+            if (answer.answer.isEmpty()) {
+                Log.d("checkQuestionContract", "answer with index=$index is empty")
+                return false
+            } else {
+                if (answer.isCorrect) rightAnswersCount++
+            }
+        }
+        if (rightAnswersCount != 1) {
+            Log.d("checkQuestionContract", "right answers count = $rightAnswersCount")
+            return false
+        }
+
+        if (proposedQuestion.questionAuthorUid.isNullOrEmpty()) {
+            Log.d(
+                "checkQuestionContract",
+                "firebaseUser.uid = ${proposedQuestion.questionAuthorUid}"
+            )
+            return false
+        }
+        return true
+    }
+
+    fun sendQuestion() {
+
+    }
+
+    companion object {
         val VIDEO_PATH = "video/"
     }
 
@@ -86,5 +142,6 @@ class AddOwnQuestionPresenter @Inject constructor(
     interface IAddOwnQuestionView : MvpView, IError {
         fun initCategoriesSpinner(categoriesList: List<Category>)
         fun initAnswersList(answersList: MutableList<Answer>)
+        fun showVideoThumbnail(videoAbsolutePath: String)
     }
 }

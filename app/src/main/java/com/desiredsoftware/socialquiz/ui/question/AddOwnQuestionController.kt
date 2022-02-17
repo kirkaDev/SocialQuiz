@@ -63,6 +63,11 @@ class AddOwnQuestionController : MvpController(), AddOwnQuestionPresenter.IAddOw
             checkPermissionForVideoUploading()
         }
 
+        binding.proposeQuestionButton.setOnClickListener {
+                presenter.buildQuestion()
+            if (presenter.checkQuestionContract())
+                presenter.sendQuestion()
+        }
         return binding.root
     }
 
@@ -104,6 +109,13 @@ class AddOwnQuestionController : MvpController(), AddOwnQuestionPresenter.IAddOw
                 activity?.applicationContext, RecyclerView.VERTICAL, false
             )
         }
+    }
+
+    override fun showVideoThumbnail(videoAbsolutePath: String) {
+        Log.d("showVideoThumbnail", "showVideoThumbnail called in controller, videoAbsolutePath=$videoAbsolutePath")
+        binding.questionVideoView.visibility = View.VISIBLE
+        binding.questionVideoView.setVideoPath(videoAbsolutePath)
+        binding.questionVideoView.start()
     }
 
     private fun startChooseVideoIntent() {
