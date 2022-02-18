@@ -23,6 +23,7 @@ import com.desiredsoftware.socialquiz.data.model.question.Question.Companion.FIE
 import com.desiredsoftware.socialquiz.data.model.question.Question.Companion.FIELD_QUESTION_BODY
 import com.desiredsoftware.socialquiz.data.model.question.Question.Companion.FIELD_QUESTION_ID
 import com.desiredsoftware.socialquiz.data.model.question.Question.Companion.FIELD_QUESTION_IS_APPROVED
+import com.desiredsoftware.socialquiz.data.model.question.Question.Companion.FIELD_QUESTION_RATES_NUMBER
 import com.desiredsoftware.socialquiz.data.model.question.Question.Companion.FIELD_QUESTION_RATING
 import com.desiredsoftware.socialquiz.data.model.question.Question.Companion.FIELD_QUESTION_TYPE
 import com.desiredsoftware.socialquiz.data.model.question.Question.Companion.FIELD_VARIANT
@@ -136,11 +137,12 @@ class FirebaseRepository @Inject constructor(
                             questionAuthorUid = document[FIELD_QUESTION_AUTHOR_ID] as String,
                             questionType = Question.Companion.QUESTION_TYPE.valueOf(document[FIELD_QUESTION_TYPE] as String),
                             rating = (document[FIELD_QUESTION_RATING] as String).toDouble(),
+                            ratesNumber = (document[FIELD_QUESTION_RATES_NUMBER] as String).toInt(),
                             isApproved = Question.Companion.IS_APPROVED.valueOf(document[FIELD_QUESTION_IS_APPROVED] as String),
                         )
                     )
                 } catch (e: Exception) {
-                    Log.e("Profile", "Casting to Question error: ${e.message}")
+                    Log.e("Question", "Casting to Question error: ${e.message}")
                 }
             }
 
