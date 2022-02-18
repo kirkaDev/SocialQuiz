@@ -42,4 +42,5 @@
     <string name="video_not_choosen">Добавь видео, покажи себя ;)</string>
     <string name="upload_video_error">Ошибка загрузки видео</string>
     <string name="upload_video_success">Видео загружено</string>
+    <string name="playback_error">Ошибка воспроизведения</string>
 </resources>
