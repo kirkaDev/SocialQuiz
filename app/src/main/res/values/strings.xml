@@ -41,6 +41,7 @@
     <string name="answer_variant_number">Enter answer here</string>
     <string name="video_not_choosen">Video doesn\'t choosen</string>
     <string name="upload_video_error">Can\'t upload the video</string>
-    <string name="upload_video_success">Video uploaded</string>
+    <string name="upload_video_success">Question is uploaded</string>
     <string name="playback_error">Playback error</string>
+    <string name="uploading_question">Uploading your question...</string>
 </resources>
