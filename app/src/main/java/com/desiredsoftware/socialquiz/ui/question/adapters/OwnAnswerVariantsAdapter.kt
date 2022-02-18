@@ -14,6 +14,13 @@ import com.desiredsoftware.socialquiz.data.model.question.Answer
 class OwnAnswerVariantsAdapter(var answerVariants: MutableList<Answer>) :
     RecyclerView.Adapter<OwnAnswerVariantsAdapter.ViewHolder>() {
 
+    var recyclerView: RecyclerView? = null
+
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
+        this.recyclerView = recyclerView
+        super.onAttachedToRecyclerView(recyclerView)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             LayoutInflater.from(parent.context)
@@ -28,6 +35,7 @@ class OwnAnswerVariantsAdapter(var answerVariants: MutableList<Answer>) :
     override fun getItemCount(): Int {
         return answerVariants.size
     }
+
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(answerVariant: Answer, position: Int) {
@@ -45,8 +53,24 @@ class OwnAnswerVariantsAdapter(var answerVariants: MutableList<Answer>) :
                 answerVariant.answer = it.toString()
             }
 
-            answerIsCorrectButton.setOnClickListener {
+
+
+            answerIsCorrectButton.setOnClickListener { buttonIsCorrect ->
                 answerVariant.isCorrect = true
+                buttonIsCorrect.background =
+                    buttonIsCorrect.context.getDrawable(R.drawable.shape_answer_is_correct)
+
+                var viewList = mutableListOf<RecyclerView.ViewHolder>()
+
+                for (position in 0..answerVariants.size) {
+                    recyclerView?.findViewHolderForAdapterPosition(position)?.itemView
+                        ?.let {
+                            if (it.findViewById<AppCompatButton>(R.id.isCorrectButton) != buttonIsCorrect)
+                                it.findViewById<AppCompatButton>(R.id.isCorrectButton).background =
+                                    it.resources.getDrawable(R.color.grey)
+                        }
+                }
+
                 answerVariants.forEach { answer ->
                     if (answer != answerVariant) {
                         answer.isCorrect = false

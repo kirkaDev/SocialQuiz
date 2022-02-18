@@ -13,6 +13,8 @@
     <color name="mainBackground">#35445C</color>>
     <color name="darkBackground">#942A3A53</color>>
     <color name="yellowMain">#F2C94C</color>>
+    <color name="grey">#6FFFFFFF</color>
+    <color name="green">#7EF24C</color>>
     <color name="purple">#BE81F7</color>>
     <color name="orange">#CF9E08</color>>
 </resources>
