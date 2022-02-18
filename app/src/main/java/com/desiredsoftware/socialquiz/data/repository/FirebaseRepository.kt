@@ -1,6 +1,7 @@
 package com.desiredsoftware.socialquiz.data.repository
 
 import android.util.Log
+import com.desiredsoftware.socialquiz.data.CommonDataSets
 import com.desiredsoftware.socialquiz.data.CommonDataSets.Companion.newUserProfileDataSet
 import com.desiredsoftware.socialquiz.data.model.category.Category
 import com.desiredsoftware.socialquiz.data.model.profile.Profile
@@ -111,7 +112,7 @@ class FirebaseRepository @Inject constructor(
         Log.d("question", "Repository: getQuestionsOfCategory called")
         val questionList = mutableListOf<Question>()
         firestore.collection(QUESTIONS_ROOT_COLLECTION)
-            //.whereEqualTo(FIELD_CATEGORY_ID, questionCategoryId)
+            .whereEqualTo(FIELD_CATEGORY_ID, questionCategoryId)
             .get()
             .await()
             .documents.map { document ->
@@ -141,6 +142,13 @@ class FirebaseRepository @Inject constructor(
 
         return questionList
     }
+
+    fun uploadQuestion(proposedQuestion: Question){
+        val questionsCollection = firestore.collection(QUESTIONS_ROOT_COLLECTION)
+        val questionDataSet = CommonDataSets.getQuestionDataSet(proposedQuestion).toMutableMap()
+        questionsCollection.document().set(HashMap(questionDataSet))
+    }
+
 
     suspend fun addPoints(points: Long): Int {
         val profile: Profile?

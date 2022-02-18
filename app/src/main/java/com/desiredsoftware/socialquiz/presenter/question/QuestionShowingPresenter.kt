@@ -33,7 +33,12 @@ class QuestionShowingPresenter @Inject constructor(
 
     // TODO: Here should be algorithm to find a new question
     private suspend fun getNextQuestion(): Question? {
-        return getCategoryQuestions(questionCategoryId).getOrNull(0)
+        getCategoryQuestions(questionCategoryId).let{
+            return if (it.isNotEmpty()) {
+                it.random()
+            } else
+                null
+        }
     }
 
     private suspend fun getCategoryQuestions(mQuestionCategoryId: String): List<Question> {

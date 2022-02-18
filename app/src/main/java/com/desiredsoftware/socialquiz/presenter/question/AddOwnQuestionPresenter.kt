@@ -60,25 +60,40 @@ class AddOwnQuestionPresenter @Inject constructor(
         }
     }
 
-    fun uploadVideoToStorage(videoFileName: String, videoAbsolutePath: String) {
+    fun sendQuestion() {
         presenterScope.launch {
-            var videoFullRef: StorageReference? = null
-            firebaseUser?.let { user ->
-                videoFullRef = firebaseStorageRef.child(VIDEO_PATH + videoFileName)
+            val videoFileName: String = proposedQuestion.questionBody
+            val videoAbsolutePath: String = videoAbsolutePath
 
-                val stream = FileInputStream(File(videoAbsolutePath))
+            if (videoAbsolutePath.isNotEmpty()) {
+                var videoFullRef: StorageReference? = null
 
-                val uploadTask = videoFullRef?.putStream(stream)
-                uploadTask?.addOnFailureListener {
-                    Log.d("upload", "upload fail, cause: ${it.message}")
-                }?.addOnSuccessListener { taskSnapshot ->
-                    Log.d(
-                        "upload",
-                        "upload success, bytesTransferred = ${taskSnapshot.bytesTransferred}"
-                    )
+                firebaseUser?.let { user ->
+                    videoFullRef =
+                        firebaseStorageRef.child(VIDEO_PATH + user.uid + "/" + videoFileName)
+
+                    val stream = FileInputStream(File(videoAbsolutePath))
+
+                    Log.d("upload", "Starting to upload video...")
+                    val uploadTask = videoFullRef?.putStream(stream)
+                    uploadTask?.addOnFailureListener {
+                        viewState.showError(context.resources.getString(R.string.upload_video_error))
+                        Log.d("upload", "upload fail, cause: ${it.message}")
+                    }?.addOnSuccessListener { taskSnapshot ->
+                        Log.d(
+                            "upload",
+                            "upload success, bytesTransferred = ${taskSnapshot.bytesTransferred}"
+                        )
+                        viewState.showError(context.resources.getString(R.string.upload_video_success))
+                        proposedQuestion.questionBody = taskSnapshot.storage.path
+
+                        firebaseRepository.uploadQuestion(proposedQuestion)
+                    }
+                } ?: run {
+                    viewState.showError("Can't get profile's data")
                 }
-            } ?: run {
-                viewState.showError("Can't get profile's data")
+            } else {
+                viewState.showError(context.resources.getString(R.string.video_not_choosen))
             }
         }
     }
@@ -86,7 +101,7 @@ class AddOwnQuestionPresenter @Inject constructor(
     fun buildQuestion() {
         val unixTimestamp = "_" + System.currentTimeMillis() / 1000
         proposedQuestion.apply {
-            firebaseUser?.let{ firebaseUser ->
+            firebaseUser?.let { firebaseUser ->
                 // Restriction for document name is 1024KiB (1024 bit)
                 questionId = firebaseUser.uid + unixTimestamp
                 // categoryId - should be set from spinner in controller already
@@ -95,8 +110,10 @@ class AddOwnQuestionPresenter @Inject constructor(
                 questionAuthorUid = firebaseUser.uid
                 questionType = Question.Companion.QUESTION_TYPE.VIDEO
             } ?: kotlin.run {
-                Log.d("buildQuestion", "buildQuestion: firebaseUser is null. " +
-                        "Question must be stopped with contract checking")
+                Log.d(
+                    "buildQuestion", "buildQuestion: firebaseUser is null. " +
+                            "Question must be stopped with contract checking"
+                )
             }
         }
     }
@@ -137,16 +154,6 @@ class AddOwnQuestionPresenter @Inject constructor(
         // If this instruction runs then all properties is filled and probably, ok
         Log.d("checkQuestionContract", "contract is OK!")
         return true
-    }
-
-    fun sendQuestion() {
-        if (videoAbsolutePath.isNotEmpty())
-        {
-            uploadVideoToStorage(proposedQuestion.questionBody, videoAbsolutePath)
-        }
-        else{
-            viewState.showError(context.resources.getString(R.string.video_not_choosen))
-        }
     }
 
     companion object {

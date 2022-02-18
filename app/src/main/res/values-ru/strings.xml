@@ -40,4 +40,6 @@
     <string name="answer_variant_number">Напиши ответ</string>
     <string name="choose_your_video">Выбери свой видео вопрос</string>
     <string name="video_not_choosen">Добавь видео, покажи себя ;)</string>
+    <string name="upload_video_error">Ошибка загрузки видео</string>
+    <string name="upload_video_success">Видео загружено</string>
 </resources>
