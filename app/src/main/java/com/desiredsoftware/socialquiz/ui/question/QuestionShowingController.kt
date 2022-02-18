@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bluelinelabs.conductor.RouterTransaction
+import com.desiredsoftware.socialquiz.R
 import com.desiredsoftware.socialquiz.data.model.question.Answer
 import com.desiredsoftware.socialquiz.databinding.ViewControllerQuestionShowingBinding
 import com.desiredsoftware.socialquiz.di.App
@@ -23,6 +24,7 @@ import com.google.android.exoplayer2.SimpleExoPlayer
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import javax.inject.Inject
+
 
 class QuestionShowingController : MvpController, QuestionShowingPresenter.IQuestionView {
     constructor() : super()
@@ -65,11 +67,11 @@ class QuestionShowingController : MvpController, QuestionShowingPresenter.IQuest
                 .build()
 
             binding.playerView.player = player
-            player?.let {
-                it.setMediaItem(MediaItem.fromUri(videoURI))
-                it.prepare()
-                it.playWhenReady = true
-                it.addListener(object : Player.Listener {
+            player?.let { player ->
+                player.setMediaItem(MediaItem.fromUri(videoURI))
+                player.prepare()
+                player.playWhenReady = true
+                player.addListener(object : Player.Listener {
                     override fun onPlaybackStateChanged(state: Int) {
                         when (state) {
                             Player.STATE_ENDED -> {
@@ -92,7 +94,7 @@ class QuestionShowingController : MvpController, QuestionShowingPresenter.IQuest
 
                     override fun onPlayerError(error: ExoPlaybackException) {
                         super.onPlayerError(error)
-                        Toast.makeText(activity, "Playback error, message: ${error.message}", Toast.LENGTH_LONG).show()
+                        Toast.makeText(activity, activity?.resources?.getString(R.string.playback_error), Toast.LENGTH_LONG).show()
                         error.printStackTrace()
                         binding.listAnswers.visibility = View.VISIBLE
                     }
@@ -106,8 +108,7 @@ class QuestionShowingController : MvpController, QuestionShowingPresenter.IQuest
     }
 
     override fun showVideoQuestion(context: Context, questionBodyVideoUri: String) {
-        // Temporary to prevent Firebase charging
-        //configurePlayer(context, questionBodyVideoUri)
+        configurePlayer(context, questionBodyVideoUri)
     }
 
     override fun showTextQuestion(context: Context, questionBodyVideoUri: String) {
@@ -132,9 +133,6 @@ class QuestionShowingController : MvpController, QuestionShowingPresenter.IQuest
             adapter = mAdapter
             layoutManager = LinearLayoutManager(context)
         }
-
-        // Temporary to prevent Firebase charging (video switched off)
-        binding.listAnswers.visibility = View.VISIBLE
     }
 
     override fun showError(message: String) {

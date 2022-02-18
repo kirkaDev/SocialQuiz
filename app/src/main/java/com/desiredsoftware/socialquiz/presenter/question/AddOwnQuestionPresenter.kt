@@ -73,8 +73,7 @@ class AddOwnQuestionPresenter @Inject constructor(
                         firebaseStorageRef.child(VIDEO_PATH + user.uid + "/" + videoFileName)
 
                     val stream = FileInputStream(File(videoAbsolutePath))
-
-                    Log.d("upload", "Starting to upload video...")
+                    viewState.showError(context.resources.getString(R.string.uploading_question))
                     val uploadTask = videoFullRef?.putStream(stream)
                     uploadTask?.addOnFailureListener {
                         viewState.showError(context.resources.getString(R.string.upload_video_error))

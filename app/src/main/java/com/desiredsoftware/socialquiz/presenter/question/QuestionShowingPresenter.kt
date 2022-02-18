@@ -7,6 +7,7 @@ import com.desiredsoftware.socialquiz.data.model.question.Answer
 import com.desiredsoftware.socialquiz.data.model.question.Question
 import com.desiredsoftware.socialquiz.data.repository.FirebaseRepository
 import com.desiredsoftware.socialquiz.view.IError
+import com.google.firebase.storage.StorageReference
 import kotlinx.coroutines.launch
 import moxy.InjectViewState
 import moxy.MvpPresenter
@@ -16,9 +17,11 @@ import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.StateStrategyType
 import javax.inject.Inject
 
+
 @InjectViewState
 class QuestionShowingPresenter @Inject constructor(
     private var firebaseRepository: FirebaseRepository,
+    private var firestoreStorage: StorageReference,
     private var context: Context
 ) : MvpPresenter<QuestionShowingPresenter.IQuestionView>() {
 
@@ -52,7 +55,10 @@ class QuestionShowingPresenter @Inject constructor(
             }
             when (questionToShow.questionType) {
                 Question.Companion.QUESTION_TYPE.VIDEO -> {
-                    viewState.showVideoQuestion(context, questionToShow.questionBody)
+                    val dateRef = firestoreStorage.child(questionToShow.questionBody)
+                    dateRef.downloadUrl.addOnSuccessListener {
+                        viewState.showVideoQuestion(context, it.toString())
+                    }
                 }
                 Question.Companion.QUESTION_TYPE.TEXT -> {
                     viewState.showTextQuestion(context, questionToShow.questionBody)
