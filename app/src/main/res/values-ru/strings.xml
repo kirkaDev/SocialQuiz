@@ -41,7 +41,7 @@
     <string name="choose_your_video">Выбери свой видео вопрос</string>
     <string name="video_not_choosen">Добавь видео, покажи себя ;)</string>
     <string name="upload_video_error">Ошибка загрузки видео</string>
-    <string name="upload_video_success">Вопрос отправлен на проверку</string>
     <string name="playback_error">Ошибка воспроизведения</string>
     <string name="uploading_question">Вопрос загружается...</string>
+    <string name="upload_video_success">Вопрос отправлен на проверку</string>
 </resources>
