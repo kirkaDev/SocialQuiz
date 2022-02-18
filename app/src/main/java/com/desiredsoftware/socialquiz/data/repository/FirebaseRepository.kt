@@ -22,6 +22,8 @@ import com.desiredsoftware.socialquiz.data.model.question.Question.Companion.FIE
 import com.desiredsoftware.socialquiz.data.model.question.Question.Companion.FIELD_QUESTION_AUTHOR_ID
 import com.desiredsoftware.socialquiz.data.model.question.Question.Companion.FIELD_QUESTION_BODY
 import com.desiredsoftware.socialquiz.data.model.question.Question.Companion.FIELD_QUESTION_ID
+import com.desiredsoftware.socialquiz.data.model.question.Question.Companion.FIELD_QUESTION_IS_APPROVED
+import com.desiredsoftware.socialquiz.data.model.question.Question.Companion.FIELD_QUESTION_RATING
 import com.desiredsoftware.socialquiz.data.model.question.Question.Companion.FIELD_QUESTION_TYPE
 import com.desiredsoftware.socialquiz.data.model.question.Question.Companion.FIELD_VARIANT
 import com.desiredsoftware.socialquiz.utils.ProfileUtils
@@ -127,12 +129,14 @@ class FirebaseRepository @Inject constructor(
 
                     questionList.add(
                         Question(
-                            document[FIELD_QUESTION_ID] as String,
-                            document[FIELD_CATEGORY_ID] as String,
-                            cleanAnswers,
-                            document[FIELD_QUESTION_BODY] as String,
-                            document[FIELD_QUESTION_AUTHOR_ID] as String,
-                            Question.Companion.QUESTION_TYPE.valueOf(document[FIELD_QUESTION_TYPE] as String)
+                            questionId = document[FIELD_QUESTION_ID] as String,
+                            categoryId = document[FIELD_CATEGORY_ID] as String,
+                            answerVariants = cleanAnswers,
+                            questionBody = document[FIELD_QUESTION_BODY] as String,
+                            questionAuthorUid = document[FIELD_QUESTION_AUTHOR_ID] as String,
+                            questionType = Question.Companion.QUESTION_TYPE.valueOf(document[FIELD_QUESTION_TYPE] as String),
+                            rating = (document[FIELD_QUESTION_RATING] as String).toDouble(),
+                            isApproved = Question.Companion.IS_APPROVED.valueOf(document[FIELD_QUESTION_IS_APPROVED] as String),
                         )
                     )
                 } catch (e: Exception) {

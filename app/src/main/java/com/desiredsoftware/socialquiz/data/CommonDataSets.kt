@@ -35,7 +35,9 @@ class CommonDataSets {
                 Question.FIELD_ANSWERS to answersArrayList,
                 Question.FIELD_QUESTION_BODY to question.questionBody,
                 Question.FIELD_QUESTION_AUTHOR_ID to question.questionAuthorUid,
-                Question.FIELD_QUESTION_TYPE to question.questionType.toString()
+                Question.FIELD_QUESTION_TYPE to question.questionType.toString(),
+                Question.FIELD_QUESTION_RATING to question.rating.toString(),
+                Question.FIELD_QUESTION_IS_APPROVED to question.isApproved.toString()
             )
         }
     }
