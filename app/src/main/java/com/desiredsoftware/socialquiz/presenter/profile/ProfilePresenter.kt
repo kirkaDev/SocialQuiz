@@ -18,6 +18,7 @@ import moxy.viewstate.strategy.StateStrategyType
 import moxy.viewstate.strategy.alias.OneExecution
 import java.io.File
 import java.io.FileInputStream
+import java.lang.Exception
 import javax.inject.Inject
 
 @InjectViewState
@@ -55,7 +56,21 @@ class ProfilePresenter @Inject constructor(
     }
 
     private fun bindProfile(profile: Profile) {
-        viewState.showAvatar(firebaseStorageRef.child(profile.avatarURI))
+        var avatarUriStorage: StorageReference?
+        try {
+            avatarUriStorage = firebaseStorageRef.child(profile.avatarURI)
+            viewState.showAvatar(avatarUriStorage)
+        } catch (e: Exception) {
+            try{
+                e.printStackTrace()
+                avatarUriStorage = firebaseStorageRef.child(AVATAR_PATH + AVATAR_DEFAULT)
+                viewState.showAvatar(avatarUriStorage)
+            }
+            catch (e: Exception){
+                e.printStackTrace()
+            }
+        }
+
         viewState.showNickName(profile.nickName)
         viewState.showScore(profile.score.toString())
         viewState.showRole(profile.role.toString())
@@ -74,25 +89,25 @@ class ProfilePresenter @Inject constructor(
         firebaseRepository.createProfile(uid)
     }
 
-    fun commitChanges(field: String, newValue: String){
-        when (field){
-            Profile.FIELD_NICK_NAME ->{
+    fun commitChanges(field: String, newValue: String) {
+        when (field) {
+            Profile.FIELD_NICK_NAME -> {
                 currentUser?.nickName = newValue
                 currentUser?.let { firebaseRepository.commitProfile(it) }
             }
-            Profile.FIELD_ABOUT ->{
+            Profile.FIELD_ABOUT -> {
                 currentUser?.about = newValue
                 currentUser?.let { firebaseRepository.commitProfile(it) }
             }
-            Profile.FIELD_INSTAGRAM ->{
+            Profile.FIELD_INSTAGRAM -> {
                 currentUser?.instagram = newValue
                 currentUser?.let { firebaseRepository.commitProfile(it) }
             }
-            Profile.FIELD_TIK_TOK ->{
+            Profile.FIELD_TIK_TOK -> {
                 currentUser?.tiktok = newValue
                 currentUser?.let { firebaseRepository.commitProfile(it) }
             }
-            else ->{
+            else -> {
             }
         }
 
@@ -150,8 +165,9 @@ class ProfilePresenter @Inject constructor(
         }
     }
 
-    companion object{
+    companion object {
         val AVATAR_PATH = "avatars/"
+        val AVATAR_DEFAULT = "avatar_default.png"
     }
 
     @StateStrategyType(AddToEndSingleStrategy::class)
