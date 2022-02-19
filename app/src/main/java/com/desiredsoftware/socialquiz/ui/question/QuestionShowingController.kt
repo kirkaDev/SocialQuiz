@@ -125,7 +125,7 @@ class QuestionShowingController : MvpController, QuestionShowingPresenter.IQuest
                 val bundle = Bundle()
                 bundle.putSerializable(ANSWER_IS_CORRECT_KEY, answer.isCorrect)
                 val transaction = RouterTransaction.with(QuestionResultController(bundle))
-                router.pushController(transaction)
+                router.replaceTopController(transaction)
             }
         })
 
