@@ -134,6 +134,7 @@ class AddOwnQuestionPresenter @Inject constructor(
         }
         if (rightAnswersCount != 1) {
             Log.d("checkQuestionContract", "right answers count = $rightAnswersCount")
+            viewState.showError(context.resources.getString(R.string.correct_variant_not_choosen))
             return false
         }
 
