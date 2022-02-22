@@ -74,9 +74,11 @@ class AddOwnQuestionPresenter @Inject constructor(
 
                     val stream = FileInputStream(File(videoAbsolutePath))
                     viewState.showError(context.resources.getString(R.string.uploading_question))
+                    viewState.enableQuestionButton(false)
                     val uploadTask = videoFullRef?.putStream(stream)
                     uploadTask?.addOnFailureListener {
                         viewState.showError(context.resources.getString(R.string.upload_video_error))
+                        viewState.enableQuestionButton(true)
                         Log.d("upload", "upload fail, cause: ${it.message}")
                     }?.addOnSuccessListener { taskSnapshot ->
                         Log.d(
@@ -84,6 +86,7 @@ class AddOwnQuestionPresenter @Inject constructor(
                             "upload success, bytesTransferred = ${taskSnapshot.bytesTransferred}"
                         )
                         viewState.showError(context.resources.getString(R.string.upload_video_success))
+                        viewState.enableQuestionButton(true)
                         proposedQuestion.questionBody = taskSnapshot.storage.path
 
                         firebaseRepository.uploadQuestion(proposedQuestion)
@@ -165,5 +168,6 @@ class AddOwnQuestionPresenter @Inject constructor(
         fun initCategoriesSpinner(categoriesList: List<Category>)
         fun initAnswersList(answersList: MutableList<Answer>)
         fun showVideoThumbnail(videoAbsolutePath: String)
+        fun enableQuestionButton(isEnabled: Boolean)
     }
 }

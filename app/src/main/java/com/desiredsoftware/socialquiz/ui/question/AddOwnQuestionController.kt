@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.desiredsoftware.socialquiz.R
@@ -116,6 +117,11 @@ class AddOwnQuestionController : MvpController(), AddOwnQuestionPresenter.IAddOw
         binding.questionVideoView.visibility = View.VISIBLE
         binding.questionVideoView.setVideoPath(videoAbsolutePath)
         binding.questionVideoView.start()
+    }
+
+    override fun enableQuestionButton(isEnabled: Boolean) {
+        binding.proposeQuestionButton.isEnabled = isEnabled
+        binding.progressBar.isVisible = !isEnabled
     }
 
     private fun startChooseVideoIntent() {
