@@ -6,13 +6,11 @@ This app represents social quiz with video questions.
 Any user reached the corresponding level (points) may add own question.
 
 
-![alt text](https://github.com/kirkaDev/SocialQuiz/blob/master/app/src/main/res/screens/screen3.jpg?raw=true)
-![alt text](https://github.com/kirkaDev/SocialQuiz/blob/master/app/src/main/res/screens/screen1.jpg?raw=true)
-![alt text](https://github.com/kirkaDev/SocialQuiz/blob/master/app/src/main/res/screens/screen2.jpg?raw=true)
-![alt text](https://github.com/kirkaDev/SocialQuiz/blob/master/app/src/main/res/screens/screen4.jpg?raw=true)
-![alt text](https://github.com/kirkaDev/SocialQuiz/blob/master/app/src/main/res/screens/screen5.jpg?raw=true)
-
-
+![alt text](https://github.com/kirkaDev/SocialQuiz/blob/master/app/src/debug/assets/screenshots/screen3.jpg?raw=true)
+![alt text](https://github.com/kirkaDev/SocialQuiz/blob/master/app/src/debug/assets/screenshots/screen1.jpg?raw=true)
+![alt text](https://github.com/kirkaDev/SocialQuiz/blob/master/app/src/debug/assets/screenshots/screen2.jpg?raw=true)
+![alt text](https://github.com/kirkaDev/SocialQuiz/blob/master/app/src/debug/assets/screenshots/screen4.jpg?raw=true)
+![alt text](https://github.com/kirkaDev/SocialQuiz/blob/master/app/src/debug/assets/screenshots/screen5.jpg?raw=true)
 
 #### Architecture: 
 MVP (+Moxy) https://github.com/moxy-community/Moxy
