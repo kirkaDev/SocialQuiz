@@ -26,7 +26,7 @@ https://github.com/square/dagger
 This solution is based on Firebase services (for auth and store data).
 For using in yourself projects you should create project on Firebase
 https://firebase.google.com/docs/android/setup
-
+and put your google-services.json into project (without this file you can't build own the project after clone operation)
 
 
 ### Contribution
