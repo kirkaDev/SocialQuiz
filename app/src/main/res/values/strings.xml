@@ -45,4 +45,5 @@
     <string name="playback_error">Playback error</string>
     <string name="uploading_question">Uploading your question...</string>
     <string name="correct_variant_not_choosen">Correct answer didn\'t choosen</string>
+    <string name="all_question_solved">"All question in this category solved! "</string>
 </resources>

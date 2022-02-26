@@ -7,8 +7,12 @@ import com.desiredsoftware.socialquiz.ui.question.QuestionResultController
 import com.desiredsoftware.socialquiz.ui.question.QuestionShowingController
 import com.desiredsoftware.socialquiz.ui.splash.SplashController
 import dagger.Component
+import javax.inject.Singleton
 
-@Component(modules = [AppModule::class, FirebaseModule::class])
+@Singleton
+@Component(modules =
+    [FirebaseModule::class,
+    SharedPreferencesModule::class])
 interface ApplicationComponent {
     fun inject(categoriesController: CategoriesController)
     fun inject(questionShowingController: QuestionShowingController)
@@ -16,5 +20,4 @@ interface ApplicationComponent {
     fun inject(splashController: SplashController)
     fun inject(profileController: ProfileController)
     fun inject(addOwnQuestionController: AddOwnQuestionController)
-
 }

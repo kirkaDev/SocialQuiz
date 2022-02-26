@@ -124,6 +124,9 @@ class QuestionShowingController : MvpController, QuestionShowingPresenter.IQuest
             override fun onClicked(answer: Answer) {
                 val bundle = Bundle()
                 bundle.putSerializable(ANSWER_IS_CORRECT_KEY, answer.isCorrect)
+                if (answer.isCorrect){
+                    presenter.saveSolvedQuestion()
+                }
                 val transaction = RouterTransaction.with(QuestionResultController(bundle))
                 router.replaceTopController(transaction)
             }
