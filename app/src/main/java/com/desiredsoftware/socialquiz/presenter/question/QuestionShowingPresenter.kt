@@ -45,7 +45,7 @@ class QuestionShowingPresenter @Inject constructor(
     }
 
     private suspend fun getCategoryQuestions(mQuestionCategoryId: String): List<Question> {
-        return firebaseRepository.getQuestionsOfCategory(mQuestionCategoryId)
+        return firebaseRepository.getQuestionsOfCategory(mQuestionCategoryId, Question.Companion.IS_APPROVED.APPROVED)
     }
 
     private suspend fun showQuestion() {
