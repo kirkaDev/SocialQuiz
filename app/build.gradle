@@ -20,8 +20,8 @@ android {
         applicationId "com.desiredsoftware.socialquiz"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 7
-        versionName "1.0.7"
+        versionCode 11
+        versionName "1.0.11"
 
         multiDexEnabled true
         resConfigs "ru"
@@ -62,6 +62,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2'
 
     // Import the Firebase services
     implementation platform('com.google.firebase:firebase-bom:28.3.1')
@@ -92,6 +93,11 @@ dependencies {
 
     // Video compressing
     implementation 'com.iceteck.silicompressorr:silicompressor:2.2.4'
+    //implementation 'com.googlecode.mp4parser:isoparser:1.1.22'
+
+    implementation ('com.googlecode.mp4parser:isoparser:1.0.6') {
+        exclude group: 'org.aspectj', module: 'aspectjrt'
+    }
 
     def exoPlayerVersion = "2.14.1"
     implementation "com.google.android.exoplayer:exoplayer:$exoPlayerVersion"

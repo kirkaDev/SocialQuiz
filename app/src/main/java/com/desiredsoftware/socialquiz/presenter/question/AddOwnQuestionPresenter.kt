@@ -1,12 +1,15 @@
 package com.desiredsoftware.socialquiz.presenter.question
 
 import android.content.Context
+import android.net.Uri
+import android.os.Environment
 import android.util.Log
 import com.desiredsoftware.socialquiz.R
 import com.desiredsoftware.socialquiz.data.model.category.Category
 import com.desiredsoftware.socialquiz.data.model.question.Answer
 import com.desiredsoftware.socialquiz.data.model.question.Question
 import com.desiredsoftware.socialquiz.data.repository.FirebaseRepository
+import com.desiredsoftware.socialquiz.utils.VideoCompressor
 import com.desiredsoftware.socialquiz.view.IError
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.storage.StorageReference
@@ -66,16 +69,45 @@ class AddOwnQuestionPresenter @Inject constructor(
             val videoAbsolutePath: String = videoAbsolutePath
 
             if (videoAbsolutePath.isNotEmpty()) {
-                var videoFullRef: StorageReference? = null
+                var videoFullRef: StorageReference?
+
+                var compressor: VideoCompressor? = VideoCompressor(context)
+
+                val destinationDir = Environment.DIRECTORY_MOVIES
+
+                val compressedFilePath =  compressor?.compressVideo(
+                    videoAbsolutePath,
+                    destinationDir)
 
                 firebaseUser?.let { user ->
                     videoFullRef =
                         firebaseStorageRef.child(VIDEO_PATH + user.uid + "/" + videoFileName)
 
-                    val stream = FileInputStream(File(videoAbsolutePath))
+                    var stream : FileInputStream? = null
+
+                    try{
+                        Log.d("compressVideo", "Try to create stream")
+                        compressedFilePath?.let{
+                            val file = File(it)
+                            stream = FileInputStream(file)
+                            Log.d("compressVideo", "stream created from compressed file")
+                        } ?: kotlin.run {
+                            stream = FileInputStream(File(videoAbsolutePath))
+                            Log.d("compressVideo", "stream created from non-compressed file")
+                        }
+                    }
+                    catch (e: Exception){
+                        Log.e("compressVideo", "can't create stream: message = $e")
+                        viewState.showError(context.resources.getString(R.string.upload_video_error))
+                    }
+
+                    compressor = null
+
                     viewState.showError(context.resources.getString(R.string.uploading_question))
                     viewState.enableQuestionButton(false)
-                    val uploadTask = videoFullRef?.putStream(stream)
+                    val uploadTask = stream?.let {
+                        videoFullRef?.putStream(it)
+                    }
                     uploadTask?.addOnFailureListener {
                         viewState.showError(context.resources.getString(R.string.upload_video_error))
                         viewState.enableQuestionButton(true)
