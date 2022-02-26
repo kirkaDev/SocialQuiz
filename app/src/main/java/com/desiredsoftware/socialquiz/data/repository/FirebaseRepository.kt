@@ -110,12 +110,13 @@ class FirebaseRepository @Inject constructor(
     }
 
     suspend fun getQuestionsOfCategory(
-        questionCategoryId: String,
+        questionCategoryId: String, queryIsApproved: Question.Companion.IS_APPROVED
     ): List<Question> {
         Log.d("question", "Repository: getQuestionsOfCategory called")
         val questionList = mutableListOf<Question>()
         firestore.collection(QUESTIONS_ROOT_COLLECTION)
             .whereEqualTo(FIELD_CATEGORY_ID, questionCategoryId)
+            .whereEqualTo(FIELD_QUESTION_IS_APPROVED, queryIsApproved.toString())
             .get()
             .await()
             .documents.map { document ->
